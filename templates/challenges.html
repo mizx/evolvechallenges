@@ -1,0 +1,5 @@
+<ul>
+{% for challenge in challenges %}
+    <a href="{{ uri_for('challenges') }}"><li>{{ challenge.name }}</li></a>
+{% endfor %}
+</ul>

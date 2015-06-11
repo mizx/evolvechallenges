@@ -1,0 +1,1 @@
+/admin/update/active/admin/update/<id>/admin/resync/<id>/admin/check/new//about/challenges/challenge/<title>
