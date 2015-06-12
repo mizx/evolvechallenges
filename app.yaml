@@ -9,8 +9,17 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /assets
-  static_dir: assets
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /font
+  static_dir: font
+
+- url: /img
+  static_dir: img
 
 - url: /cron/.*
   script: cron.app

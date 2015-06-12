@@ -3,7 +3,11 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+@font-face {
+    font-family: ultralight;
+    src: url('/font/ultralight.woff');
+}
+ 
 body {
     width: 100%;
     height: 100%;
@@ -63,10 +67,11 @@ a:focus {
 
 .navbar-custom {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: #000;
+    /*font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    font-family: "ultralight","Segoe, sans-serif";
+    border-bottom: 3px solid rgb(253,57,30);
+    background: rgba(0, 0, 0, .8);
 }
 
 .navbar-custom .navbar-brand {
@@ -125,29 +130,25 @@ a:focus {
 @media(min-width:768px) {
     .navbar-custom {
         padding: 20px 0;
-        border-bottom: 0;
         letter-spacing: 1px;
-        background: 0 0;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
     }
 
     .navbar-custom.top-nav-collapse {
-        padding: 0;
-        border-bottom: 1px solid rgba(255,255,255,.3);
-        background: #000;
+        padding: 10px 0;
     }
 }
 
-.intro {
+.challenge {
     display: table;
     width: 100%;
     height: auto;
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+    background: url(/img/bg-concept.jpg) no-repeat bottom center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -155,30 +156,30 @@ a:focus {
     -o-background-size: cover;
 }
 
-.intro .intro-body {
+.challenge .challenge-body {
     display: table-cell;
     vertical-align: middle;
 }
 
-.intro .intro-body .brand-heading {
+.challenge .challenge-body .brand-heading {
     font-size: 40px;
 }
 
-.intro .intro-body .intro-text {
+.challenge .challenge-body .challenge-text {
     font-size: 18px;
 }
 
 @media(min-width:768px) {
-    .intro {
+    .challenge {
         height: 100%;
         padding: 0;
     }
 
-    .intro .intro-body .brand-heading {
+    .challenge .challenge-body .brand-heading {
         font-size: 100px;
     }
 
-    .intro .intro-body .intro-text {
+    .challenge .challenge-body .challenge-text {
         font-size: 26px;
     }
 }
@@ -265,7 +266,7 @@ a:focus {
     width: 100%;
     padding: 50px 0;
     color: #fff;
-    background: url(../img/downloads-bg.jpg) no-repeat center center scroll;
+    background: url(/img/downloads-bg.jpg) no-repeat center center scroll;
     background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -370,4 +371,47 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+}
+/* OVERWRITE BOOTSTRAP AND DEFAULT */
+.navbar-brand {
+    font-size: 58px;
+    height: 90px;
+    line-height: 60px;
+    float: none;
+}
+
+@media (min-width: 768px)
+.navbar-custom.top-nav-collapse {
+  padding: 0;
+  border-bottom: 3px solid rgb(253,57,30);
+  background: rgba(255, 255, 255, .6);
+}
+
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  margin: 0 auto;
+}
+
+.navbar-header {
+    float: none;
+    text-align: center
+}
+
+a {
+    color: rgb(253, 57, 30) !important;
+}
+
+#clock {
+    height: 160px;
+    width: 160px;
+}
+
+#clock > svg {
+    height: 100%;
+    display: block;
+}
+
+#clock .clock_label {
+    font-family: "ultralight","Segoe, sans-serif";
+    font-size: 30px;
 }

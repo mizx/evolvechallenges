@@ -49,11 +49,11 @@
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">{{ challenge.name }}</h1>
+            <h1 class="cover-heading title">{{ challenge.name }}</h1>
             <p class="lead">Is challenge over? {{ 'Yes' if challenge.is_active else 'No' }}</p>
             <p class="lead">Achieved? {{ 'Yes' if challenge.is_achieved else 'No' }}</p>
             <p class="lead">Progress: {{ challenge.get_progress() }}%</p>
-            <p class="lead">Raw Progress: {{ challenge.datapoints[-1].value }} / {{ challenge.config['Goal'] }}</p>
+            <p class="lead">Raw Progress: {{ "{:,d}".format(challenge.datapoints[-1].value|int) }} / {{ "{:,d}".format(challenge.config['Goal']) }}</p>
             <p class="lead">Stretch Goal?: {{ 'Yes' if challenge.has_stretch_goal() else 'No' }}</p>
             <p class="lead">Event Type: {{ challenge.type }}</p>
             
