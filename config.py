@@ -16,3 +16,4 @@ JINJA_ENV = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+NUMBER_FORMAT = '{:,}'

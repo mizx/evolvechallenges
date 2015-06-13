@@ -421,12 +421,70 @@ a {
     padding: 2px;
 }
 
-.health_progress .bar {
-    height: 30px;
+.health_progress .placeholder {
+    height: 32px;
+    /*padding: 4px;*/
     /*border: 4px solid #FF391D;*/
+    
+    position: relative;
+} 
+
+.health_progress .placeholder.complete {
+    background: rgb(253, 57, 30);
     border: 4px solid rgba(255, 204, 204, .5);
 }
 
-.health_progress .bar.complete {
-    background: rgb(253, 57, 30);
+.bar_progress, .bar_border {
+    position: absolute;
+    
 }
+
+.bar_progress {
+    background: rgb(253, 57, 30);
+    width: 0;
+    padding: 4px;
+    height: 32px;
+}
+
+.bar_border {
+    border: 4px solid rgba(255, 204, 204, .5);
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

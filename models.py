@@ -18,6 +18,8 @@ class Challenge(ndb.Model):
     start = ndb.DateTimeProperty()
     end = ndb.DateTimeProperty()
     slug = ndb.ComputedProperty(lambda self: slugify(self.name))
+    header = ndb.StringProperty(default="")
+    reward = ndb.StringProperty(default="")
     type = ndb.StringProperty(choices=['counter', 'versus'], default='counter')
     progress = ndb.ComputedProperty(
         lambda self: (self.get_max_datapoint() / self.config['Goal']) * 100
@@ -69,6 +71,16 @@ class Challenge(ndb.Model):
     
     def get_end_seconds(self):
         return int((self.end - datetime(1970, 1, 1)).total_seconds())
+    
+    def get_max_format(self):
+        return config.NUMBER_FORMAT.format(
+            int(self.get_max_datapoint())
+        )
+    
+    def get_goal_format(self):
+        return config.NUMBER_FORMAT.format(
+            int(self.config['Goal'])
+        )
     
     def get_raw_config(self):
         return self.config
