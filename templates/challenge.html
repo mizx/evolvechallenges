@@ -29,6 +29,21 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+        var challenge = {
+            config: {{ challenge.get_raw_config() }},
+            isAchieved: {{ challenge.is_achieved }},
+            is_active: {{ challenge.is_active }},
+            name: {{ challenge.name }},
+            num: {{ challenge.num }},
+            progress: {{ challenge.progress }},
+            start: {{ challenge.get_start_seconds() }},
+            end: {{ get_end_seconds }},
+            type: {{ challenge.type }},
+            news_url: {{ challenge.url }}
+        };
+    </script>
+    
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
@@ -71,6 +86,38 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
+                        <div class="row health_progress">
+                            <div class="col-xs-2 col-xs-offset-1">
+                                <div class="bar complete">
+                                
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="bar complete">
+                                
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="bar complete">
+                                
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="bar">
+                                
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="bar">
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p class="text-center">{{ '{:,}'.format(challenge.get_max_datapoint()|int) }} / {{ '{:,}'.format(challenge.config['Goal']) }}
+                            </div>
+                        </div>
                         <h1 class="brand-heading">INSPIRIING TEXT</h1>
                         <p class="challenge-text">THIS IS WHAT YOU'RE PLAYING FOR</p>
                         <div id="clock">

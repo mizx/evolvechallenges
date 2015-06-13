@@ -63,3 +63,12 @@ class Challenge(ndb.Model):
         for point in self.datapoints:
             values.append(point.value)
         return max(self.get_datapoint_values())
+    
+    def get_start_seconds(self):
+        return int((self.start - datetime(1970, 1, 1)).total_seconds())
+    
+    def get_end_seconds(self):
+        return int((self.end - datetime(1970, 1, 1)).total_seconds())
+    
+    def get_raw_config(self):
+        return self.config
