@@ -182,10 +182,22 @@ function init() {
     */
 }
 var clock_text;
-var sec_delimiter = 2592;
+var clock, jClock, timeleft, start, end, date_start, date_end;
 $(function() {
-    clock_text = new ProgressBar.Circle(document.getElementById('clock'), {
-        duration: 1000,
+    clock = document.getElementById('clock');
+    jClock = $(clock);
+    timeleft = "";
+    start = jClock.attr('data-start');
+    end = jClock.attr('data-end');
+    date_start = new Date(0);
+    date_start.setUTCSeconds(challenge['start']);
+    date_end = new Date(0);
+    date_end.setUTCSeconds(challenge['end']);
+    total_time = date_end - date_start;
+    var
+    
+    clock_text = new ProgressBar.Circle(clock, {
+        duration: 100,
         trailColor: "#FF391D",
         color: "#000",
         strokeWidth: 4,
@@ -207,12 +219,28 @@ $(function() {
     */
     
     
-    $("#clock_text").countdown("2015/06/12 12:00:00", function(event) {
+    $("#clock_text").countdown(date_end, function(event) {
         var str_format = "%-Dd %-Hh";
         if ( ! event.offset.totalDays) {
             str_format = "%-Hh %-Mm";
         }
         clock_text.setText(event.strftime(str_format));
-        $(this).html(event.strftime("%-D days %-H hours %M mins"))
+        timeleft = event.strftime("%-D days %-H hours %M mins");
+        $(this).html(timeleft);
     });
+    
+    $(clock).tooltip({
+        'title': function() {
+            return timeleft;
+        },
+    });
+    
+    setInterval(function() {
+        var now = new Date();
+        var timeleft = date_end - now;
+        var percent_left = timeleft / total_time;
+        clock_text.animate(1 - percent_left)
+    });
+    
+    
 });

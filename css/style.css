@@ -15,11 +15,12 @@ body {
     font-family: "ultralight","Segoe, sans-serif";
     color: #fff;
     background-color: #000;
+    background: url(/img/goliath-monster-evolve-1920x1080-0028.jpg) no-repeat bottom center scroll;
 }
 
 html {
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
 }
 
 h1,
@@ -138,7 +139,7 @@ a:focus {
     }
 
     .navbar-custom.top-nav-collapse {
-        padding: 10px 0;
+        padding: 20px 0;
     }
 }
 
@@ -149,8 +150,6 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: #fff;
-    background: url(/img/bg-concept.jpg) no-repeat bottom center scroll;
-    background-color: #000;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -158,8 +157,8 @@ a:focus {
 }
 
 .challenge .challenge-body {
-    display: table-cell;
-    vertical-align: middle;
+    /*display: table-cell;
+    vertical-align: middle;*/
 }
 
 .challenge .challenge-body .brand-heading {
@@ -171,10 +170,11 @@ a:focus {
 }
 
 @media(min-width:768px) {
-    .challenge {
+    /*.challenge {
         height: 100%;
         padding: 0;
     }
+    */
 
     .challenge .challenge-body .brand-heading {
         font-size: 100px;
@@ -381,14 +381,14 @@ html {
 }
 
 body {
-    margin-bottom: 300px;
+    margin-bottom: 204px;
 }
 
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 300px;
+    height: 204px;
     border-top: 3px solid rgb(253,57,30);
     background: rgba(0, 0, 0, .8);
     text-transform: uppercase;
@@ -427,6 +427,8 @@ a {
 #clock {
     height: 160px;
     width: 160px;
+    text-align: center;
+    margin: 20px auto;
 }
 
 #clock > svg {

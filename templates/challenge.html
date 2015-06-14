@@ -31,16 +31,16 @@
 
     <script type="text/javascript">
         var challenge = {
-            config: {{ challenge.get_raw_config() }},
-            isAchieved: {{ challenge.is_achieved }},
-            is_active: {{ challenge.is_active }},
-            name: {{ challenge.name }},
+            /*config: {{ challenge.get_raw_config() }},*/
+            isAchieved: {{ challenge.is_achieved|lower }},
+            is_active: {{ challenge.is_active|lower }},
+            name: '{{ challenge.name }}',
             num: {{ challenge.num }},
             progress: {{ challenge.progress }},
             start: {{ challenge.get_start_seconds() }},
-            end: {{ get_end_seconds }},
-            type: {{ challenge.type }},
-            news_url: {{ challenge.url }}
+            end: {{ challenge.get_end_seconds() }},
+            type: '{{ challenge.type }}',
+            news_url: '{{ challenge.url }}'
         };
     </script>
     
@@ -49,7 +49,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
     
-    <nav class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+    <nav class="navbar navbar-custom top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
@@ -91,7 +91,7 @@
                             </div>
                             <div class="col-xs-2">
                                 <div class="placeholder incomplete">
-                                    <div class="bar_progress" style="width: 50px;">
+                                    <div class="bar_progress" style="width: 25%;">
                                     </div>
                                     <div class="bar_border">
                                     </div>
@@ -106,9 +106,7 @@
                         </div>
                         <h2>{{ challenge.header }}</h1>
                         <p class="challenge-text">{{ challenge.reward }}</p>
-                        <div id="clock">
                         
-                        </div>
                         <div id="clock_text">
                         
                         </div>
@@ -120,7 +118,15 @@
     
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Place sticky footer content here.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="clock" data-end="{{ challenge.end }}" data-start="{{ challenge.start }}"></div>
+                </div>
+                <div class="col-md-8">
+                    test
+                </div>
+                
+            </div
         </div>
     </footer>
 
