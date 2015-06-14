@@ -12,6 +12,7 @@ body {
     width: 100%;
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "ultralight","Segoe, sans-serif";
     color: #fff;
     background-color: #000;
 }
@@ -342,7 +343,7 @@ ul.banner-social-buttons {
 }
 
 footer {
-    padding: 50px 0;
+    /*padding: 50px 0;*/
 }
 
 footer p {
@@ -372,6 +373,28 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
 }
+
+/* STICKY FOOTER */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 300px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+    border-top: 3px solid rgb(253,57,30);
+    background: rgba(0, 0, 0, .8);
+    text-transform: uppercase;
+    text-align: right;
+}
+
 /* OVERWRITE BOOTSTRAP AND DEFAULT */
 .navbar-brand {
     font-size: 58px;

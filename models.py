@@ -13,7 +13,7 @@ class DataPoint(ndb.Model):
 
 class Challenge(ndb.Model):
     num = ndb.IntegerProperty(required=True)
-    url = ndb.TextProperty(default="")
+    news_url = ndb.TextProperty(default="")
     name = ndb.StringProperty(required=True)
     start = ndb.DateTimeProperty()
     end = ndb.DateTimeProperty()
