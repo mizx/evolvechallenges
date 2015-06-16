@@ -1,4 +1,5 @@
 import admin
+import api
 import config
 import models
 import pprint
@@ -53,6 +54,7 @@ class AboutHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', handler=MainHandler, name='index'),
+    webapp2.Route('/api/challenge_data/<id>', handler=api.ApiHandler, name="api"),
     webapp2.Route('/about', handler=AboutHandler, name='about'),
     webapp2.Route('/challenge/<title>', handler=challenge.ChallengeHandler, name='challenge'),
     #webapp2.Route('/challenges', handler=challenge.ChallengesHandler, name='challenges'),

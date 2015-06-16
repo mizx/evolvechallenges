@@ -1,6 +1,7 @@
 import datetime
 import jinja2
 import os
+import filters
 
 URL_API_EVOLVE_CHALLENGE = 'http://api.4v1game.net/challenge/'
 DEFAULT_CHALLENGE_KEY = 'default_challenge'
@@ -15,5 +16,8 @@ JINJA_ENV = jinja2.Environment(
     ),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+JINJA_ENV.filters['json'] = filters.json
+JINJA_ENV.filters['number'] = filters.number
+JINJA_ENV.filters['percent'] = filters.percent
 
 NUMBER_FORMAT = '{:,}'

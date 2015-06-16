@@ -39,10 +39,6 @@ class Challenge(ndb.Model):
     def has_stretch_goal(self):
         return 'StretchGoal' in self.config
     
-    def get_progress(self):
-        value = int(self.progress)
-        return value if value < 100 else 100
-    
     def get_datapoint_values(self):
         values = []
         for point in self.datapoints:
@@ -71,16 +67,3 @@ class Challenge(ndb.Model):
     
     def get_end_seconds(self):
         return int((self.end - datetime(1970, 1, 1)).total_seconds())
-    
-    def get_max_format(self):
-        return config.NUMBER_FORMAT.format(
-            int(self.get_max_datapoint())
-        )
-    
-    def get_goal_format(self):
-        return config.NUMBER_FORMAT.format(
-            int(self.config['Goal'])
-        )
-    
-    def get_raw_config(self):
-        return self.config

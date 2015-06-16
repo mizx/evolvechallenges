@@ -456,7 +456,15 @@ a {
 
 .health_progress .placeholder.complete {
     background: rgb(253, 57, 30);
+}
+
+.health_progress .placeholder.incomplete,
+.health_progress .placeholder.complete {
     border: 4px solid rgba(255, 204, 204, .5);
+}
+
+.health_progress .placeholder.inprogress {
+    /*border: none;*/
 }
 
 .bar_progress, .bar_border {
@@ -467,7 +475,7 @@ a {
 .bar_progress {
     background: rgb(253, 57, 30);
     width: 0;
-    padding: 4px;
+    /*padding: 4px;*/
     height: 32px;
 }
 

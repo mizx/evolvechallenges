@@ -242,5 +242,31 @@ $(function() {
         clock_text.animate(1 - percent_left)
     });
     
+    updateProgressBar();
     
 });
+
+function updateProgressBar() {
+    
+    var i = 0;
+    var bars = challenge.progress / 20;
+    $('.health_progress .placeholder').each(function() {
+        var floor = Math.floor(bars);
+        var div = $(this);
+        if (i < floor) {
+            div.addClass('complete');
+            div.removeClass('incomplete');
+            div.html('');
+        } else if (i == floor && bars != 0) {
+            div.removeClass('complete');
+            div.removeClass('incomplete');
+            var width = challenge.progress % 20 * 5;
+            div.html('<div class="bar_progress" style="width: ' + width + '%"></div><div class="bar_border"></div>');
+        } else {
+            div.addClass('incomplete');
+            div.removeClass('complete');
+            div.html('');
+        }
+        i++;
+    });
+}

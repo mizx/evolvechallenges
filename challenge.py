@@ -14,12 +14,13 @@ import base
 class ChallengeHandler(webapp2.RequestHandler):
     def get(self, title):
         challenge = Challenge.query(Challenge.slug == title).get()
+        
         if challenge is None:
             self.response.write('None')
             self.error(404)
             return
         template = config.JINJA_ENV.get_template('challenge.html')
-        self.response.write(template.render({'challenge': challenge}))
+        self.response.write(template.render({'challenge': challenge, 'config': json.dumps(challenge.config)}))
 
 class ChallengesHandler(base.BaseHandler):
     def get(self):
