@@ -10,6 +10,9 @@ class DataPoint(ndb.Model):
     updated = ndb.DateTimeProperty()
     value = ndb.FloatProperty()
     increment = ndb.FloatProperty()
+    
+    def get_fdate_js(self):
+        return self.updated.strftime(config.STRFTIME_JS)
 
 class Challenge(ndb.Model):
     num = ndb.IntegerProperty(required=True)

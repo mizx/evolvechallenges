@@ -10,6 +10,7 @@ DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(hours=1)
 API_DATETIME_ADJUST = datetime.timedelta(hours=2)
 
 STRIP_TIME_BASE = '%Y-%m-%dT%H:%M:%S'
+STRFTIME_JS = 'Date(%Y, %m, %d, %H, %M, %S)'
 JINJA_ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader(
         os.path.join(os.path.dirname(__file__), 'templates')
