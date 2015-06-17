@@ -242,7 +242,8 @@ $(function() {
         clock_text.animate(1 - percent_left)
     });
     
-    updateProgressBar();
+    setTimeout(updateProgressBar, 750);
+    //updateProgressBar();
     
 });
 
@@ -252,20 +253,20 @@ function updateProgressBar() {
     var bars = challenge.progress / 20;
     $('.health_progress .placeholder').each(function() {
         var floor = Math.floor(bars);
-        var div = $(this);
+        var progress = 0;
         if (i < floor) {
-            div.addClass('complete');
-            div.removeClass('incomplete');
-            div.html('');
+            progress = 100;
         } else if (i == floor && bars != 0) {
-            div.removeClass('complete');
-            div.removeClass('incomplete');
-            var width = challenge.progress % 20 * 5;
-            div.html('<div class="bar_progress" style="width: ' + width + '%"></div><div class="bar_border"></div>');
-        } else {
-            div.addClass('incomplete');
-            div.removeClass('complete');
-            div.html('');
+            progress = challenge.progress % 20 * 5;
+            $(this).find('.bar_border').delay(750 * (i + 1)).queue(function() {
+                $(this).addClass('active');
+            });
+        }
+        
+        if (progress) {
+            $(this).find('.bar_progress').delay(750 * i).queue(function() {
+                $(this).css('width', progress + '%')
+            })
         }
         i++;
     });

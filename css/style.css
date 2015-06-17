@@ -454,7 +454,7 @@ a {
     
     position: relative;
 } 
-
+/*
 .health_progress .placeholder.complete {
     background: rgb(253, 57, 30);
 }
@@ -465,9 +465,9 @@ a {
 }
 
 .health_progress .placeholder.inprogress {
-    /*border: none;*/
+    border: none;
 }
-
+*/
 .bar_progress, .bar_border {
     position: absolute;
     
@@ -486,7 +486,28 @@ a {
     width: 100%;
 }
 
+.bar_progress {
+    -webkit-transition: width .75s;
+    transition: width .75s;
+}
 
+.bar_border.active {
+    -webkit-animation: pulsate .8s infinite alternate;
+    -moz-animation: pulsate .8s infinite alternate;
+    animation: pulsate .8s infinite alternate;
+}
+@-webkit-keyframes pulsate {
+    from { box-shadow: 0 0 10px #FE9283; }
+    to { box-shadow: 0 0 40px #FD391E; }
+}
+@-moz-keyframes pulsate {
+    from { box-shadow: 0 0 10px #FE9283; }
+    to { box-shadow: 0 0 40px #FD391E; }
+}
+@keyframes pulsate {
+    from { box-shadow: 0 0 10px #FE9283; }
+    to { box-shadow: 0 0 40px #FD391E; }
+}
 
 
 

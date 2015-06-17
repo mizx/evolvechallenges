@@ -5,6 +5,7 @@ import datetime
 import logging
 import json
 import webapp2
+from packages import gviz_api
 
 from google.appengine.api import urlfetch
 from google.appengine.ext import ndb
@@ -12,6 +13,31 @@ from google.appengine.ext import ndb
 import base
 
 class ApiHandler(webapp2.RequestHandler):
+    def get(self, id):
+        if not id.isdigit():
+            self.response.write('Invalid ID')
+            self.error(500)
+            return
+        
+        challenge = Challenge.query(Challenge.num == int(id)).get()
+        description = {
+            'updated': ('datetime', 'Updated'),
+            'value': ('number', 'Value')
+        }
+        
+        data = []
+        for point in challenge.datapoints:
+            data.append({
+                'updated': point.updated,
+                'value': point.increment
+            })
+        data_table = gviz_api.DataTable(description)
+        data_table.LoadData(data)
+        json = data_table.ToJSon()
+        self.response.write(json)
+        
+
+class ApiHandler_raw_json(webapp2.RequestHandler):
     def get(self, id):
         if not id.isdigit():
             self.response.write('Invalid ID')
@@ -26,8 +52,8 @@ class ApiHandler(webapp2.RequestHandler):
             return
         data = dict();
         cols = [{
-            'label': 'Hours',
-            'type': 'number'
+            'label': 'Time',
+            'type': 'datetime'
         }, {
             'label': 'Values',
             'type': 'number'
@@ -51,7 +77,7 @@ class ApiHandler(webapp2.RequestHandler):
             if (i % 4) == 0:
                 data['increment']['rows'].append({
                     'c': [
-                        {'v': hours},
+                        {'v': point.get_fdate_js(), 'f': 'test'},
                         {'v': counter}
                     ]
                 })
