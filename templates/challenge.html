@@ -43,40 +43,7 @@
             news_url: '{{ challenge.url }}'
         };
     </script>
-    
-      <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript">
-    google.load('visualization', '1.1', {packages: ['line']});
-    google.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var jsonData = $.ajax({
-          url: "/api/challenge_data/" + challenge.id,
-          dataType:"json",
-          async: false
-          }).responseText;
-
-      var data = new google.visualization.DataTable(jsonData);
-
-      var options = {
-        chart: {
-          title: 'Evolve Challenge Progress',
-          subtitle: 'in hours'
-        },
-        width: 900,
-        height: 500,
-        axes: {
-          x: {
-            0: {side: 'top'}
-          }
-        }
-      };
-
-      var chart = new google.charts.Line(document.getElementById('chart'));
-
-      chart.draw(data, options);
-    }
-    </script>
+   
     
 </head>
 
@@ -168,6 +135,34 @@
     <script src="/js/bootstrap-3.3.4/bootstrap.min.js"></script>
     <script src="/js/jquery.countdown.min.js"></script>
     <script src="/js/progressbar.min.js"></script>
+    
+     
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1.1', {packages: ['line']});
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var jsonData = $.ajax({
+          url: "/api/challenge_data/" + challenge.id,
+          dataType:"json",
+          async: false
+          }).responseText;
+
+      var data = new google.visualization.DataTable(jsonData);
+
+      var options = {
+        legend: {position: 'none'},
+        colors: ['fd391e'],
+        backgroundColor: { fill: "none" }
+      };
+      
+
+      var chart = new google.charts.Line(document.getElementById('chart'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+    </script>
 
     <!-- Plugin JavaScript -->
     <!--<script src="js/jquery.easing.min.js"></script>-->

@@ -26,21 +26,19 @@ class ApiHandler(webapp2.RequestHandler):
             return
         data = dict();
         cols = [{
-            'id': 'hours',
             'label': 'Hours',
             'type': 'number'
         }, {
-            'id': 'value',
             'label': 'Values',
             'type': 'number'
         }]
         data['increment'] = {
             'cols': cols,
-            'rows': {}
+            'rows': []
         }
         data['total'] = {
             'cols': cols,
-            'rows': {}
+            'rows': []
         }
         # formatting: https://developers.google.com/chart/interactive/docs/reference#dataparam
         # example: https://developers.google.com/chart/interactive/docs/php_example
@@ -51,8 +49,18 @@ class ApiHandler(webapp2.RequestHandler):
         finished = 0
         for point in challenge.datapoints:
             if (i % 4) == 0:
-                data['increment']['rows'][hours] = counter
-                data['total']['rows'][hours] = total
+                data['increment']['rows'].append({
+                    'c': [
+                        {'v': hours},
+                        {'v': counter}
+                    ]
+                })
+                data['total']['rows'].append({
+                    'c': [
+                        {'v': hours},
+                        {'v': total}
+                    ]
+                })
                 counter = point.increment
                 hours += 1
                 finished = 1
@@ -62,6 +70,16 @@ class ApiHandler(webapp2.RequestHandler):
             i += 1
             total += point.increment
         if not finished:
-            data['increment']['rows'][hours] = counter
-            data['total']['rows'][hours] = total
-        self.response.write(json.dumps(data))
+            data['increment']['rows'].append({
+                'c': [
+                    {'v': hours},
+                    {'v': counter}
+                ]
+            })
+            data['total']['rows'].append({
+                'c': [
+                    {'v': hours},
+                    {'v': total}
+                ]
+            })
+        self.response.write(json.dumps(data['increment']))
