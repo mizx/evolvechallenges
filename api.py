@@ -26,11 +26,18 @@ class ApiHandler(webapp2.RequestHandler):
         }
         
         data = []
+        i = 0
+        counter = 0
         for point in challenge.datapoints:
-            data.append({
-                'updated': point.updated,
-                'value': point.increment
-            })
+            counter += point.increment
+            if (i % 4) == 0:
+                data.append({
+                    'updated': point.updated.replace(minute=0, second=0, microsecond=0),
+                    'value': counter
+                })
+                counter = 0
+            i += 1
+            
         data_table = gviz_api.DataTable(description)
         data_table.LoadData(data)
         json = data_table.ToJSon()

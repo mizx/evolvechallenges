@@ -7,6 +7,12 @@
     font-family: ultralight;
     src: url('/font/ultralight.woff');
 }
+
+@font-face {
+    font-family: 'unicode sans medium';
+    src: url('/font/medium.woff');
+    font-weight: bold;
+}
  
 body {
     width: 100%;
@@ -468,6 +474,11 @@ a {
     border: none;
 }
 */
+
+h2.percent {
+    font-family: 'unicode sans medium';
+    margin: 20px 0;
+}
 .bar_progress, .bar_border {
     position: absolute;
     

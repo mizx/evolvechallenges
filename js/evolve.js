@@ -256,6 +256,7 @@ function updateProgressBar() {
         var progress = 0;
         if (i < floor) {
             progress = 100;
+            $(this).find('.bar_border').removeClass('active');
         } else if (i == floor && bars != 0) {
             progress = challenge.progress % 20 * 5;
             $(this).find('.bar_border').delay(750 * (i + 1)).queue(function() {

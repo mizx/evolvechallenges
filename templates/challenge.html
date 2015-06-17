@@ -42,7 +42,7 @@
             type: '{{ challenge.type }}',
             news_url: '{{ challenge.url }}'
         };
-        challenge.progress = 33.11;
+        challenge.progress = 133.11;
     </script>
    
     
@@ -104,7 +104,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2>{{ challenge.progress|percent }}</h2>
+                                <h2 class="percent">{{ challenge.progress|percent }}</h2>
                                 <p class="text-center challenge-text">{{ challenge.get_max_datapoint()|number }} / {{ challenge.config['Goal']|number }}
                             </div>
                         </div>
