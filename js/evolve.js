@@ -226,7 +226,6 @@ $(function() {
         }
         clock_text.setText(event.strftime(str_format));
         timeleft = event.strftime("%-D days %-H hours %M mins");
-        $(this).html(timeleft);
     });
     
     $(clock).tooltip({

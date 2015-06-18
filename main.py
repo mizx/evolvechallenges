@@ -1,7 +1,7 @@
 import admin
 import api
 import config
-import models
+from models import Challenge
 import pprint
 import jinja2
 
@@ -39,12 +39,12 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        challenge = Challenge.query().order(-Challenge.num).get()
         template_vars = {
-            'challenge': {
-                'name': 'Test Challenge',
-            }
+            'challenge': challenge,
+            'start': 1434855227
         }
-        template = config.JINJA_ENV.get_template('index.html')
+        template = config.JINJA_ENV.get_template('countdown.html')
         self.response.write(template.render(template_vars))
 
 class AboutHandler(webapp2.RequestHandler):
