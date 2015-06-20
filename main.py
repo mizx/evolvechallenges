@@ -39,13 +39,8 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        challenge = Challenge.query().order(-Challenge.num).get()
-        template_vars = {
-            'challenge': challenge,
-            'start': 1434855227
-        }
-        template = config.JINJA_ENV.get_template('countdown.html')
-        self.response.write(template.render(template_vars))
+        template = config.JINJA_ENV.get_template('index.html')
+        self.response.write(template.render({}))
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
@@ -55,6 +50,7 @@ class AboutHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     webapp2.Route('/', handler=MainHandler, name='index'),
     webapp2.Route('/api/challenge_data/<id>', handler=api.ApiHandler, name="api"),
+	webapp2.Route('/api/challenge/<arg>.json', handler=api.ApiChallengeHandler, name='api_challenge'),
     webapp2.Route('/about', handler=AboutHandler, name='about'),
     webapp2.Route('/challenge/<title>', handler=challenge.ChallengeHandler, name='challenge'),
     #webapp2.Route('/challenges', handler=challenge.ChallengesHandler, name='challenges'),

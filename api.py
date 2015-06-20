@@ -12,6 +12,23 @@ from google.appengine.ext import ndb
 
 import base
 
+class ApiChallengeHandler(webapp2.RequestHandler):
+	def get(self, arg):
+		data = []
+		if arg == 'challenges':
+			challenges = Challenge.query().fetch()
+			for challenge in challenges:
+				data.append({
+					'id': challenge.num,
+					'slug': challenge.slug,
+					'name': challenge.name
+				})
+			self.response.write(json.dumps(data))
+			return
+		else:
+			self.response.write('challenge id: %s' % arg)
+		
+
 class ApiHandler(webapp2.RequestHandler):
     def get(self, id):
         if not id.isdigit():
@@ -28,14 +45,17 @@ class ApiHandler(webapp2.RequestHandler):
         data = []
         i = 0
         counter = 0
+        values = []
         for point in challenge.datapoints:
             counter += point.increment
+            values.append(point.value)
             if (i % 4) == 0:
                 data.append({
                     'updated': point.updated.replace(minute=0, second=0, microsecond=0),
-                    'value': counter
+                    'value': counter if challenge.type == 'counter' else sum(values)/len(values)
                 })
                 counter = 0
+                values = []
             i += 1
             
         data_table = gviz_api.DataTable(description)

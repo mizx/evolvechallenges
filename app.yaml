@@ -21,6 +21,9 @@ handlers:
 - url: /img
   static_dir: img
 
+- url: /partials
+  static_dir: templates/partials
+
 - url: /cron/.*
   script: cron.app
   #login: admin
