@@ -3,7 +3,8 @@
 var evolveApp = angular.module('evolveApp', [
 	'ngRoute',
 	'evolveControllers',
-	'evolveServices'
+	'evolveServices',
+	'frapontillo.ex.filters'
 ]);
 
 evolveApp.config(['$routeProvider',
@@ -13,7 +14,7 @@ evolveApp.config(['$routeProvider',
 				templateUrl: 'partials/challenge-list.html',
 				controller: 'ChallengeListCtrl'
 			}).
-			when('/challenges/:challengeId', {
+			when('/challenges/:challengeSlug', {
 				templateUrl: 'partials/challenge-detail.html',
 				controller: 'ChallengeDetailCtrl'
 			}).

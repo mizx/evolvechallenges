@@ -4,10 +4,10 @@ var evolveServices = angular.module('evolveServices', ['ngResource']);
 
 evolveServices.factory('Challenge', ['$resource',
 	function($resource) {
-		return $resource('/api/challenge/:challengeId.json', {}, {
+		return $resource('/api/challenge/:challengeSlug.json', {}, {
 			query: {
 				method: 'GET',
-				params: {challengeId: 'challenges'},
+				params: {challengeSlug: 'all'},
 				isArray: true
 			}
 		});

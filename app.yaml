@@ -9,6 +9,9 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+- url: /_ah/spi/.*
+  script: evolvechallenges_api.APPLICATION
+
 - url: /js
   static_dir: js
 
@@ -38,3 +41,5 @@ libraries:
   version: "2.6"
 - name: django
   version: "1.4"
+- name: endpoints
+  version: "1.0"

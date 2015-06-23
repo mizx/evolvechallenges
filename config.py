@@ -22,3 +22,6 @@ JINJA_ENV.filters['number'] = filters.number
 JINJA_ENV.filters['percent'] = filters.percent
 
 NUMBER_FORMAT = '{:,}'
+
+def date_handler(obj):
+	return obj.isoformat() if hasattr(obj, 'isoformat') else obj

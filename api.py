@@ -15,7 +15,7 @@ import base
 class ApiChallengeHandler(webapp2.RequestHandler):
 	def get(self, arg):
 		data = []
-		if arg == 'challenges':
+		if arg == 'all':
 			challenges = Challenge.query().fetch()
 			for challenge in challenges:
 				data.append({
@@ -26,7 +26,10 @@ class ApiChallengeHandler(webapp2.RequestHandler):
 			self.response.write(json.dumps(data))
 			return
 		else:
-			self.response.write('challenge id: %s' % arg)
+			challenge = Challenge.query(Challenge.slug == arg).get()
+			_dict = challenge.to_dict()
+			_dict['max'] = challenge.get_max_datapoint()
+			self.response.write(json.dumps(_dict, default=config.date_handler))
 		
 
 class ApiHandler(webapp2.RequestHandler):
