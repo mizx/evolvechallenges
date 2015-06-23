@@ -6,7 +6,8 @@ from protorpc import remote
 package = 'Evolve'
 
 class Challenge(messages.Message):
-    id = messages.StringField(1)
+    id = messages.IntegerField(1)
+	name = messages.StringField(2)
 
 class ChallengeCollection(messages.Message):
 	items = messages.MessageField(Challenge, 1, repeated=True)
