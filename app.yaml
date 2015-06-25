@@ -1,5 +1,5 @@
 application: evolvechallenges
-version: 1
+version: 2
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -8,9 +8,6 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
-
-- url: /_ah/spi/.*
-  script: evolvechallenges_api.APPLICATION
 
 - url: /js
   static_dir: js
@@ -41,5 +38,3 @@ libraries:
   version: "2.6"
 - name: django
   version: "1.4"
-- name: endpoints
-  version: "1.0"

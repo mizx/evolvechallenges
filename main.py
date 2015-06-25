@@ -1,4 +1,4 @@
-import admin
+#import admin
 import api
 import config
 from models import Challenge
@@ -9,7 +9,7 @@ import datetime
 import cgi
 import urllib
 import webapp2
-import challengeapi
+#import challengeapi
 import challenge
 
 from google.appengine.ext import ndb
@@ -63,6 +63,6 @@ app = webapp2.WSGIApplication([
     #webapp2.Route('/challenges', handler=challenge.ChallengesHandler, name='challenges'),
     #webapp2.Route('/admin/update/active', handler=admin.UpdateActiveHandler, name='update.active'),
     #webapp2.Route('/admin/update/<id>', handler=admin.UpdateHandler, name='admin.update'),
-    webapp2.Route('/admin/resync/<id>', handler=admin.ResyncHandler, name='admin.resync'),
+    #webapp2.Route('/admin/resync/<id>', handler=admin.ResyncHandler, name='admin.resync'),
     #webapp2.Route('/admin/check/new', handler=admin.CheckNewHandler, name='admin.checknew'),
 ], debug=True)

@@ -20,6 +20,7 @@ class Challenge(ndb.Model):
     name = ndb.StringProperty(required=True)
     start = ndb.DateTimeProperty()
     end = ndb.DateTimeProperty()
+	config = ndb.JsonProperty()
     slug = ndb.ComputedProperty(lambda self: slugify(self.name))
     header = ndb.StringProperty(default="")
     reward = ndb.StringProperty(default="")
@@ -36,11 +37,10 @@ class Challenge(ndb.Model):
     is_achieved = ndb.ComputedProperty(
         lambda self: (self.progress >= 100 or self.type == 'versus')
     )
-    config = ndb.JsonProperty()
     datapoints = ndb.StructuredProperty(DataPoint, repeated=True)
     
     def has_stretch_goal(self):
-        return 'StretchGoal' in self.config
+        return self.to_dict().has_key('stretchgoal')
     
     def get_datapoint_values(self):
         values = []
