@@ -102,15 +102,16 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="percent text-center">{{ challenge.progress|percent }}</h2>
-                        <p class="text-center challenge-text">{{ challenge.get_max_datapoint()|number }} / {{ challenge.config['Goal']|number }}
+                        <p class="text-center challenge-text">
+							{{ challenge.get_max_datapoint()|number }} / <span>{{ challenge.config['Goal']|number }}</span>
+						</p>
+						<h2 class="header text-center">{{ challenge.header }}</h1>
+						<p class="reward-text text-center">{{ challenge.reward }}</p>
                     </div>
                 </div>
-                <h2>{{ challenge.header }}</h1>
-                <p class="challenge-text">{{ challenge.reward }}</p>
                 
-                <div id="clock_text" class="hidden">
                 
-                </div>
+                
             </div>
         </div>
     </div>
@@ -119,7 +120,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
+					{% if challenge.is_active %}
+					<div id="clock_text" class="hidden"></div>
                     <div id="clock" data-end="{{ challenge.end }}" data-start="{{ challenge.start }}"></div>
+					{% endif %}
                 </div>
                 <div class="col-md-8">
                     <div id="chart"></div>

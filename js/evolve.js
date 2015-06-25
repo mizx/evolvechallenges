@@ -184,7 +184,12 @@ function init() {
 var clock_text;
 var clock, jClock, timeleft, start, end, date_start, date_end;
 $(function() {
+
+	setTimeout(updateProgressBar, 750);
+	
     clock = document.getElementById('clock');
+	if (clock == null) 
+		return
     jClock = $(clock);
     timeleft = "";
     start = jClock.attr('data-start');
@@ -240,9 +245,6 @@ $(function() {
         var percent_left = timeleft / total_time;
         clock_text.animate(1 - percent_left)
     });
-    
-    setTimeout(updateProgressBar, 750);
-    //updateProgressBar();
     
 });
 

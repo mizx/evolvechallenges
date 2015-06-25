@@ -12,23 +12,25 @@ from google.appengine.ext import ndb
 import base
 
 class ChallengeHandler(webapp2.RequestHandler):
-    def get(self, title):
-        challenge = Challenge.query(Challenge.slug == title).get()
-        
-        if challenge is None:
-            self.response.write('None')
-            self.error(404)
-            return
-        template = config.JINJA_ENV.get_template('challenge.html')
-        self.response.write(template.render({'challenge': challenge, 'config': json.dumps(challenge.config)}))
+	def get(self, title):
+		challenge = Challenge.query(Challenge.slug == title).get()
+		challenge.header = 'Win 40,000 Games With Val'
+		challenge.reward = 'Community Gets Val Preditor Skin'
+		
+		if challenge is None:
+			self.response.write('None')
+			self.error(404)
+			return
+		template = config.JINJA_ENV.get_template('challenge.html')
+		self.response.write(template.render({'challenge': challenge, 'config': json.dumps(challenge.config)}))
 
 class ChallengesHandler(base.BaseHandler):
-    def get(self):
-        challenges = Challenge.query().order(-Challenge.num).fetch(10)
-        template_vars = {
-            'challenges': challenges,
-        }
-        self.render_response('templates/challenges.html')
-        return
-        template = config.JINJA_ENV.get_template('challenges.html')
-        self.response.write(template.render(template_vars))
+	def get(self):
+		challenges = Challenge.query().order(-Challenge.num).fetch(10)
+		template_vars = {
+			'challenges': challenges,
+		}
+		self.render_response('templates/challenges.html')
+		return
+		template = config.JINJA_ENV.get_template('challenges.html')
+		self.response.write(template.render(template_vars))

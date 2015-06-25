@@ -4,6 +4,7 @@ import config
 from models import Challenge
 import pprint
 import jinja2
+import datetime
 
 import cgi
 import urllib
@@ -39,8 +40,14 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = config.JINJA_ENV.get_template('index.html')
-        self.response.write(template.render({}))
+		challenge = Challenge.query().filter(Challenge.start > datetime.datetime.now()).get()
+		template = None
+		if challenge != None:
+			template = config.JINJA_ENV.get_template('countdown.html')
+		else:
+			template = config.JINJA_ENV.get_template('challenge.html')
+			challenge = Challenge.query().order(-Challenge.num).get()
+		self.response.write(template.render({'challenge': challenge}))
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
