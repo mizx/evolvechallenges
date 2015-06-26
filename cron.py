@@ -9,6 +9,7 @@ import webapp2
 
 from google.appengine.api import urlfetch
 from google.appengine.ext import ndb
+from google.appengine.api import memcache
 
 class InitHandler(webapp2.RequestHandler):
 	def get(self, challenge_id):
@@ -52,6 +53,7 @@ class UpdateHandler(webapp2.RequestHandler):
 		
 		challenge.datapoints = api.get_datapoints()
 		challenge.put()
+		memcache.delete(challenge.memkey())
 		logging.info('Successfully updated info for challenge: %s' % challenge_id)
 
 class UpdateActiveHandler(webapp2.RequestHandler):
@@ -64,6 +66,7 @@ class UpdateActiveHandler(webapp2.RequestHandler):
 				return
 			challenge.datapoints = api.get_datapoints()
 			challenge.put()
+			memcache.delete(challenge.memkey())
 			logging.info('Successfully updated info for challenge: %s' % challenge.num)
 
 

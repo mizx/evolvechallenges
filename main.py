@@ -40,7 +40,6 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-		#challenge = Challenge.query().filter(Challenge.start > datetime.datetime.utcnow()).get()
 		challenge = Challenge.query(Challenge.is_active == True).fetch()
 		template = None
 		if challenge != None and len(challenge):

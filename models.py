@@ -69,3 +69,6 @@ class Challenge(ndb.Model):
 	
 	def get_end_seconds(self):
 		return int((self.end - datetime(1970, 1, 1)).total_seconds())
+	
+	def memkey(self):
+		return 'challenge_%s' % self.slug
