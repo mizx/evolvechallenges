@@ -40,14 +40,15 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-		challenge = Challenge.query(Challenge.is_active == True).fetch()
-		template = None
-		if challenge != None and len(challenge):
-			template = config.JINJA_ENV.get_template('beard_brains_selector.html')
-		else:
-			template = config.JINJA_ENV.get_template('countdown.html')
-			challenge = Challenge.query().order(-Challenge.num).get()
-		self.response.write(template.render({'challenge': challenge}))
+		#challenge = Challenge.query(Challenge.is_active == True).fetch()
+		#template = None
+		#if challenge != None and len(challenge):
+		#	template = config.JINJA_ENV.get_template('beard_brains_selector.html')
+		#else:
+			#template = config.JINJA_ENV.get_template('countdown.html')
+			#challenge = Challenge.query().order(-Challenge.num).get()
+		template = config.JINJA_ENV.get_template('beard_brains_selector.html')
+		self.response.write(template.render())
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
