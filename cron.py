@@ -54,9 +54,22 @@ class UpdateHandler(webapp2.RequestHandler):
 		challenge.put()
 		logging.info('Successfully updated info for challenge: %s' % challenge_id)
 
+class UpdateActiveHandler(webapp2.RequestHandler):
+	def get(self):
+		challenges = Challenge.query(Challenge.is_active == True).fetch()
+		for challenge in challenges:
+			api = ChallengeApi(challenge.num)
+			if api.id == 0:
+				logging.error('Invalid Challenge ID: %s' % challenge.num)
+				return
+			challenge.datapoints = api.get_datapoints()
+			challenge.put()
+			logging.info('Successfully updated info for challenge: %s' % challenge.num)
+
 
 	
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/cron/init/<challenge_id:\d+>', handler=InitHandler, name='cron-init-challenge'),
 	webapp2.Route(r'/cron/update/<challenge_id:\d+>', handler=UpdateHandler, name='cron-update-challenge'),
+	webapp2.Route(r'/cron/update/active', handler=UpdateActiveHandler, name='cron-update-active-challenges'),
 ])
