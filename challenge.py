@@ -14,8 +14,6 @@ import base
 class ChallengeHandler(webapp2.RequestHandler):
 	def get(self, title):
 		challenge = Challenge.query(Challenge.slug == title).get()
-		challenge.header = 'Win 40,000 Games With Val'
-		challenge.reward = 'Community Gets Val Preditor Skin'
 		
 		if challenge is None:
 			self.response.write('None')

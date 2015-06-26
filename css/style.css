@@ -21,7 +21,7 @@ body {
     font-family: "ultralight","Segoe, sans-serif";
     color: #fff;
     background-color: #000;
-    background: url(/img/goliath-monster-evolve-1920x1080-0028.jpg) no-repeat bottom center scroll;
+    background: url(/img/goliath_bg.jpg) no-repeat bottom center scroll;
 }
 
 html {
@@ -403,7 +403,7 @@ html {
 }
 
 .footer {
-    padding-top: 20px;
+    padding: 30px 0 40px;
     bottom: 0;
     width: 100%;
     border-top: 3px solid rgb(253,57,30);
@@ -547,29 +547,11 @@ h2.header {
     margin: 100px 0;
 }
 
+.author {
+	font-size: 14pt;
+	text-align: left;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+img.selector {
+	width: 100%;
+}

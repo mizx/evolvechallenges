@@ -40,12 +40,13 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-		challenge = Challenge.query().filter(Challenge.start > datetime.datetime.now()).get()
+		#challenge = Challenge.query().filter(Challenge.start > datetime.datetime.utcnow()).get()
+		challenge = Challenge.query(Challenge.is_active == True).fetch()
 		template = None
-		if challenge != None:
-			template = config.JINJA_ENV.get_template('countdown.html')
+		if challenge != None and len(challenge):
+			template = config.JINJA_ENV.get_template('beard_brains_selector.html')
 		else:
-			template = config.JINJA_ENV.get_template('challenge.html')
+			template = config.JINJA_ENV.get_template('countdown.html')
 			challenge = Challenge.query().order(-Challenge.num).get()
 		self.response.write(template.render({'challenge': challenge}))
 
@@ -65,4 +66,4 @@ app = webapp2.WSGIApplication([
     #webapp2.Route('/admin/update/<id>', handler=admin.UpdateHandler, name='admin.update'),
     #webapp2.Route('/admin/resync/<id>', handler=admin.ResyncHandler, name='admin.resync'),
     #webapp2.Route('/admin/check/new', handler=admin.CheckNewHandler, name='admin.checknew'),
-], debug=True)
+])

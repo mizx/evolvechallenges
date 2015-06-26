@@ -26,7 +26,7 @@ handlers:
 
 - url: /cron/.*
   script: cron.app
-  #login: admin
+  login: admin
 
 - url: .*
   script: main.app

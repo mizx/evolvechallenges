@@ -230,7 +230,7 @@ $(function() {
             str_format = "%-Hh %-Mm";
         }
         clock_text.setText(event.strftime(str_format));
-        timeleft = event.strftime("%-D days %-H hours %M mins");
+        timeleft = event.strftime("%-D days %-H hours %M mins remaining");
     });
     
     $(clock).tooltip({
