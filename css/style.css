@@ -145,7 +145,7 @@ a:focus {
     }
 
     .navbar-custom.top-nav-collapse {
-        padding: 20px 0;
+        padding: 10px 0;
     }
 }
 
@@ -173,11 +173,13 @@ a:focus {
 
 .challenge-text {
     font-size: 18pt;
+    font-size:3vmax;
 	font-weight: 600;
 }
 
 .reward-text {
 	font-size: 18pt;
+    font-size: 3vmax;
 	font-weight: 500;
 	margin: 0 0 40px;
 }
@@ -407,6 +409,7 @@ html {
     bottom: 0;
     width: 100%;
     border-top: 3px solid rgb(253,57,30);
+    border-bottom: 3px solid rgb(253,57,30);
     background: rgba(0, 0, 0, .8);
     text-transform: uppercase;
     text-align: right;
@@ -415,9 +418,9 @@ html {
 /* OVERWRITE BOOTSTRAP AND DEFAULT */
 .navbar-brand {
     font-size: 58px;
-    height: 90px;
-    line-height: 60px;
+    line-height: normal;
     float: none;
+    letter-spacing: 0;
 }
 
 @media (min-width: 768px)
@@ -430,6 +433,7 @@ html {
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
   margin: 0 auto;
+  font-size: 3.6vmax;
 }
 
 .navbar-header {
@@ -437,13 +441,26 @@ html {
     text-align: center
 }
 
+.navbar {
+    min-height: 0;
+    margin-bottom: 20px;
+}
+
+.navbar-brand {
+    padding: 0 0;
+    display: block;
+    height: auto;
+}
+
 a {
     color: rgb(253, 57, 30) !important;
 }
 
 #clock {
-    height: 160px;
-    width: 160px;
+    height: 45%;
+    width: 45%;
+    max-height: 200px;
+    max-width: 200px;
     text-align: center;
     margin: 20px auto;
 }
@@ -489,12 +506,14 @@ h2.percent {
     font-family: 'unicode sans medium';
     margin: 0 0;
 	font-size: 50pt;
+    font-size: 6vmax;
 }
 
 h2.header {
 	font-family: 'unicode sans medium';
 	margin: 20px 0;
 	font-size: 40pt;
+    font-size: 3.5vmax;
 }
 
 .bar_progress, .bar_border {
@@ -549,7 +568,6 @@ h2.header {
 
 .author {
 	font-size: 14pt;
-	text-align: left;
 }
 
 img.selector {

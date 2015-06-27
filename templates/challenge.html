@@ -51,9 +51,6 @@
     <nav class="navbar navbar-custom top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
                     {{ challenge.name }}
                 </a>
@@ -113,14 +110,14 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4">
 					{% if challenge.is_active %}
 					<div id="clock_text" class="hidden"></div>
                     <div id="clock" data-end="{{ challenge.end }}" data-start="{{ challenge.start }}"></div>
 					{% endif %}
-					<p class="author">Developed by <a href="http://steamcommunity.com/id/mizx" target="_blank">mizx</a></p>
+					<p class="author text-center">Developed by <a href="http://steamcommunity.com/id/mizx" target="_blank">mizx</a></p>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 col-sm-8">
                     <div id="chart"></div>
                 </div>
                 

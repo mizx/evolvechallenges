@@ -199,7 +199,6 @@ $(function() {
     date_end = new Date(0);
     date_end.setUTCSeconds(challenge['end']);
     total_time = date_end - date_start;
-    var
     
     clock_text = new ProgressBar.Circle(clock, {
         duration: 100,
