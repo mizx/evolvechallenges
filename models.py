@@ -33,7 +33,7 @@ class Challenge(ndb.Model):
 		lambda self: (self.get_max_datapoint() / self.config['StretchGoal'] if self.has_stretch_goal() else None)
 	)
 	is_active = ndb.ComputedProperty(
-		lambda self: (datetime.utcnow() < self.end and datetime.utcnow() > self.start)
+		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
 	)
 	is_achieved = ndb.ComputedProperty(
 		lambda self: (self.progress >= 100 or self.type == 'versus')
