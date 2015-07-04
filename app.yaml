@@ -1,40 +1,35 @@
 application: evolvechallenges
-version: 3
+version: 4
 runtime: python27
-api_version: 1
 threadsafe: yes
+api_version: 1
 
 handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
 
-- url: /js
-  static_dir: js
+- url: /robots\.txt
+  static_files: robots.txt
+  upload: robots\.txt
 
-- url: /css
-  static_dir: css
-
-- url: /font
-  static_dir: font
-
-- url: /img
-  static_dir: img
-
-- url: /partials
-  static_dir: templates/partials
-
-- url: /cron/.*
+- url: /admin/.*
   script: cron.app
   login: admin
 
-- url: .*
+- url: /rest/.*
   script: main.app
+
+- url: (.*)/
+  static_files: app\1/index.html
+  upload: app
+
+- url: (.*)
+  static_files: app\1
+  upload: app
 
 libraries:
 - name: webapp2
   version: "2.5.2"
-- name: jinja2
-  version: "2.6"
 - name: django
   version: "1.4"
