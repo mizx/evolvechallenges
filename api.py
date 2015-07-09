@@ -6,46 +6,33 @@ import model
 
 class JsonBaseHandler(webapp2.RequestHandler):
 
-  def send_json(self, data):
-    self.response.headers['content-type'] = 'application/json'
-    self.response.write(json.dumps(data, default=tools.json_date_handler))
-    
+	def send_json(self, data):
+		self.response.headers['content-type'] = 'application/json'
+		self.response.write(json.dumps(data, default=tools.json_date_handler))
+	
+	def raise_error(self):
+		self.error(404)
 
 class ChallengesHandler(JsonBaseHandler):
 
-  def get(self):
-    challenges = model.AllChallenges()
-    data = [challenge.to_dict() for challenge in challenges]
-    self.send_json(data)
+	def get(self):
+		# TODO: Memcache
+		data = []
+		for challenge in model.challenges():
+			challenge = challenge.to_dict()
+			del challenge['datapoints']
+			data.append(challenge)
+		self.send_json(data)
 
-"""
-class UpdateHandler(RestHandler):
+class ChallengeHandler(JsonBaseHandler):
 
-  def post(self):
-    r = json.loads(self.request.body)
-    guest = model.UpdateGuest(r['id'], r['first'], r['last'])
-    r = AsDict(guest)
-    self.SendJson(r)
-
-
-class InsertHandler(RestHandler):
-
-  def post(self):
-    r = json.loads(self.request.body)
-    guest = model.InsertGuest(r['first'], r['last'])
-    r = AsDict(guest)
-    self.SendJson(r)
-
-
-class DeleteHandler(RestHandler):
-
-  def post(self):
-    r = json.loads(self.request.body)
-    model.DeleteGuest(r['id'])
-"""
+	def get(self, slug):
+		challenge = model.challenge(slug)
+		if challenge is None:
+			return self.raise_error()
+		self.send_json(challenge.to_dict())
 
 app = webapp2.WSGIApplication([
-    ('/api/challenges', ChallengesHandler),
+    webapp2.Route(r'/api/challenges.json', ChallengesHandler),
+	webapp2.Route(r'/api/challenge/<slug>.json', ChallengeHandler),
 ], debug=True)
-
-

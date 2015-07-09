@@ -67,30 +67,8 @@ class Challenge(ndb.Model):
     def get_end_seconds(self):
         return self.to_seconds(self.end)
 
-def AllChallenges():
+def challenges():
     return Challenge.query()
 
-class Guest(ndb.Model):
-  first = ndb.StringProperty()
-  last = ndb.StringProperty()
-
-
-def AllGuests():
-  return Guest.query()
-
-
-def UpdateGuest(id, first, last):
-  guest = Guest(id=id, first=first, last=last)
-  guest.put()
-  return guest
-
-
-def InsertGuest(first, last):
-  guest = Guest(first=first, last=last)
-  guest.put()
-  return guest
-
-
-def DeleteGuest(id):
-  key = ndb.Key(Guest, id)
-  key.delete()
+def challenge(slug):
+	return Challenge.query(Challenge.slug == slug).get()
