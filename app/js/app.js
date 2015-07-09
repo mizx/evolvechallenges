@@ -2,7 +2,7 @@
 
 var app = angular.module('evolveApp', ['ngRoute']);
 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/', {
 			controller: 'MainCtrl',
@@ -19,6 +19,7 @@ app.config(function($routeProvider) {
 		otherwise({
 			redirectTo: '/challenges'
 		});
+	$locationProvider.html5Mode(true);
 });
 
 app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {

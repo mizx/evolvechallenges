@@ -6,12 +6,16 @@ api_version: 1
 
 handlers:
 - url: /favicon\.ico
-  static_files: favicon.ico
-  upload: favicon\.ico
+  static_files: app/favicon.ico
+  upload: app/favicon\.ico
 
 - url: /robots\.txt
-  static_files: robots.txt
-  upload: robots\.txt
+  static_files: app/robots.txt
+  upload: app/robots\.txt
+
+- url: /(img|css|js|partials)/(.*)
+  static_files: app/\1/\2
+  upload: app/(img|css|js|partials)/(.*)
 
 - url: /admin/.*
   script: cron.app
@@ -21,12 +25,12 @@ handlers:
   script: api.app
 
 - url: (.*)/
-  static_files: app\1/index.html
-  upload: app
+  static_files: app\index.html
+  upload: app/index.html
 
-- url: (.*)
-  static_files: app\1
-  upload: app
+- url: /(.*)
+  static_files: app\index.html
+  upload: app/index.html
 
 libraries:
 - name: webapp2
