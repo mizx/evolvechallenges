@@ -2,6 +2,7 @@
 import api
 import config
 from models import Challenge
+from google.appengine.api import memcache
 import pprint
 import jinja2
 import datetime
@@ -40,15 +41,21 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-		#challenge = Challenge.query(Challenge.is_active == True).fetch()
-		#template = None
-		#if challenge != None and len(challenge):
-		#	template = config.JINJA_ENV.get_template('beard_brains_selector.html')
-		#else:
-			#template = config.JINJA_ENV.get_template('countdown.html')
-			#challenge = Challenge.query().order(-Challenge.num).get()
-		template = config.JINJA_ENV.get_template('beard_brains_selector.html')
-		self.response.write(template.render())
+		redirect = memcache.get('redirect')
+		if redirect is None:
+			challenges = Challenge.query(Challenge.is_active == True).fetch()
+			if challenges != None and len(challenges):
+				redirect = '/challenge/%s' % challenges[0].slug
+				memcache.set('redirect', redirect)
+				self.redirect(redirect)
+				return
+
+		template = config.JINJA_ENV.get_template('countdown.html')
+		challenge = memcache.get('countdown')
+		if challenge is None:
+			challenge = Challenge.query().order(-Challenge.num).get()
+		#template = config.JINJA_ENV.get_template('beard_brains_selector.html')
+		self.response.write(template.render({'challenge': challenge}))
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
