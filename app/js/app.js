@@ -1,6 +1,6 @@
 'use strict';
 
-var App = angular.module('App', ['ngRoute']);
+var App = angular.module('evolveApp', ['ngRoute']);
 
 App.factory('myHttpInterceptor', function($rootScope, $q) {
   return {
@@ -19,9 +19,9 @@ App.factory('myHttpInterceptor', function($rootScope, $q) {
 App.factory('guestService', function($rootScope, $http, $q, $log) {
   $rootScope.status = 'Retrieving data...';
   var deferred = $q.defer();
-  $http.get('rest/query')
+  $http.get('api/challenges')
   .success(function(data, status, headers, config) {
-    $rootScope.guests = data;
+    $rootScope.challenges = data;
     deferred.resolve();
     $rootScope.status = '';
   });

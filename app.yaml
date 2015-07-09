@@ -17,8 +17,8 @@ handlers:
   script: cron.app
   login: admin
 
-- url: /rest/.*
-  script: main.app
+- url: /api/.*
+  script: api.app
 
 - url: (.*)/
   static_files: app\1/index.html
