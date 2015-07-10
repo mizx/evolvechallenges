@@ -6,7 +6,7 @@ app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/', {
 			controller: 'MainCtrl',
-			templateUrl: '/partials/countdown.html'
+			templateUrl: '/partials/main.html'
 		}).
 		when('/challenges', {
 			controller: 'ChallengeListCtrl',
