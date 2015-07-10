@@ -1,28 +1,166 @@
 <!DOCTYPE html>
 <html ng-app="evolveApp">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Evolve Challenges</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/css/normalize.css">
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/app.css">
-  
-  <base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Keep track and watch the progress with Evolve's Community Challenges.">
+	<meta name="author" content="Cody (mizx) Mathisen">
+
+	<title>Evolve Challenges</title>
+
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/app.css">
+
+	<base href="/">
 </head>
-<body>
-  <ul class="menu">
-    <li><a href="/">main</a></li>
-    <li><a href="/challenges">challenges</a></li>
-  </ul>
+<body id="page-top">
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle"collapse" data-target="#navbar-collapsable">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand page-scroll" href="#page-top">Challenges</a>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="navbar-collapsable">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
+					<li>
+						<a class="page-scroll" href="#challenges">Challenges</a>
+					</li>
+					<li>
+						<a class="page-scroll" href="#about">About</a>
+					</li>
+					<li>
+						<a class="page-scroll" href="#newsletter">Get Alerts</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<header>
+		<div class="container">
+			<div class="intro-text">
+				<div class="intro-lead-in">Welcome to Evolve Challenges</div>
+				<div class="intro-heading">Maggie's Challenge On Now!</div>
+				<a href="#challenges" class="page-scroll btn btn-xl">Challenge Progress</a>
+			</div>
+		</div>
+	</header>
+	
+	<section id="challenges" class="bg-light-gray">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<h2 class="section-heading">Previous Challenges</h2>
+				</div>
+			</div>
+			<div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>June 26-29</h4>
+                                    <h4 class="subheading">Cabot's Beards & Brains Challenge</h4>
+                                </div>
+								<div class="timeline-body">
+                                    <p class="text-muted">17,042 / 25,000 Wins</p>
+                                </div>
+                            </div>
+                        </li>
+						<li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>June 26-29</h4>
+                                    <h4 class="subheading">Hank's Beards & Brains Challenge</h4>
+                                </div>
+								<div class="timeline-body">
+                                    <p class="text-muted">31,376 / 25,000 Wins</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>June 5-8</h4>
+                                    <h4 class="subheading">Arena Mode Challenge Weekend</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">29,287 / 40,000 Arena Wins</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/3.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>December 2012</h4>
+                                    <h4 class="subheading">Transition to Full Service</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>July 2014</h4>
+                                    <h4 class="subheading">Phase Two Expansion</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Be Part
+                                    <br>Of Our
+                                    <br>Story!</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+		</div>
+	</section>
 
-  <div ng-view></div>
+	<div ng-view></div>
 
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
-  <script src="/js/app.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.min.js"></script>
+	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script src="http://ironsummitmedia.github.io/startbootstrap-agency/js/classie.js"></script>
+	<script src="http://ironsummitmedia.github.io/startbootstrap-agency/js/cbpAnimatedHeader.js"></script>
+	
+	<script src="/js/spyscroll.js"></script>
+	<script src="/js/app.js"></script>
 </body>
 </html>

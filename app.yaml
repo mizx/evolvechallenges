@@ -13,9 +13,9 @@ handlers:
   static_files: app/robots.txt
   upload: app/robots\.txt
 
-- url: /(img|css|js|partials)/(.*)
+- url: /(img|css|font|js|partials)/(.*)
   static_files: app/\1/\2
-  upload: app/(img|css|js|partials)/(.*)
+  upload: app/(img|css|font|js|partials)/(.*)
 
 - url: /admin/.*
   script: cron.app
