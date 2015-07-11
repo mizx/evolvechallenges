@@ -21,7 +21,7 @@ class Challenge(ndb.Model):
     slug = ndb.StringProperty()
     action = ndb.StringProperty(default="")
     reward = ndb.StringProperty(default="")
-    img_bg = ndb.StringProperty(default="goliath_bg.jpg")
+    background = ndb.StringProperty(default="goliath_bg.jpg")
     type = ndb.StringProperty(choices=['counter', 'versus', 'joint'], default='counter')
     progress = ndb.ComputedProperty(
         lambda self: ((self.get_max_datapoint() / self.config['Goal']) * 100)
