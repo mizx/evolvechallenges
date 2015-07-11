@@ -1,4 +1,39 @@
-<h2>Challenges</h2>
-<div ng-repeat="challenge in challenges | orderBy:'name'">
-  {{ challenge.num }}. <a href="/challenge/{{ challenge.slug }}">{{ challenge.name }}</a>
-</div>
+<header ng-repeat="challenge in challenges" ng-show="challenge.is_active == true" style="background-image: url('/img/{{ challenge.img_bg }}')">
+	<div class="container">
+		<div class="intro-text">
+			<div class="intro-heading">{{ challenge.name }}</div>
+			<div class="intro-subheading">{{ challenge.reward }}</div>
+			<a href="#challenges" class="page-scroll btn btn-xl">View Challenge Progress</a>
+		</div>
+	</div>
+</header>
+
+<section id="challenges" class="bg-light-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h2 class="section-heading">Previous Challenges</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<ul class="timeline">
+					<li ng-repeat="challenge in challenges | orderBy:'-end'" ng-class-even="'timeline-inverted'">
+						<div class="timeline-image">
+							<img class="img-circle img-responsive" src="" alt="">
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<h4>{{ challenge.start | date:'MMM d' }} - {{ challenge.end | date:'d' }}</h4>
+								<h4 class="subheading">{{ challenge.name }}</h4>
+							</div>
+							<div class="timeline-body">
+								<p class="text-muted">{{ challenge.progress_raw | number:0 }} / {{ challenge.config.Goal | number:0 }} Wins</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

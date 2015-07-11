@@ -19,9 +19,12 @@ class ChallengesHandler(JsonBaseHandler):
 		# TODO: Memcache
 		data = []
 		for challenge in model.challenges():
+			data_max = challenge.get_max_datapoint()
 			challenge = challenge.to_dict()
+			challenge['progress_raw'] = data_max
 			del challenge['datapoints']
 			data.append(challenge)
+		
 		self.send_json(data)
 
 class ChallengeHandler(JsonBaseHandler):

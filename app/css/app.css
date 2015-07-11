@@ -247,7 +247,7 @@ header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px
 }
-header .intro-text .intro-lead-in {
+header .intro-text .intro-subheading {
     font-family: 'unicode sans medium', Segoe, sans-serif;
     font-size: 22px;
     line-height: 22px;
@@ -259,14 +259,15 @@ header .intro-text .intro-heading {
     font-weight: 700;
     font-size: 50px;
     line-height: 50px;
-    margin-bottom: 25px
+    margin-bottom: 25px;
+	color: #FD391E;
 }
 @media (min-width: 768px) {
     header .intro-text {
         padding-top: 300px;
         padding-bottom: 200px
     }
-    header .intro-text .intro-lead-in {
+    header .intro-text .intro-subheading {
         font-family: 'unicode sans medium', Segoe, sans-serif;
         font-size: 40px;
         line-height: 40px;

@@ -17,7 +17,7 @@ app.config(function($routeProvider, $locationProvider) {
 			templateUrl: '/partials/challenge_detail.html'
 		}).
 		otherwise({
-			redirectTo: '/challenges'
+			redirectTo: '/'
 		});
 	$locationProvider.html5Mode(true);
 });
@@ -36,5 +36,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 });
 
 app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
-	
+	$http.get('/api/challenges.json').success(function(data) {
+		$scope.challenges = data;
+	});
 });
