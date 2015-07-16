@@ -41,8 +41,6 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-		self.redirect('/challenge/maggies-follow-the-daisy-challenge')
-		return
 		redirect = memcache.get('redirect')
 		if redirect is None:
 			challenges = Challenge.query(Challenge.is_active == True).fetch()

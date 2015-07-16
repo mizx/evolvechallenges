@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Maggie and Daisy Weekend Challenge</title>
+    <title>{{ challenge.name }}</title>
 
     <link href="/css/bootstrap-3.3.4/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 	
 	<style>
 		body {
-			background: url(/img/maggie_bg.jpg) no-repeat top center scroll;
+			background: url(/img/{{ challenge.background }}) no-repeat top center scroll;
 		}
 	</style>
     
@@ -34,7 +34,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    Maggie &amp; Daisy Challenge
+                    {{ challenge.name }}
                 </a>
             </div>
         </div>
