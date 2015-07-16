@@ -47,13 +47,16 @@ class MainHandler(webapp2.RequestHandler):
 			if challenges != None and len(challenges):
 				redirect = '/challenge/%s' % challenges[0].slug
 				memcache.set('redirect', redirect)
-				self.redirect(redirect)
-				return
+		
+		if redirect is not None:
+			self.redirect(redirect)
+			return
 
 		template = config.JINJA_ENV.get_template('countdown.html')
 		challenge = memcache.get('countdown')
 		if challenge is None:
 			challenge = Challenge.query().order(-Challenge.num).get()
+			memcache.set('countdown', challenge)
 		#template = config.JINJA_ENV.get_template('beard_brains_selector.html')
 		self.response.write(template.render({'challenge': challenge}))
 
