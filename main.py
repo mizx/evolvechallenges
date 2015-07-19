@@ -6,6 +6,7 @@ from google.appengine.api import memcache
 import pprint
 import jinja2
 import datetime
+import logging
 
 import cgi
 import urllib
@@ -56,6 +57,11 @@ class MainHandler(webapp2.RequestHandler):
 		challenge = memcache.get('countdown')
 		if challenge is None:
 			challenge = Challenge.query().order(-Challenge.num).get()
+			if challenge.end <= datetime.datetime.now():
+				redirect = '/challenge/%s' % challenge.slug
+				memcache.set('redirect', redirect)
+				self.redirect(redirect)
+				return
 			memcache.set('countdown', challenge)
 		#template = config.JINJA_ENV.get_template('beard_brains_selector.html')
 		self.response.write(template.render({'challenge': challenge}))
