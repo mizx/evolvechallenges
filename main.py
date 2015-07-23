@@ -42,6 +42,10 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+		challenge = Challenge.query().order(-Challenge.num).get()
+		template = config.JINJA_ENV.get_template('countdown.html')
+		self.response.write(template.render({'challenge': challenge}))
+		return
 		redirect = memcache.get('redirect')
 		if redirect is None:
 			challenges = Challenge.query(Challenge.is_active == True).fetch()
@@ -57,11 +61,11 @@ class MainHandler(webapp2.RequestHandler):
 		challenge = memcache.get('countdown')
 		if challenge is None:
 			challenge = Challenge.query().order(-Challenge.num).get()
-			if challenge.end <= datetime.datetime.now():
+			"""if challenge.end <= datetime.datetime.now():
 				redirect = '/challenge/%s' % challenge.slug
 				memcache.set('redirect', redirect)
 				self.redirect(redirect)
-				return
+				return"""
 			memcache.set('countdown', challenge)
 		#template = config.JINJA_ENV.get_template('beard_brains_selector.html')
 		self.response.write(template.render({'challenge': challenge}))
