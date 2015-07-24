@@ -182,6 +182,7 @@ a:focus {
     font-size: 3vmax;
 	font-weight: 500;
 	margin: 0 0 40px;
+	background-color: rgba(0,0,0,.3);
 }
 
 .challenge-text span {
@@ -514,6 +515,7 @@ h2.header {
 	margin: 20px 0;
 	font-size: 40pt;
     font-size: 3.5vmax;
+	background-color: rgba(0,0,0,.3);
 }
 
 .bar_progress, .bar_border {
