@@ -17,28 +17,38 @@ class News(ndb.Model):
 	button_text = ndb.StringProperty()
 	button_link = ndb.StringProperty()
 
-class ChallengeData(ndb.Model):
-	updated = ndb.DateTimeProperty()
-	value = ndb.FloatProperty()
-	increment = ndb.FloatProperty()
-
 class ChallengeV2(ndb.Model):
 	id = ndb.IntegerProperty(required=True)
 	slug = ndb.StringProperty(required=True)
 	name = ndb.StringProperty(required=True)
+	
 	start = ndb.DateTimeProperty(required=True)
 	end = ndb.DateTimeProperty()
 	type = ndb.StringProperty(choices=['counter', 'versus', 'joint'], default='counter')
+	
 	action = ndb.StringProperty(default='')
 	reward = ndb.StringProperty(default='')
+	reward_stretch = ndb.StringProperty(default='')
 	background = ndb.StringProperty(default='goliath_bg.jpg')
 	news_url = ndb.StringProperty(default='')
+	
 	progress = ndb.IntegerProperty(default=0)
+	progress_stretch = ndb.IntegerProperty(default=0)
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
 	is_active = ndb.ComputedProperty(
 		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
 	)
+	
+	axis_y_min = ndb.IntegerProperty()
+	axis_y_max = ndb.IntegerProperty()
+	axis_y_label = ndb.StringProperty()
+
+class ChallengeData(ndb.Model):
+	challenge = ndb.KeyProperty(kind=ChallengeV2)
+	updated = ndb.DateTimeProperty()
+	value = ndb.FloatProperty()
+	increment = ndb.FloatProperty()
 
 class Challenge(ndb.Model):
     num = ndb.IntegerProperty(required=True)
