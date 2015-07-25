@@ -93,12 +93,25 @@
                         </div>
                     </div>
                 </div>
+				{% set data_max = challenge.get_max_datapoint() %}
+				{% set data_goal = challenge.config['Goal'] %}
+				{% set has_stretch = challenge.config.has_key('StretchGoal') %}
+				{% set in_stretch = has_stretch and data_max > data_goal %}
                 <div class="row">
                     <div class="col-lg-12">
                         <h2 class="percent text-center">{{ challenge.progress|percent }}</h2>
-                        <p class="text-center challenge-text">
-							{{ challenge.get_max_datapoint()|number }} / <span>{{ challenge.config['Goal']|number }}</span>
-						</p>
+							<p class="text-center challenge-text">
+								{% if in_stretch %}<strike>{% endif %}
+									{{ data_max|number }} / <span>{{ challenge.config['Goal']|number }}</span>
+								{% if in_stretch %}</strike>{% endif %}
+							</p>
+						{% if in_stretch %}
+							<p class="text-center challenge-text">STRETCH GOAL: {{ challenge.progress_stretch|percent }}<br>
+								{{ data_max|number }} / <span>{{ challenge.config['StretchGoal']|number }}</span>
+							</p>
+						{% endif %}
+						
+						
 						<h2 class="header text-center">{{ challenge.header }}</h1>
 						<p class="reward-text text-center">{{ challenge.reward }}</p>
                     </div>

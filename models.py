@@ -30,7 +30,7 @@ class Challenge(ndb.Model):
 		lambda self: ((self.get_max_datapoint() / self.config['Goal']) * 100) if len(self.datapoints) else 0
 	)
 	progress_stretch = ndb.ComputedProperty(
-		lambda self: (self.get_max_datapoint() / self.config['StretchGoal'] if self.has_stretch_goal() else None)
+		lambda self: ((self.get_max_datapoint() / self.config['StretchGoal']) * 100) if self.has_stretch_goal() else None
 	)
 	is_active = ndb.ComputedProperty(
 		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
@@ -41,7 +41,7 @@ class Challenge(ndb.Model):
 	datapoints = ndb.StructuredProperty(DataPoint, repeated=True)
 	
 	def has_stretch_goal(self):
-		return self.config.has_key('stretchgoal')
+		return self.config.has_key('StretchGoal')
 	
 	def get_datapoint_values(self):
 		values = []
