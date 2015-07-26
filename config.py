@@ -1,11 +1,13 @@
 import datetime
 
-URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
+URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
 DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=45)
 API_DATETIME_ADJUST = datetime.timedelta(hours=0)
 
 MEMCACHE_TIME = 60*15
+
+STRIP_TIME_BASE = '%Y-%m-%dT%H:%M:%S'
 
 NUMBER_FORMAT = '{:,}'
 

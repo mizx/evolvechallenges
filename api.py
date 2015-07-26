@@ -2,7 +2,7 @@ import json
 import webapp2
 import tools
 
-import model
+import models
 
 class JsonBaseHandler(webapp2.RequestHandler):
 
@@ -18,7 +18,7 @@ class ChallengesHandler(JsonBaseHandler):
 	def get(self):
 		# TODO: Memcache
 		data = []
-		for challenge in model.challenges():
+		for challenge in models.challenges():
 			data_max = challenge.get_max_datapoint()
 			challenge = challenge.to_dict()
 			challenge['progress_raw'] = data_max
@@ -30,7 +30,7 @@ class ChallengesHandler(JsonBaseHandler):
 class ChallengeHandler(JsonBaseHandler):
 
 	def get(self, slug):
-		challenge = model.challenge(slug)
+		challenge = models.challenge(slug)
 		if challenge is None:
 			return self.raise_error()
 		self.send_json(challenge.to_dict())

@@ -1,4 +1,8 @@
 cron:
 - description: update active challenges
   url: /cron/update/active
-  schedule: every 15 minutes
+  schedule: every 15 minutes from 00:13 to 23:58
+
+- description: touch challenge for countdown timers to init challenge
+  url: /cron/touch
+  schedule: every friday 00:00

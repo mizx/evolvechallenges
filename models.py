@@ -39,10 +39,14 @@ class ChallengeV2(ndb.Model):
 	is_active = ndb.ComputedProperty(
 		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
 	)
+	is_achieved = ndb.ComputedProperty(lambda self: self.progress > self.goal)
 	
 	axis_y_min = ndb.IntegerProperty()
 	axis_y_max = ndb.IntegerProperty()
 	axis_y_label = ndb.StringProperty()
+	
+	def __str__(self):
+		return self.name
 
 class ChallengeData(ndb.Model):
 	challenge = ndb.KeyProperty(kind=ChallengeV2)
@@ -107,7 +111,7 @@ class Challenge(ndb.Model):
         return self.to_seconds(self.end)
 
 def challenges():
-    return Challenge.query()
+    return ChallengeV2.query()
 
 def challenge(slug):
-	return Challenge.query(Challenge.slug == slug).get()
+	return ChallengeV2.query(Challenge.slug == slug).get()
