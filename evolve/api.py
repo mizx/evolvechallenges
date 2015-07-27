@@ -10,18 +10,37 @@ from google.appengine.api import urlfetch
 
 from django.template.defaultfilters import slugify
 
+def active():
+	evolve = EvolveApi()
+	for challenge in evolve.get_active():
+		print challenge.to_datastore()
+	return evolve
+
 class EvolveApi(object):
 	
 	def __init__(self):
-		self.test = None
-		self.challenges = list()
+		self.challenges_api = []
+		self.challenges_datastore = []
+		self.ids = []
 	
 	def get_active(self):
+		self.get_active_api()
+		self.get_active_datastore()
+		self.get_ids()
+		if len(self.challenges_api) != self.challenges_datastore:
+			
+	
+	def get_active_api(self):
 		self._set_url()
 		return self._get_challenges()
 	
-	def active_check(self):
-		self._set_url()
+	def get_active_datastore(self):
+		self.challenges_datastore = ChallengeV2.query(ChallengeV2.id.IN([self.ids])).fetch()
+	
+	def get_ids(self):
+		for challenge in self.challenges_api:
+			self.ids.append(challenge.id)
+		return self.ids
 	
 	def get_challenge(self, id):
 		self._set_url(id)
@@ -37,13 +56,13 @@ class EvolveApi(object):
 		if data is None:
 			return None
 		self.json = json.loads(data)
-		self.challenges = []
+		self.challenges_api = []
 		if type(self.json) is not list:
 			self.json = [self.json]
 		for challenge in self.json:
-			self.challenges.append(ChallengeApi(challenge))
+			self.challenges_api.append(ChallengeApi(challenge))
 			
-		return self.challenges
+		return self.challenges_api
 	
 	def _get_http(self):
 		result = urlfetch.fetch(self.url)
@@ -59,23 +78,30 @@ class EvolveApi(object):
 class ChallengeApi(object):
 	
 	def __init__(self, json):
-		self.raw = json
+		self.json = json
 		self.challenge = {}
+		self.datastore = None
 		self.datapoints = []
-		self._process_data()
-		
+		self.id = None
+		self.key = None
 	
-	def _process_data(self):
-		for key in self.raw:
-			if key == 'Configuration':
-				for key_config in self.raw[key]:
-					self.challenge[config.API_TO_DATASTORE[key_config]] = self.raw[key][key_config]
-			elif config.API_TO_DATASTORE.has_key(key):
-				self.challenge[config.API_TO_DATASTORE[key]] = self.raw[key]
-		self._process_challenge_info()
-		self._process_challenge_data()
+	def get_id(self):
+		if not len(self.challenge):
+			self._process_challenge_info()
+		return self.id
 	
 	def _process_challenge_info(self):
+		for key in self.json:
+			if key == 'Configuration':
+				for key_config in self.json[key]:
+					self.challenge[config.API_TO_DATASTORE[key_config]] = self.json[key][key_config]
+			elif config.API_TO_DATASTORE.has_key(key):
+				self.challenge[config.API_TO_DATASTORE[key]] = self.json[key]
+		
+		self.id = self.challenge['id']
+		self._process_challenge_extras()
+	
+	def _process_challenge_extras(self):
 		self.challenge['slug'] = slugify(self.challenge['name'])
 		self.challenge['start'] = datetime.utcfromtimestamp(self.challenge['start'])
 		self.challenge['end'] = self.challenge['start'] + config.DEFAULT_CHALLENGE_DURATION
@@ -87,10 +113,9 @@ class ChallengeApi(object):
 		start = self.challenge['start']
 		end = self.challenge['end'] + config.DEFAULT_CHALLENGE_POST_DELAY
 		
-		for point in self.raw['DataPoints']:
+		for point in self.json['DataPoints']:
 			datapoint = {}
-			datetime_human = ['DateTime']
-			datapoint['updated'] = datetime.strptime(datetime_human, config.STRIP_TIME_BASE)
+			datapoint['updated'] = datetime.strptime(point['DateTime'], config.STRIP_TIME_BASE)
 			
 			if datapoint['updated'] < start or datapoint['updated'] > end:
 				continue
@@ -100,13 +125,33 @@ class ChallengeApi(object):
 			
 			self.datapoints.append(datapoint)
 			value_previous = datapoint['value']
-		
 	
-	def to_dict(self):
+	def init_challenge(self):
+		self.key = self.to_datastore.put()
+	
+	def get_challenge_dict(self):
+		if not len(self.challenge):
+			self._process_challenge_info()
 		return self.challenge
 	
-	def to_datastore(self):
-		return ChallengeV2(**self.to_dict())
+	def get_datapoints_dict(self):
+		if not len(self.datapoints):
+			self._process_challenge_data()
+		return self.datapoints
 	
-	def to_datastore_data(self):
-		return [
+	def get_challenge_datastore(self):
+		self.datastore = ChallengeV2.query(ChallengeV2.id == self.id).get()
+		if self.datastore is None:
+			self.init_challenge()
+		return self.datastore
+	
+	def to_datastore(self):
+		return ChallengeV2(**self.get_challenge_dict())
+	
+	def to_datastore_data(self, challenge_key):
+		datapoints = []
+		for point in self.datapoints:
+			point_new = ChallengeData(**self.datapoints)
+			point_new.challenge = challenge_key
+			datapoints.append(point_new)
+		return datapoints
