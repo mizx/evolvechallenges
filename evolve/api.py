@@ -119,7 +119,6 @@ class ChallengeApi(object):
 		self.challenge['start'] = datetime.utcfromtimestamp(self.challenge['start'])
 		self.challenge['end'] = self.challenge['start'] + config.DEFAULT_CHALLENGE_DURATION
 		self.challenge['type'] = 'versus' if 'vs' in self.challenge['name'] and self.challenge['goal'] == 50 else 'counter'
-		self.challenge['is_stretch'] = self.challenge.has_key('goal_stretch')
 	
 	def _process_challenge_data(self):
 		value_previous = 0.0
@@ -140,13 +139,14 @@ class ChallengeApi(object):
 			self.datapoints.append(datapoint)
 			self.values.append(datapoint['value'])
 			value_previous = datapoint['value']
+		self._process_challenge_data_calculations()
 	
 	def _process_challenge_data_calculations(self):
-		self.challenge['progress'] = self._calc_max_datapoint()
-		self.challenge['updated'] = datetime.now()
+		self.datastore.progress = self._calc_max_datapoint()
+		self.datastore.updated = datetime.now()
 	
 	def _calc_max_datapoint(self):
-		return max(self.values) if len(values) else 0
+		return max(self.values) if len(self.values) else 0
 	
 	def set_key(self, key):
 		self.key = key
@@ -177,16 +177,19 @@ class ChallengeApi(object):
 	
 	def put_datastore(self):
 		self.datastore.put()
+		logging.info('Put challenge information in datastore for challenge %s' % self.id)
 	
 	def delete_datastore_data(self):
 		options = ndb.QueryOptions(keys_only=True)
 		ndb.delete_multi(ChallengeData.query(ChallengeData.challenge==self.key).fetch(options=options))
+		logging.info('Deleted all data for challenge %s' % self.id)
 	
 	def put_datastore_data(self):
 		self.delete_datastore_data()
 		if not len(self.datapoints):
 			self.get_datapoints_dict()
 		ndb.put_multi(self.to_datastore_data())
+		logging.info('Put %s records of data in for challenge %s' % (len(self.datapoints), self.id))
 	
 	def to_datastore_data(self):
 		datapoints = []

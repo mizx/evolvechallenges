@@ -27,12 +27,12 @@ class Challenge(ndb.Model):
 	reward = ndb.StringProperty(default='')
 	reward_stretch = ndb.StringProperty(default='')
 	background = ndb.StringProperty(default='goliath_bg.jpg')
-	news_url = ndb.StringProperty(default='')
+	url_news = ndb.StringProperty(default='')
 	
-	progress = ndb.IntegerProperty(default=0)
+	progress = ndb.FloatProperty(default=0)
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
-	is_stretch = ndb.BooleanProperty(default=False)
+	is_stretch = ndb.ComputedProperty(lambda self: self.has_stretch())
 	is_active = ndb.ComputedProperty(
 		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
 	)
@@ -41,6 +41,9 @@ class Challenge(ndb.Model):
 	axis_y_min = ndb.IntegerProperty()
 	axis_y_max = ndb.IntegerProperty()
 	axis_y_label = ndb.StringProperty()
+	
+	def has_stretch(self):
+		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
 
 class ChallengeData(ndb.Model):
 	challenge = ndb.KeyProperty(kind=Challenge)
