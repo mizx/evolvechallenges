@@ -1,10 +1,11 @@
 import config
-from models import ChallengeV2, ChallengeData
+from models import Challenge, ChallengeData
 
 from datetime import datetime
 import logging
 import json
 
+from google.appengine.ext import ndb
 from google.appengine.api import mail
 from google.appengine.api import urlfetch
 
@@ -12,8 +13,7 @@ from django.template.defaultfilters import slugify
 
 def active():
 	evolve = EvolveApi()
-	for challenge in evolve.get_active():
-		print challenge.to_datastore()
+	evolve.get_active()
 	return evolve
 
 class EvolveApi(object):
@@ -22,20 +22,26 @@ class EvolveApi(object):
 		self.challenges_api = []
 		self.challenges_datastore = []
 		self.ids = []
+		self.master = {}
 	
 	def get_active(self):
 		self.get_active_api()
 		self.get_active_datastore()
-		self.get_ids()
-		if len(self.challenges_api) != self.challenges_datastore:
-			
+		
+		self.update_challenge_datapoints()
 	
 	def get_active_api(self):
 		self._set_url()
 		return self._get_challenges()
-	
+
 	def get_active_datastore(self):
-		self.challenges_datastore = ChallengeV2.query(ChallengeV2.id.IN([self.ids])).fetch()
+		for challenge in self.challenges_api:
+			self.challenges_datastore.append(challenge.get_challenge_datastore())
+	
+	def update_challenge_datapoints(self):
+		for challenge in self.challenges_api:
+			challenge.put_datastore_data()
+			challenge.put_datastore()
 	
 	def get_ids(self):
 		for challenge in self.challenges_api:
@@ -82,6 +88,7 @@ class ChallengeApi(object):
 		self.challenge = {}
 		self.datastore = None
 		self.datapoints = []
+		self.values = []
 		self.id = None
 		self.key = None
 	
@@ -106,6 +113,7 @@ class ChallengeApi(object):
 		self.challenge['start'] = datetime.utcfromtimestamp(self.challenge['start'])
 		self.challenge['end'] = self.challenge['start'] + config.DEFAULT_CHALLENGE_DURATION
 		self.challenge['type'] = 'versus' if 'vs' in self.challenge['name'] and self.challenge['goal'] == 50 else 'counter'
+		self.challenge['is_stretch'] = self.challenge.has_key('goal_stretch')
 	
 	def _process_challenge_data(self):
 		value_previous = 0.0
@@ -124,10 +132,22 @@ class ChallengeApi(object):
 			datapoint['increment'] = datapoint['value'] - value_previous
 			
 			self.datapoints.append(datapoint)
+			self.values.append(datapoint['value'])
 			value_previous = datapoint['value']
 	
+	def _process_challenge_data_calculations(self):
+		self.challenge['progress'] = self._calc_max_datapoint()
+		self.challenge['updated'] = datetime.now()
+	
+	def _calc_max_datapoint(self):
+		return max(self.values) if len(values) else 0
+	
+	def set_key(self, key):
+		self.key = key
+	
 	def init_challenge(self):
-		self.key = self.to_datastore.put()
+		self.datastore = self.to_datastore()
+		self.key = self.datastore.put()
 	
 	def get_challenge_dict(self):
 		if not len(self.challenge):
@@ -140,18 +160,31 @@ class ChallengeApi(object):
 		return self.datapoints
 	
 	def get_challenge_datastore(self):
-		self.datastore = ChallengeV2.query(ChallengeV2.id == self.id).get()
+		self.datastore = Challenge.query(Challenge.id == self.id).get()
 		if self.datastore is None:
 			self.init_challenge()
+		self.set_key(self.datastore.key)
 		return self.datastore
 	
 	def to_datastore(self):
-		return ChallengeV2(**self.get_challenge_dict())
+		return Challenge(**self.get_challenge_dict())
 	
-	def to_datastore_data(self, challenge_key):
+	def put_datastore(self):
+		self.datastore.put()
+	
+	def delete_datastore_data(self):
+		ndb.delete_multi(ChallengeData.query(challenge=self.key, keys_only=True).fetch())
+	
+	def put_datastore_data(self):
+		#self.delete_datastore_data()
+		if not len(self.datapoints):
+			self.get_datapoints_dict()
+		ndb.put_multi(self.to_datastore_data())
+	
+	def to_datastore_data(self):
 		datapoints = []
 		for point in self.datapoints:
-			point_new = ChallengeData(**self.datapoints)
-			point_new.challenge = challenge_key
+			point_new = ChallengeData(**point)
+			point_new.challenge = self.key
 			datapoints.append(point_new)
 		return datapoints

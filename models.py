@@ -12,7 +12,7 @@ class News(ndb.Model):
 	button_text = ndb.StringProperty()
 	button_link = ndb.StringProperty()
 
-class ChallengeV2(ndb.Model):
+class Challenge(ndb.Model):
 	id = ndb.IntegerProperty(required=True)
 	slug = ndb.StringProperty(required=True)
 	name = ndb.StringProperty(required=True)
@@ -30,9 +30,9 @@ class ChallengeV2(ndb.Model):
 	news_url = ndb.StringProperty(default='')
 	
 	progress = ndb.IntegerProperty(default=0)
-	progress_stretch = ndb.IntegerProperty(default=0)
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
+	is_stretch = ndb.BooleanProperty(default=False)
 	is_active = ndb.ComputedProperty(
 		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
 	)
@@ -42,8 +42,8 @@ class ChallengeV2(ndb.Model):
 	axis_y_max = ndb.IntegerProperty()
 	axis_y_label = ndb.StringProperty()
 
-class Data(ndb.Model):
-	challenge = ndb.KeyProperty(kind=ChallengeV2)
+class ChallengeData(ndb.Model):
+	challenge = ndb.KeyProperty(kind=Challenge)
 	updated = ndb.DateTimeProperty()
 	value = ndb.FloatProperty()
 	increment = ndb.FloatProperty()
