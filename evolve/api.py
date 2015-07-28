@@ -16,6 +16,11 @@ def active():
 	evolve.get_active()
 	return evolve
 
+def delete():
+	options = ndb.QueryOptions(keys_only=True)
+	datas = ChallengeData.query().fetch(1000, options=options)
+	ndb.delete_multi(datas)
+
 class EvolveApi(object):
 	
 	def __init__(self):
@@ -26,6 +31,7 @@ class EvolveApi(object):
 	
 	def get_active(self):
 		self.get_active_api()
+		self.get_ids()
 		self.get_active_datastore()
 		
 		self.update_challenge_datapoints()
@@ -45,7 +51,7 @@ class EvolveApi(object):
 	
 	def get_ids(self):
 		for challenge in self.challenges_api:
-			self.ids.append(challenge.id)
+			self.ids.append(challenge.get_id())
 		return self.ids
 	
 	def get_challenge(self, id):
@@ -173,10 +179,11 @@ class ChallengeApi(object):
 		self.datastore.put()
 	
 	def delete_datastore_data(self):
-		ndb.delete_multi(ChallengeData.query(challenge=self.key, keys_only=True).fetch())
+		options = ndb.QueryOptions(keys_only=True)
+		ndb.delete_multi(ChallengeData.query(ChallengeData.challenge==self.key).fetch(options=options))
 	
 	def put_datastore_data(self):
-		#self.delete_datastore_data()
+		self.delete_datastore_data()
 		if not len(self.datapoints):
 			self.get_datapoints_dict()
 		ndb.put_multi(self.to_datastore_data())
