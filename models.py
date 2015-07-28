@@ -12,6 +12,14 @@ class News(ndb.Model):
 	button_text = ndb.StringProperty()
 	button_link = ndb.StringProperty()
 
+class ClassType(ndb.Model):
+	name = ndb.StringProperty()
+	is_hunter = ndb.BooleanProperty()
+
+class Character(ndb.Model):
+	name = ndb.StringProperty()
+	class_type = ndb.KeyProperty(kind=ClassType)
+
 class Challenge(ndb.Model):
 	id = ndb.IntegerProperty(required=True)
 	slug = ndb.StringProperty(required=True)
