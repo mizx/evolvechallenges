@@ -6,25 +6,9 @@ import logging
 import json
 
 from google.appengine.ext import ndb
-from google.appengine.api import mail
 from google.appengine.api import urlfetch
 
 from django.template.defaultfilters import slugify
-
-def active():
-	evolve = EvolveApi()
-	evolve.get_active()
-	return evolve
-
-def force(id):
-	evolve = EvolveApi()
-	evolve.get_single(id)
-	return evolve
-
-def delete():
-	options = ndb.QueryOptions(keys_only=True)
-	datas = ChallengeData.query().fetch(1000, options=options)
-	ndb.delete_multi(datas)
 
 class EvolveApi(object):
 	
@@ -100,10 +84,6 @@ class EvolveApi(object):
 			return None
 		logging.info('Successfully retrieved challenge API: %s' % self.url)
 		return result.content
-	
-	def get_challenges(self):
-		challenges = list()
-		#for challenge in self.json:
 
 class ChallengeApi(object):
 	
