@@ -65,3 +65,6 @@ class ChallengeData(ndb.Model):
 
 def challenges():
 	return Challenge.query().fetch()
+
+def challenge(slug):
+	return Challenge.query(Challenge.slug==slug).get()

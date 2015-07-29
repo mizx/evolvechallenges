@@ -10,8 +10,8 @@ class JsonBaseHandler(webapp2.RequestHandler):
 		self.response.headers['content-type'] = 'application/json'
 		self.response.write(json.dumps(data, default=tools.json_date_handler))
 	
-	def raise_error(self):
-		self.error(404)
+	def raise_error(self, code):
+		self.error(code)
 
 class ChallengesHandler(JsonBaseHandler):
 
@@ -24,7 +24,7 @@ class ChallengeHandler(JsonBaseHandler):
 	def get(self, slug):
 		challenge = models.challenge(slug)
 		if challenge is None:
-			return self.raise_error()
+			return self.raise_error(404)
 		self.send_json(challenge.to_dict())
 
 app = webapp2.WSGIApplication([
