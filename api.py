@@ -16,16 +16,8 @@ class JsonBaseHandler(webapp2.RequestHandler):
 class ChallengesHandler(JsonBaseHandler):
 
 	def get(self):
-		# TODO: Memcache
-		data = []
-		for challenge in models.challenges():
-			data_max = challenge.get_max_datapoint()
-			challenge = challenge.to_dict()
-			challenge['progress_raw'] = data_max
-			del challenge['datapoints']
-			data.append(challenge)
-		
-		self.send_json(data)
+		challenges = [challenge.to_dict() for challenge in models.challenges()]
+		self.send_json(challenges)
 
 class ChallengeHandler(JsonBaseHandler):
 

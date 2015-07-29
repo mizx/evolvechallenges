@@ -62,3 +62,6 @@ class ChallengeData(ndb.Model):
 	updated = ndb.DateTimeProperty()
 	value = ndb.FloatProperty()
 	increment = ndb.FloatProperty()
+
+def challenges():
+	return Challenge.query().fetch()

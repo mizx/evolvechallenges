@@ -1,4 +1,4 @@
 <h2>Challenges</h2>
 <div ng-repeat="challenge in challenges | orderBy:'name'">
-  {{ challenge.num }}. <a href="/challenge/{{ challenge.slug }}">{{ challenge.name }}</a>
+  {{ challenge.id }}. <a href="/challenge/{{ challenge.slug }}">{{ challenge.name }}</a>
 </div>
