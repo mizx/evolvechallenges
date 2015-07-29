@@ -24,6 +24,9 @@ handlers:
 - url: /api/.*
   script: api.app
 
+- url: /task/.*
+  script: task.app
+
 - url: /(.*)
   static_files: app/index.html
   upload: app/index.html

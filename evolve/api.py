@@ -16,6 +16,11 @@ def active():
 	evolve.get_active()
 	return evolve
 
+def force(id):
+	evolve = EvolveApi()
+	evolve.get_single(id)
+	return evolve
+
 def delete():
 	options = ndb.QueryOptions(keys_only=True)
 	datas = ChallengeData.query().fetch(1000, options=options)
@@ -23,7 +28,7 @@ def delete():
 
 class EvolveApi(object):
 	
-	def __init__(self):
+	def __init__(self,):
 		self.challenges_api = []
 		self.challenges_datastore = []
 		self.ids = []
@@ -36,8 +41,20 @@ class EvolveApi(object):
 		
 		self.update_challenge_datapoints()
 	
+	def get_single(self, id):
+		self.get_single_api(id)
+		self.get_ids()
+		self.get_active_datastore()
+		
+		self.update_challenge_datapoints()
+	
 	def get_active_api(self):
 		self._set_url()
+		return self._get_challenges()
+	
+	def get_single_api(self, id):
+		self._set_url(id)
+		self.ids = [id]
 		return self._get_challenges()
 
 	def get_active_datastore(self):
@@ -79,8 +96,9 @@ class EvolveApi(object):
 	def _get_http(self):
 		result = urlfetch.fetch(self.url)
 		if result.status_code != 200:
-			logging.error('Unable to retrieve challenge API. Url requested: %s' % self.url)
+			logging.error('Unable to retrieve challenge API. URL requested replied with %s: %s' % (result.status_code, self.url))
 			return None
+		logging.info('Successfully retrieved challenge API: %s' % self.url)
 		return result.content
 	
 	def get_challenges(self):
@@ -107,7 +125,8 @@ class ChallengeApi(object):
 		for key in self.json:
 			if key == 'Configuration':
 				for key_config in self.json[key]:
-					self.challenge[config.API_TO_DATASTORE[key_config]] = self.json[key][key_config]
+					if config.API_TO_DATASTORE.has_key(key_config):
+						self.challenge[config.API_TO_DATASTORE[key_config]] = self.json[key][key_config]
 			elif config.API_TO_DATASTORE.has_key(key):
 				self.challenge[config.API_TO_DATASTORE[key]] = self.json[key]
 		
@@ -154,6 +173,7 @@ class ChallengeApi(object):
 	def init_challenge(self):
 		self.datastore = self.to_datastore()
 		self.key = self.datastore.put()
+		logging.info('Initialized challenge %s' % self.id)
 	
 	def get_challenge_dict(self):
 		if not len(self.challenge):
@@ -177,7 +197,7 @@ class ChallengeApi(object):
 	
 	def put_datastore(self):
 		self.datastore.put()
-		logging.info('Put challenge information in datastore for challenge %s' % self.id)
+		logging.info('Put challenge %s to datastore' % self.id)
 	
 	def delete_datastore_data(self):
 		options = ndb.QueryOptions(keys_only=True)

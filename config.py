@@ -1,6 +1,11 @@
 import datetime
 
-URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
+DEV = True
+
+if DEV:
+	URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
+else:
+	URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
 DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=30)
 API_DATETIME_ADJUST = datetime.timedelta(hours=0)

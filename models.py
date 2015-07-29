@@ -50,6 +50,10 @@ class Challenge(ndb.Model):
 	axis_y_max = ndb.IntegerProperty()
 	axis_y_label = ndb.StringProperty()
 	
+	@classmethod
+	def _get_kind(cls):
+		return 'Challenge2'
+	
 	def has_stretch(self):
 		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
 
