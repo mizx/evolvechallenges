@@ -758,16 +758,11 @@ body {
 	background: transparent;
 }
 
-h2 {
+h1 {
 	color: #fff;
-	background: #111;
-	width: 100%;
-	padding: 20px 0;
-	text-align: center;
-	margin: 20px 0;
 }
 
-.row.top {
+.top {
 	margin-top: 140px;
 }
 
