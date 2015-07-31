@@ -156,15 +156,18 @@ fieldset[disabled] .btn-xl.active {
     background-color: #222;
     border-color: transparent
 }
+.navbar>.container .navbar-brand {
+	margin-left: 0;
+}
 .navbar-default .navbar-brand {
     color: #FD391E;
     font-family: ultralight, Segoe, sans-serif;
 	text-transform: uppercase;
 	font-weight: 600;
-}
-.navbar-default .navbar-brand img {
-	height: 30px;
-	display: inline;
+	padding-left: 210px;
+	background: url(/img/evolve_logo.png);
+	background-position-y: center;
+	background-repeat: no-repeat;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus,
@@ -233,7 +236,7 @@ fieldset[disabled] .btn-xl.active {
 		border-bottom: 3px solid #FD391E;
     }
     .navbar-default.navbar-shrink .navbar-brand {
-        font-size: 1.5em
+        font-size: 1.6em
     }
 }
 header {
