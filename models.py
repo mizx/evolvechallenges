@@ -35,6 +35,7 @@ class Challenge(ndb.Model):
 	reward = ndb.StringProperty(default='')
 	reward_stretch = ndb.StringProperty(default='')
 	background = ndb.StringProperty(default='goliath_bg.jpg')
+	thumbnail = ndb.StringProperty(default='')
 	url_news = ndb.StringProperty(default='')
 	
 	progress = ndb.FloatProperty(default=0)

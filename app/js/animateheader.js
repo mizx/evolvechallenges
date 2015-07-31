@@ -1,34 +1,15 @@
-var animateheader = (function() {
-
-	var docElem = document.documentElement,
-		header = document.querySelector( '.navbar-default' ),
-		didScroll = false,
-		changeHeaderOn = 1;
-
-	function init() {
-		window.addEventListener( 'scroll', function( event ) {
-			if( !didScroll ) {
-				didScroll = true;
-				setTimeout( scrollPage, 100 );
-			}
-		}, false );
-	}
-
-	function scrollPage() {
-		var sy = scrollY();
-		if ( sy >= changeHeaderOn ) {
-			classie.add( header, 'navbar-shrink' );
+$(function() {
+	var scroll;
+	
+	$(window).scroll(function() {
+		if (scroll) {
+			window.clearTimeout(scroll);
+			scroll = null;
 		}
-		else {
-			classie.remove( header, 'navbar-shrink' );
-		}
-		didScroll = false;
-	}
-
-	function scrollY() {
-		return window.pageYOffset || docElem.scrollTop;
-	}
-
-	init();
-
-})();
+		scroll = window.setTimeout(function() {
+			if ($(window).scrollTop() > 70)
+				$('.navbar-default').addClass('navbar-shrink');
+			else $('.navbar-default').removeClass('navbar-shrink');
+		}, 100);
+	});
+});

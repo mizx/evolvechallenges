@@ -748,7 +748,7 @@ body {
 
 html {
     color: #bbb;
-	background: #333 url('/img/bg/red_checker.png');
+	background: #111 url('/img/bg/red_checker.png');
 	background-size: cover;
 	background-position: top;
 	background-attachment: fixed;
@@ -760,16 +760,25 @@ body {
 
 h2 {
 	color: #fff;
+	background: #111;
+	width: 100%;
+	padding: 20px 0;
+	text-align: center;
+	margin: 20px 0;
+}
+
+.row.top {
+	margin-top: 140px;
 }
 
 .challenge-item {
 	width: 100%;
-	border: solid 1px #000;
+	border: solid 1px #111;
 	position: relative;
 	overflow: hidden;
 	height: 240px;
 	margin-bottom: 20px;
-	background: #000;
+	background: #111;
 	color: #FD391E;
 }
 
