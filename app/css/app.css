@@ -743,3 +743,70 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: #FD391E
 }
+
+/*                */
+
+html {
+    color: #bbb;
+	background: #333 url('/img/bg/red_checker.png');
+	background-size: cover;
+	background-position: top;
+	background-attachment: fixed;
+}
+
+body {
+	background: transparent;
+}
+
+h2 {
+	color: #fff;
+}
+
+.challenge-item {
+	width: 100%;
+	border: solid 1px #000;
+	position: relative;
+	overflow: hidden;
+	height: 240px;
+	margin-bottom: 20px;
+	background: #000;
+	color: #FD391E;
+}
+
+.challenge-item  .character-img img {
+	margin: 0 auto;
+}
+
+.challenge-item:hover {
+	border-color: #FD391E;
+}
+
+.challenge-item:hover .teaser {
+	top: 0;
+}
+
+.challenge-item .teaser {
+	background: rgba(0,0,0,.7);
+	padding: 10px;
+	height: 240px;
+	position: absolute;
+	top: 175px;
+	left: 0;
+	transition: all .4s linear;
+	border-top: 2px solid #FD391E;
+	width: 100%;
+}
+
+.challenge-item h3{
+	font-size: 1.3em;
+	text-align: center;
+	margin: 0 0 20px;
+	min-height: 1.8em;
+}
+
+.challenge-item p {
+	color: #fff;
+	text-align: center;
+	font-size: 1.1em;
+	font-weight: 600;
+}
