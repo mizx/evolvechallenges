@@ -9,6 +9,7 @@ else:
 
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
 DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=30)
+DEFAULT_CHALLENGE_START_GRACE = datetime.timedelta(minutes=5)
 API_DATETIME_ADJUST = datetime.timedelta(hours=0)
 
 MEMCACHE_TIME = 60*15
