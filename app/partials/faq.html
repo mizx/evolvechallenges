@@ -1,0 +1,24 @@
+
+<div class="container">
+	<div class="page-header">
+		<h1>Frequently Asked Questions</h1>
+	</div>
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="accordion" id="accordian_master">
+				<div class="accordion-group" ng-repeat="question in questions">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_master" href="#collapse{{ $index }}">
+							{{ question.q }}
+						</a>
+					</div>
+					<div id="collapse{{ $index }}" class="accordion-body collapse">
+						<div class="accordion-inner">
+							{{ question.a }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

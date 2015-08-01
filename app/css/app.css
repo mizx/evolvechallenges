@@ -761,6 +761,23 @@ body {
 	background: transparent;
 }
 
+.accordion-heading {
+	background: #111;
+	padding: 6px;
+	margin-top: 12px;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.accordion-body {
+	background: #222;
+	padding: 6px;
+	margin-bottom: 12px;
+	color: #fff;
+	font-size: 16px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .page-header {
 	margin-top: 140px;
 	color: #fff;
