@@ -5,10 +5,10 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-8">
-			<div class="accordion" id="accordian_master">
+			<div class="accordion">
 				<div class="accordion-group" ng-repeat="question in questions">
 					<div class="accordion-heading">
-						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_master" href="#collapse{{ $index }}">
+						<a data-toggle="collapse" href="" data-target="#collapse{{ $index }}">
 							{{ question.q }}
 						</a>
 					</div>

@@ -762,15 +762,19 @@ body {
 }
 
 .accordion-heading {
-	background: #111;
+	background: #000;
 	padding: 6px;
 	margin-top: 12px;
 	font-size: 20px;
 	text-transform: uppercase;
 }
 
+.accordion-heading a:hover, .accordion-heading a:focus {
+	text-decoration: none;
+}
+
 .accordion-body {
-	background: #222;
+	background: #111;
 	padding: 6px;
 	margin-bottom: 12px;
 	color: #fff;

@@ -27,6 +27,7 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	$http.get('/api/challenges.json').success(function(data) {
 		$scope.challenges = data;
 	});
@@ -49,6 +50,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 });
 
 app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/faq.jpg')"};
 	$scope.questions = [
 		{
 			q: "Do you have to play as specific characters?",
