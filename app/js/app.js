@@ -34,6 +34,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 		$scope.challenge = data;
 		$scope.challenge['percent'] = $scope.challenge.progress / $scope.challenge.goal * 100;
 		$scope.challenge.percent = ($scope.challenge.percent > 100) ? 100.0 : $scope.challenge.percent;
+		$rootScope.htmlPage = {background: "url('" + $scope.challenge.background + "')"};
 	});
 });
 

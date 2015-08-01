@@ -751,7 +751,7 @@ body {
 
 html {
     color: #bbb;
-	background: #111 url('/img/bg/red_checker.png');
+	background: #111 url('/img/bg/default.png');
 	background-size: cover;
 	background-position: top;
 	background-attachment: fixed;
@@ -842,6 +842,10 @@ body {
 	color: #fff;
 }
 
+.challenge .progress_normal {
+	margin-top: 60px;
+}
+
 .challenge .progress_normal.completed  .current,
 .challenge .progress_stretch.completed .current {
 	color: #fff;
@@ -854,11 +858,17 @@ body {
 }
 
 .challenge .goal {
+	color: #fff;
 	font-family: ultralight, Segoe, sans-serif;
 }
 
 .challenge .action {
+	color: #fff;
 	margin-top: 40px;
+}
+
+.progress_bars {
+	margin: 40px 0;
 }
 
 .challenge_progress .placeholder {

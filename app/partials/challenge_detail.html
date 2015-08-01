@@ -133,19 +133,15 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<h2 class="progress_normal" ng-class="{completed: challenge.is_achieved, stretch: challenge.is_stretch}">
+				<h2 class="progress_normal" ng-class="{completed: challenge.is_achieved}">
 					<span class="current">{{ challenge.progress | number : 0 }}</span>
-					<span class="goal">/ {{ challenge.goal | number : 0 }}</span>
-				</h2>
-				<h2 class="progress_stretch" ng-if="challenge.is_achieved && challenge.is_stretch" ng-class="{completed: challenge.is_achieved, stretch: challenge.is_stretch}">
-					<span class="current">{{ challenge.progress | number : 0 }}</span>
-					<span class="goal">/ {{ challenge.goal_stretch | number : 0 }}</span>
+					<span class="goal">/ {{ (challenge.is_achieved && challenge.is_stretch) ? challenge.goal_stretch : challenge.goal | number : 0 }}</span>
 				</h2>
 			</div>
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1 class="action">{{ challenge.action }}</h1>
 				<h3 class="reward" ng-class="{completed: challenge.is_achieved, stretch: challenge.is_stretch}">{{ challenge.reward }}</h3>
-				<h2 class="reward_stretch" ng-class="{completed: challenge.is_achieved}">{{ challenge.reward_stretch }}</h2>
+				<h2 class="reward_stretch" ng-class="{completed2: challenge.is_achieved}">{{ challenge.reward_stretch }}</h2>
 			</div>
 		</div>
 	</div>
