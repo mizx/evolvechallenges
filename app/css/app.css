@@ -761,12 +761,9 @@ body {
 	background: transparent;
 }
 
-h1 {
-	color: #fff;
-}
-
-.top {
+.page-header {
 	margin-top: 140px;
+	color: #fff;
 }
 
 .challenge-item {
@@ -816,4 +813,99 @@ h1 {
 	text-align: center;
 	font-size: 1.1em;
 	font-weight: 600;
+}
+
+.challenge {
+	text-align: center;
+	color: #FD391E;
+}
+
+.challenge .page-header {
+	background: rgba(0,0,0,.7);
+	border: 2px solid #FD391E;
+	border-left: 0;
+	border-right: 0;
+	color: #FD391E;
+}
+
+.challenge .percent {
+	color: #fff;
+	font-weight: 600;
+	text-align: center;
+}
+
+.challenge .current {
+	color: #FD391E;
+}
+
+.challenge .completed {
+	color: #fff;
+}
+
+.challenge .progress_normal.completed  .current,
+.challenge .progress_stretch.completed .current {
+	color: #fff;
+	font-family: ultralight, Segoe, sans-serif;
+}
+
+.completed.stretch,
+.completed.stretch {
+	text-decoration: line-through;
+}
+
+.challenge .goal {
+	font-family: ultralight, Segoe, sans-serif;
+}
+
+.challenge .action {
+	margin-top: 40px;
+}
+
+.challenge_progress .placeholder {
+	height: 32px;
+	position: relative;
+	margin: 0 2px;
+}
+
+.armor .challenge_progress .placeholder {
+	height: 26px;
+}
+
+.armor .challenge_progress .placeholder {
+	margin: 0 1px;
+}
+
+
+.challenge_progress .bar_progress, .challenge_progress .bar_border {
+	position: absolute;
+}
+
+.challenge_progress .bar_progress {
+	-webkit-transition: width .75s;
+	transition: width .75s;
+	background: #FD391E;
+	height: 32px;
+}
+
+.armor .challenge_progress .bar_progress {
+	height: 26px;
+}
+
+.challenge_progress .bar_border {
+	border: 4px solid rgba(255, 204, 204, .5);
+	height: 100%;
+	width: 100%;
+}
+
+.armor {
+	margin-bottom: -10px;
+	z-index: 50;
+}
+
+.armor .challenge_progress .bar_progress {
+	background: rgb(32, 32, 163);
+}
+
+.armor .challenge_progress .bar_border {
+	border-color: rgba(219, 219, 255, .35);
 }
