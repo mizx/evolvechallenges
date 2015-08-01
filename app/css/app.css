@@ -940,3 +940,30 @@ body {
 .armor .challenge_progress .bar_border {
 	border-color: rgba(219, 219, 255, .35);
 }
+
+.footer {
+	border-top: 2px solid #FD391E;
+	background: #111;
+}
+
+.footer h4 {
+	color: #555;
+	text-align: center;
+}
+
+.footer .style_chooser {
+	margin-right: 0;
+	margin-left: 0;
+	text-align: center;
+}
+
+.footer .style_chooser ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+.footer .style_chooser ul li {
+	width: 20%;
+	float: left;
+	padding: 4px;
+}
