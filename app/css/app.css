@@ -769,6 +769,12 @@ body {
 	text-transform: uppercase;
 }
 
+.accordion-heading a {
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
 .accordion-heading a:hover, .accordion-heading a:focus {
 	text-decoration: none;
 }
@@ -944,6 +950,7 @@ body {
 .footer {
 	border-top: 2px solid #FD391E;
 	background: #111;
+	margin-top: 40px;
 }
 
 .footer h4 {
