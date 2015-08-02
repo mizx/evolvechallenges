@@ -77,7 +77,7 @@ app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams
 			a: "It includes them all: PC, XBOX, PS3. Everyone who plays Evolve contributes to the challenges."
 		},
 		{
-			q: "I want to stay up to date! Do I need to spam the f*** out of my f5 key?",
+			q: "Do I need to spam the f*** out of my f5 key?",
 			a: "Nope! The site will automatically update itself every 15 minutes for you. You focus on completing the challenges, I'll make sure the site is up-to-date next time you glance over and take a peak."
 		},
 		{
