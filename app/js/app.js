@@ -5,8 +5,8 @@ var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize']);
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/', {
-			controller: 'MainCtrl',
-			templateUrl: '/partials/main.html'
+			controller: 'ChallengeListCtrl',
+			templateUrl: '/partials/challenge_list.html'
 		}).
 		when('/challenges', {
 			controller: 'ChallengeListCtrl',
@@ -51,9 +51,6 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 
 app.controller('HeaderController', function($scope, $location) {
 	$scope.isActive = function(viewLocation) {
-	console.log('LOCATION PATH: ' + $location.path());
-	console.log('VIEWLOCATION: ' + viewLocation);
-	console.log('LOCATION SUB: ' + $location.path().substr(0, viewLocation.length));
 		return $location.path().substr(0, viewLocation.length) == viewLocation;
 	};
 });
