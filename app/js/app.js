@@ -49,6 +49,15 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 	});
 });
 
+app.controller('HeaderController', function($scope, $location) {
+	$scope.isActive = function(viewLocation) {
+	console.log('LOCATION PATH: ' + $location.path());
+	console.log('VIEWLOCATION: ' + viewLocation);
+	console.log('LOCATION SUB: ' + $location.path().substr(0, viewLocation.length));
+		return $location.path().substr(0, viewLocation.length) == viewLocation;
+	};
+});
+
 app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/faq.jpg')"};
 	$scope.questions = [
