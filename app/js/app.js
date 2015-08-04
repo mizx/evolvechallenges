@@ -80,7 +80,7 @@ app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams
 		},
 		{
 			q: "Does this site provide information for all platforms?",
-			a: "It includes them all: PC, XBOX, PS3. Everyone who plays Evolve contributes to the challenges."
+			a: "It includes them all: PC, XBOX, PS4. Everyone who plays Evolve contributes to the challenges."
 		},
 		{
 			q: "Do I need to spam the f*** out of my f5 key?",
