@@ -31,7 +31,6 @@ app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $r
 	$http.get('/api/challenges.json').success(function(data) {
 		$scope.challenges = data;
 	});
-	$scope.orderProp = 'num';
 });
 
 app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {

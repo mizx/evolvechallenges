@@ -974,3 +974,21 @@ body {
 	float: left;
 	padding: 4px;
 }
+
+.versus {
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+.versus .percent {
+	font-size: 42px;
+	line-height: 64px;
+}
+
+.versus .percent.winning {
+	font-size: 64px;
+}
+
+.versus .v {
+	margin: 0 auto;
+}

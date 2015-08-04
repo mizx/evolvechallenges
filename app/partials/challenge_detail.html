@@ -2,7 +2,25 @@
 	<div class="page-header">
 		<h1>{{ challenge.name }}</h1>
 	</div>
-	<div class="container">
+	<div class="container versus" ng-if="challenge.type == 'versus'">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="percent" ng-if="challenge.is_achieved">COMPLETED</h1>
+			</div>
+			<div class="col-sm-5">
+				<h1 class="percent" ng-class="{winning: challenge.progress > 50}">{{ challenge.progress | number : 1}}%</h1>
+				<h1 class="name">{{ challenge.versus_names[0] }}</h1>
+			</div>
+			<div class="col-sm-2">
+				<img class="v img-responsive" src="/img/misc/versus.png" />
+			</div>
+			<div class="col-sm-5">
+				<h1 class="percent" ng-class="{winning: challenge.progress < 50}">{{ 100 - challenge.progress | number : 1}}%</h1>
+				<h1 class="name">{{ challenge.versus_names[1] }}</h1>
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-if="challenge.type != 'versus'">
 		<div class="row">
 			<h1 class="percent" ng-if="challenge.is_achieved">COMPLETED</h1>
 			<h1 class="percent">{{ challenge.percent | number : 0}}%</h1>

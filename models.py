@@ -43,9 +43,11 @@ class Challenge(ndb.Model):
 	goal_stretch = ndb.IntegerProperty()
 	is_stretch = ndb.ComputedProperty(lambda self: self.has_stretch())
 	is_active = ndb.ComputedProperty(
-		lambda self: (datetime.utcnow() < self.end + config.DEFAULT_CHALLENGE_POST_DELAY and datetime.utcnow() > self.start)
+		lambda self: (not self.is_ended() and self.is_started())
 	)
-	is_achieved = ndb.ComputedProperty(lambda self: self.progress > self.goal)
+	is_achieved = ndb.ComputedProperty(
+		lambda self: self.is_ended() if self.is_versus() else self.is_goal_reached()
+	)
 	
 	axis_y_min = ndb.IntegerProperty()
 	axis_y_max = ndb.IntegerProperty()
@@ -55,8 +57,35 @@ class Challenge(ndb.Model):
 	def _get_kind(cls):
 		return 'Challenge2'
 	
+	def to_dict(self):
+		result = super(Challenge, self).to_dict()
+		if self.is_versus():
+			result['versus_names'] = self.get_versus_names()
+		return result
+	
 	def has_stretch(self):
 		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
+	
+	def is_versus(self):
+		return self.type == 'versus'
+	
+	def is_started(self):
+		return datetime.utcnow() > self.start()
+	
+	def is_ended(self, post_delay=True):
+		if post_delay:
+			return datetime.utcnow() > self.end + config.DEFAULT_CHALLENGE_POST_DELAY
+		return datetime.utcnow() > self.end
+	
+	def is_goal_reached(self):
+		return self.progress > self.goal
+	
+	def get_versus_names(self):
+		if not self.is_versus():
+			return None
+		names = self.name.split(' ')
+		if len(names) >= 3 and names[1] == 'vs':
+			return [names[0], names[2]]
 
 class ChallengeData(ndb.Model):
 	challenge = ndb.KeyProperty(kind=Challenge)
