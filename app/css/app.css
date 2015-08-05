@@ -949,8 +949,10 @@ body {
 
 .footer {
 	border-top: 2px solid #FD391E;
+	border-bottom: 2px solid #FD391E;
 	background: #111;
-	margin-top: 40px;
+	padding: 30px 0;
+	margin: 40px 0 0;
 }
 
 .footer h4 {
@@ -1029,4 +1031,16 @@ body {
     color: #fff;
     background-color: #CA2D18;
     border-color: #CA2D18;
+}
+
+.glyphicon {
+	font-family: FontAwesome;
+}
+
+.glyphicon-chevron-left:before {
+    content: "\f053";
+}
+
+.glyphicon-chevron-right:before {
+    content: "\f054";
 }

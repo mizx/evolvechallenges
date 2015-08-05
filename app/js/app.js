@@ -5,8 +5,8 @@ var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap'])
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
 		when('/', {
-			controller: 'ChallengeListCtrl',
-			templateUrl: '/partials/challenge_list.html'
+			controller: 'MainCtrl',
+			templateUrl: '/partials/main.html'
 		}).
 		when('/challenges', {
 			controller: 'ChallengeListCtrl',
@@ -48,7 +48,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 });
 
 app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
-	$http.get('/api/challenges.json').success(function(data) {
+	$http.get('/api/challenges/countdown.json').success(function(data) {
 		$scope.challenges = data;
 	});
 });

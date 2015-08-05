@@ -42,6 +42,7 @@ class Challenge(ndb.Model):
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
 	is_stretch = ndb.ComputedProperty(lambda self: self.has_stretch())
+	is_countdown = ndb.ComputedProperty(lambda self: not self.is_started())
 	is_active = ndb.ComputedProperty(
 		lambda self: (not self.is_ended() and self.is_started())
 	)
@@ -70,7 +71,7 @@ class Challenge(ndb.Model):
 		return self.type == 'versus'
 	
 	def is_started(self):
-		return datetime.utcnow() > self.start()
+		return datetime.utcnow() >= self.start
 	
 	def is_ended(self, post_delay=True):
 		if post_delay:
@@ -93,7 +94,9 @@ class ChallengeData(ndb.Model):
 	value = ndb.FloatProperty()
 	increment = ndb.FloatProperty()
 
-def challenges():
+def challenges(filter=None):
+	if filter == 'countdown':
+		return Challenge.query(Challenge.is_countdown==True).fetch()
 	return Challenge.query().fetch()
 
 def challenge(slug):

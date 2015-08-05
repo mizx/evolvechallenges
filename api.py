@@ -15,8 +15,8 @@ class JsonBaseHandler(webapp2.RequestHandler):
 
 class ChallengesHandler(JsonBaseHandler):
 
-	def get(self):
-		challenges = [challenge.to_dict() for challenge in models.challenges()]
+	def get(self, filter=None):
+		challenges = [challenge.to_dict() for challenge in models.challenges(filter)]
 		self.send_json(challenges)
 
 class ChallengeHandler(JsonBaseHandler):
@@ -29,5 +29,6 @@ class ChallengeHandler(JsonBaseHandler):
 
 app = webapp2.WSGIApplication([
     webapp2.Route(r'/api/challenges.json', ChallengesHandler),
+    webapp2.Route(r'/api/challenges/<filter>.json', ChallengesHandler),
 	webapp2.Route(r'/api/challenge/<slug>.json', ChallengeHandler),
 ], debug=True)
