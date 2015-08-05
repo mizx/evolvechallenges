@@ -993,6 +993,20 @@ body {
 	margin: 0 auto;
 }
 
+.donate h2, h3 {
+	color: #FD391E;
+	text-align: center;
+}
+
+.donate h3 {
+	color: #fff;
+	margin-bottom: 20px;
+}
+
+.donate button {
+	font-size: 200%;
+}
+
 .btn-group {
 	margin-bottom: 20px;
 }

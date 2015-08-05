@@ -20,6 +20,10 @@ app.config(function($routeProvider, $locationProvider) {
 			controller: 'FaqCtrl',
 			templateUrl: '/partials/faq.html'
 		}).
+		when('/donate', {
+			controller: 'DonateCtrl',
+			templateUrl: '/partials/donate.html'
+		}).
 		otherwise({
 			redirectTo: '/'
 		});
@@ -47,6 +51,10 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 	$http.get('/api/challenges.json').success(function(data) {
 		$scope.challenges = data;
 	});
+});
+
+app.controller('DonateCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+	
 });
 
 app.controller('HeaderController', function($scope, $location) {
@@ -80,7 +88,7 @@ app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams
 		},
 		{
 			q: "Does this site provide information for all platforms?",
-			a: "It includes them all: PC, XBOX, PS4. Everyone who plays Evolve contributes to the challenges."
+			a: "It includes them all: PC, Xbox One, PS4. Everyone who plays Evolve contributes to the challenges."
 		},
 		{
 			q: "Do I need to spam the f*** out of my f5 key?",
