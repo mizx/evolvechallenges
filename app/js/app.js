@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize']);
+var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -28,6 +28,7 @@ app.config(function($routeProvider, $locationProvider) {
 
 app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
+	
 	$http.get('/api/challenges.json').success(function(data) {
 		$scope.challenges = data;
 	});

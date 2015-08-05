@@ -3,32 +3,37 @@
 		<h1>Previous Challenges</h1>
 	</div>
 	<div class="row">
-		<div ng-repeat="challenge in challenges | orderBy:'-start'">
-			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
-				<a href="/challenge/{{ challenge.slug }}">
-					<div class="challenge-item">
-						<div class="character-img">
-							<img src="{{ challenge.thumbnail }}" class="img-responsive" />
-						</div>
-						<div class="teaser">
-							<h3>{{ challenge.name }}</h3>
-							<div>
-								<p ng-if="challenge.is_achieved">
-									<i class="fa fa-unlock"></i>
-									<span ng-if="challenge.type != 'versus'">ACHIEVED</span>
-									<span ng-if="challenge.type == 'versus'">COMPLETED</span>
-								</p>
-								<p ng-if="!challenge.is_achieved">
-									<i class="fa fa-lock"></i>
-									<span ng-if="challenge.type != 'versus'">NOT ACHIEVED</span>
-									<span ng-if="challenge.type == 'versus'">NOT COMPLETE</span>
-								</p>
-							</div>
-							<p>{{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</p>
-						</div>
-					</div>
-				</a>
+		<div class="col-sm-12">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary active" ng-model="filterTest" btn-radio="{}" selected>All</button>
+				<button type="button" class="btn btn-primary" ng-model="filterTest" btn-radio="{is_achieved: true}">Achieved</button>
+				<button type="button" class="btn btn-primary" ng-model="filterTest" btn-radio="{is_achieved: false}">Not Achieved</button>
 			</div>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" ng-repeat="challenge in challenges | orderBy:'-start' | filter:filterTest">
+			<a href="/challenge/{{ challenge.slug }}">
+				<div class="challenge-item">
+					<div class="character-img">
+						<img src="{{ challenge.thumbnail }}" class="img-responsive" />
+					</div>
+					<div class="teaser">
+						<h3>{{ challenge.name }}</h3>
+						<div>
+							<p ng-if="challenge.is_achieved">
+								<i class="fa fa-unlock"></i>
+								<span ng-if="challenge.type != 'versus'">ACHIEVED</span>
+								<span ng-if="challenge.type == 'versus'">COMPLETED</span>
+							</p>
+							<p ng-if="!challenge.is_achieved">
+								<i class="fa fa-lock"></i>
+								<span ng-if="challenge.type != 'versus'">NOT ACHIEVED</span>
+								<span ng-if="challenge.type == 'versus'">NOT COMPLETE</span>
+							</p>
+						</div>
+						<p>{{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</p>
+					</div>
+				</div>
+			</a>
 		</div>
 	</div>
 </div>
