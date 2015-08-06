@@ -25,7 +25,10 @@ class ChallengeHandler(JsonBaseHandler):
 		challenge = models.challenge(slug)
 		if challenge is None:
 			return self.raise_error(404)
-		self.send_json(challenge.to_dict())
+		response = challenge.to_dict()
+		response['datapoints'] = [data.to_dict(exclude=['challenge']) for data in challenge.get_datapoints()]
+
+		self.send_json(response)
 
 app = webapp2.WSGIApplication([
     webapp2.Route(r'/api/challenges.json', ChallengesHandler),

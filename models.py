@@ -64,6 +64,9 @@ class Challenge(ndb.Model):
 			result['versus_names'] = self.get_versus_names()
 		return result
 	
+	def get_datapoints(self):
+		return ChallengeData.query(ChallengeData.challenge==self.key).fetch()
+	
 	def has_stretch(self):
 		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
 	

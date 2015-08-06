@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
+var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'googlechart']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -44,6 +44,62 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 		$scope.challenge['percent'] = $scope.challenge.progress / $scope.challenge.goal * 100;
 		$scope.challenge.percent = ($scope.challenge.percent > 100) ? 100.0 : $scope.challenge.percent;
 		$rootScope.htmlPage = {backgroundImage: "url('" + $scope.challenge.background + "')"};
+	
+	
+	var chart = {};
+	chart.type="LineChart";
+	chart.data = {"cols": [
+        {id: "month", label: "Month", type: "string"},
+        {id: "laptop-id", label: "Laptop", type: "number"},
+        {id: "desktop-id", label: "Desktop", type: "number"},
+        {id: "server-id", label: "Server", type: "number"},
+        {id: "cost-id", label: "Shipping", type: "number"},
+		{id: "progress", label: "Progress", type: "number"}
+    ], "rows": [
+        {c: [
+            {v: "January"},
+            {v: 19, f: "42 items"},
+            {v: 12, f: "Ony 12 items"},
+            {v: 7, f: "7 servers"},
+            {v: 4},
+			{v: 10}
+        ]},
+        {c: [
+            {v: "February"},
+            {v: 13},
+            {v: 1, f: "1 unit (Out of stock this month)"},
+            {v: 12},
+            {v: 2},
+			{v: 10}
+        ]},
+        {c: [
+            {v: "March"},
+            {v: 24},
+            {v: 0},
+            {v: 11},
+            {v: 6},
+			{v: 10}
+
+        ]}
+    ]};
+	chart.options = {
+        "title": "Challenge Progress",
+        "displayExactValues": true,
+        "vAxis": {
+            "title": $scope.challenge.axis_y_label,
+			"ticks": [$scope.challenge.goal],
+			"maxValue": $scope.challenge.axis_y_max,
+			"minValue": $scope.challenge.axis_y_min
+        },
+        "hAxis": {
+            "title": "Date"
+        }
+    };
+	if ($scope.challenge.is_stretch)
+		chart.options['vAxis']['ticks'].push($scope.challenge.goal_stretch);
+	chart.formatters = {};
+	$scope.chart = chart;
+	
 	});
 });
 
