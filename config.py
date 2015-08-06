@@ -4,6 +4,7 @@ import os
 import filters
 
 URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
+URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/' #temporary for twitch viewer event
 DEFAULT_CHALLENGE_KEY = 'default_challenge'
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
 DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=45)

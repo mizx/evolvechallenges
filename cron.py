@@ -15,6 +15,8 @@ class InitHandler(webapp2.RequestHandler):
 	def get(self, challenge_id):
 		if challenge_id.isdigit():
 			challenge_id = int(challenge_id)
+		elif challenge_id.startswith('-') and challenge_id[1:].isdigit():
+			challenge_id = int(challenge_id)
 		else:
 			self.response.write('Challenge ID is not a digit: %s' % challenge_id)
 			return
@@ -39,8 +41,10 @@ class UpdateHandler(webapp2.RequestHandler):
 	def get(self, challenge_id):
 		if challenge_id.isdigit():
 			challenge_id = int(challenge_id)
+		elif challenge_id.startswith('-') and challenge_id[1:].isdigit():
+			challenge_id = int(challenge_id)
 		else:
-			logging.error('Challenge ID is not a digit: %s' % challenge_id)
+			logging.error('Challenge ID is not a digit: %s' % challenge_id[1:])
 			return
 		api = ChallengeApi(challenge_id)
 		if api.id == 0:
@@ -58,7 +62,7 @@ class UpdateHandler(webapp2.RequestHandler):
 
 class UpdateActiveHandler(webapp2.RequestHandler):
 	def get(self):
-		challenges = Challenge.query(Challenge.is_active == True).fetch()
+		challenges = Challenge.query(Challenge.start <= datetime.datetime.now()).fetch()
 		for challenge in challenges:
 			api = ChallengeApi(challenge.num)
 			if api.id == 0:
@@ -72,7 +76,7 @@ class UpdateActiveHandler(webapp2.RequestHandler):
 
 	
 app = webapp2.WSGIApplication([
-	webapp2.Route(r'/cron/init/<challenge_id:\d+>', handler=InitHandler, name='cron-init-challenge'),
-	webapp2.Route(r'/cron/update/<challenge_id:\d+>', handler=UpdateHandler, name='cron-update-challenge'),
+	webapp2.Route(r'/cron/init/<challenge_id>', handler=InitHandler, name='cron-init-challenge'),
 	webapp2.Route(r'/cron/update/active', handler=UpdateActiveHandler, name='cron-update-active-challenges'),
+	webapp2.Route(r'/cron/update/<challenge_id>', handler=UpdateHandler, name='cron-update-challenge'),
 ])
