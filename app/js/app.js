@@ -52,23 +52,42 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 	chart.type="LineChart";
 	chart.data = new google.visualization.DataTable();
 	chart.data.addColumn('datetime', 'Time');
+	chart.data.addColumn('number', 'Target');
 	chart.data.addColumn('number', 'Progress');
 	
 	for (i = 0; i < $scope.challenge.datapoints.length; i++) {
-		rows.push([new Date($scope.challenge.datapoints[i]['updated']), $scope.challenge.datapoints[i]['value']]);
+		if (i == 0) {
+			chart.data.addRow([new Date($scope.challenge.start), 0, 0]);
+		}
+		chart.data.addRow([new Date($scope.challenge.datapoints[i]['updated']), null, $scope.challenge.datapoints[i]['value']]);
+		if (i == $scope.challenge.datapoints.length - 1) {
+			chart.data.addRow([new Date($scope.challenge.end), $scope.challenge.goal, null]);
+		}
 	}
-	chart.data.addRows(rows);
 	
 	chart.options = {
-        "title": "Challenge Progress",
-        "vAxis": {
-            "title": $scope.challenge.axis_y_label,
-			"ticks": [$scope.challenge.goal],
-			"maxValue": $scope.challenge.axis_y_max,
-			"minValue": $scope.challenge.axis_y_min
+        title: "Challenge Progress",
+		titleTextStyle: {color: '#fff'},
+		titlePosition: 'none',
+		legend: {position: 'none'},
+		backgroundColor: 'transparent',
+		colors: ['#333', '#FD391E'],
+        vAxis: {
+            title: $scope.challenge.axis_y_label,
+			titleTextStyle: {color: '#fff'},
+			baselineColor: '#333',
+			ticks: [$scope.challenge.goal],
+			maxValue: $scope.challenge.axis_y_max,
+			minValue: $scope.challenge.axis_y_min,
+			format: 'short',
         },
-        "hAxis": {
-            "title": "Date"
+        hAxis: {
+            title: "Time",
+			titleTextStyle: {color: '#fff'},
+			gridlines: {
+				color: '#333',
+				count: 6,
+			}
         }
     };
 	if ($scope.challenge.is_stretch)
