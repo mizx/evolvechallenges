@@ -62,7 +62,10 @@ class UpdateHandler(webapp2.RequestHandler):
 
 class UpdateActiveHandler(webapp2.RequestHandler):
 	def get(self):
-		challenges = Challenge.query(Challenge.start <= datetime.datetime.now()).fetch()
+		challenges = Challenge.query(Challenge.is_active == True).fetch()
+		if not len(challenges):
+			challenges = Challenge.query().filter(Challenge.end >= datetime.datetime.now()).fetch()
+		
 		for challenge in challenges:
 			api = ChallengeApi(challenge.num)
 			if api.id == 0:
