@@ -1,0 +1,17 @@
+<?php header('Content-Type:application/json');?>
+[
+  {
+    "Id": -3,
+    "Name": "Viewer Challenge Gamescom 2015 Thursday",
+    "Configuration": {
+      "Goal": 2000,
+      "StartDateTimeEpoch": 1438848000,
+      "YAxisLabel": "Viewers",
+      "SetYMin": 0,
+      "SetYMax": 2500
+    },
+    "DataPoints": [
+	
+    ]
+  }
+]

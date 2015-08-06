@@ -1,0 +1,16 @@
+[
+  {
+    "Id": -5,
+    "Name": "Viewer Challenge Gamescom 2015 Saturday",
+    "Configuration": {
+      "Goal": 2000,
+      "StartDateTimeEpoch": 1439020800,
+      "YAxisLabel": "Viewers",
+      "SetYMin": 0,
+      "SetYMax": 2500
+    },
+    "DataPoints": [
+	
+    ]
+  }
+]
