@@ -17,9 +17,10 @@ class ApiHandler(webapp2.RequestHandler):
 	# change this to use slug
 	def get(self, id):
 		if not id.isdigit():
-			self.response.write('Invalid ID')
-			self.error(500)
-			return
+			if not id.startswith('-') and id[1:].isdigit():
+				self.response.write('Invalid ID')
+				self.error(500)
+				return
 		challenge = memcache.get('challenge_%s' % id)
 		if challenge is None:
 			challenge = Challenge.query(Challenge.num == int(id)).get()

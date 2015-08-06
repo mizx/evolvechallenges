@@ -56,7 +56,7 @@ class MainHandler(webapp2.RequestHandler):
 		template = config.JINJA_ENV.get_template('countdown.html')
 		challenge = memcache.get('countdown')
 		if challenge is None:
-			challenge = Challenge.query().order(-Challenge.num).get()
+			challenge = Challenge.query().order(-Challenge.start).get()
 			if challenge.end <= datetime.datetime.now():
 				redirect = '/challenge/%s' % challenge.slug
 				memcache.set('redirect', redirect)
