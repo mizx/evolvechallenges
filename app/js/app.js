@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'googlechart']);
+var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -47,44 +47,20 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 	
 	
 	var chart = {};
+	var rows = [];
+	var i = 0;
 	chart.type="LineChart";
-	chart.data = {"cols": [
-        {id: "month", label: "Month", type: "string"},
-        {id: "laptop-id", label: "Laptop", type: "number"},
-        {id: "desktop-id", label: "Desktop", type: "number"},
-        {id: "server-id", label: "Server", type: "number"},
-        {id: "cost-id", label: "Shipping", type: "number"},
-		{id: "progress", label: "Progress", type: "number"}
-    ], "rows": [
-        {c: [
-            {v: "January"},
-            {v: 19, f: "42 items"},
-            {v: 12, f: "Ony 12 items"},
-            {v: 7, f: "7 servers"},
-            {v: 4},
-			{v: 10}
-        ]},
-        {c: [
-            {v: "February"},
-            {v: 13},
-            {v: 1, f: "1 unit (Out of stock this month)"},
-            {v: 12},
-            {v: 2},
-			{v: 10}
-        ]},
-        {c: [
-            {v: "March"},
-            {v: 24},
-            {v: 0},
-            {v: 11},
-            {v: 6},
-			{v: 10}
-
-        ]}
-    ]};
+	chart.data = new google.visualization.DataTable();
+	chart.data.addColumn('datetime', 'Time');
+	chart.data.addColumn('number', 'Progress');
+	
+	for (i = 0; i < $scope.challenge.datapoints.length; i++) {
+		rows.push([new Date($scope.challenge.datapoints[i]['updated']), $scope.challenge.datapoints[i]['value']]);
+	}
+	chart.data.addRows(rows);
+	
 	chart.options = {
         "title": "Challenge Progress",
-        "displayExactValues": true,
         "vAxis": {
             "title": $scope.challenge.axis_y_label,
 			"ticks": [$scope.challenge.goal],

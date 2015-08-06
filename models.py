@@ -65,7 +65,7 @@ class Challenge(ndb.Model):
 		return result
 	
 	def get_datapoints(self):
-		return ChallengeData.query(ChallengeData.challenge==self.key).fetch()
+		return ChallengeData.query(ChallengeData.challenge==self.key).order(ChallengeData.updated).fetch()
 	
 	def has_stretch(self):
 		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
