@@ -1,6 +1,6 @@
 import datetime
 
-DEV = True
+DEV = False
 
 if DEV:
 	URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'

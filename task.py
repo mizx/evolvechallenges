@@ -9,6 +9,7 @@ from models import Challenge
 class ChallengeTaskHandler(webapp2.RequestHandler):
 
 	def get(self, id=None):
+		logging.info('ChallengeTaskHandler.get has been called.')
 		evolve = EvolveApi()
 		if id is not None:
 			evolve.get_single(id)
@@ -18,6 +19,7 @@ class ChallengeTaskHandler(webapp2.RequestHandler):
 class TouchTaskHandler(webapp2.RequestHandler):
 
 	def get(self, id=None):
+		logging.info('TouchTaskHandler.get has been called.')
 		if id is not None:
 			challenge = Challenge.query(Challenge.id == int(id)).get()
 			if challenge is not None:
