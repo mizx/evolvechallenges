@@ -42,6 +42,9 @@ class BaseHandler(webapp2.RequestHandler):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+		template = config.JINJA_ENV.get_template('challenge_temp.html')
+		self.response.write(template.render())
+		return
 		redirect = memcache.get('redirect')
 		if redirect is None:
 			challenges = Challenge.query(Challenge.is_active == True).fetch()
