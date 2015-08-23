@@ -11,8 +11,9 @@ from django.template.defaultfilters import slugify
 
 class ChallengeApi(object):
 	
-	def __init__(self, id):
+	def __init__(self, id, end = None):
 		self.id = id
+		self.end = end
 		self.query_url = '%s%s' % (config.URL_API_EVOLVE_CHALLENGE, self.id)
 		self.data = None
 		self._get_http()
@@ -39,7 +40,7 @@ class ChallengeApi(object):
 		)
 	
 	def get_end_datetime(self):
-		return self.get_start_datetime() + config.DEFAULT_CHALLENGE_DURATION
+		return self.end if self.end is not None else self.get_start_datetime() + config.DEFAULT_CHALLENGE_DURATION
 	
 	def get_name(self):
 		return self.data['Name']

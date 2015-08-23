@@ -46,14 +46,15 @@ class UpdateHandler(webapp2.RequestHandler):
 		else:
 			logging.error('Challenge ID is not a digit: %s' % challenge_id[1:])
 			return
-		api = ChallengeApi(challenge_id)
-		if api.id == 0:
-			logging.error('Invalid Challenge ID: %s' % challenge_id)
-			return
 		challenge = Challenge.query(Challenge.num == challenge_id).get()
 		if challenge is None:
 			logging.error('No challenge in database with id: %s' % challenge_id)
 			return
+		api = ChallengeApi(challenge_id, challenge.end)
+		if api.id == 0:
+			logging.error('Invalid Challenge ID: %s' % challenge_id)
+			return
+
 		
 		challenge.datapoints = api.get_datapoints()
 		challenge.put()
