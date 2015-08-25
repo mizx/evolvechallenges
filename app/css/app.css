@@ -1072,3 +1072,13 @@ body {
 .black-transparent {
 	background: rgba(0,0,0,.7);
 }
+
+.thumbnail {
+	background-color: rgba(0,0,0,.5);
+	border: 1px solid #FD391E;
+}
+
+.thumbnail p {
+	color: #fff;
+	font-size: 1.2em;
+}
