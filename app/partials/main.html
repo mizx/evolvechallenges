@@ -3,19 +3,15 @@
 	<p>Test test test test</p>
 	<p><a class="btn btn-primary btn-lg" href="#">Clicky</a></p>
 </div>--->
+<div class="header-padding"></div>
 <div class="container-fluid">
-	<div class="row">
-		<div style="height: 600px;">
-			<carousel interval="50000" no-wrap="false">
-				<slide ng-repeat="challenge in challenges" active="slide.active">
-					<img ng-src="{{ challenge.background }}" style="margin: auto;">
-					<div class="carousel-caption">
-						<h2>{{ challenge.name }}</h2>
-						<p>{{ challenge.reward }}</p>
-						<a href="#" class="btn btn-primary btn-lg">View Progress</a>
-					</div>
-				</slide>
-			</carousel>
+	<div ng-repeat="challenge in challenges">
+		<div class="jumbotron" style="background: rgba(0,0,0,.5) url('{{ challenge.thumbnail }}') top right no-repeat">
+			<div class="content">
+				<h1>{{ challenge.name }}</h1>
+				<p>{{ challenge.action }}</p>
+				<p><a class="btn btn-primary btn-lg" href="/challenge/{{ challenge.slug }}">View Progress</a></p>
+			</div>
 		</div>
 	</div>
 </div>

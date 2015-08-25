@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart']);
+var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart', 'ngSanitize']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -99,6 +99,8 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, 
 });
 
 app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
+	
 	$http.get('/api/challenges/countdown.json').success(function(data) {
 		$scope.challenges = data;
 	});

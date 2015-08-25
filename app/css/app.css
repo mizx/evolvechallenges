@@ -847,8 +847,8 @@ body {
 	color: #FD391E;
 }
 
-.challenge .page-header {
-	background: rgba(0,0,0,.7);
+.challenge .page-header, .jumbotron {
+	background: rgba(0,0,0,.5);
 	border: 2px solid #FD391E;
 	border-left: 0;
 	border-right: 0;
@@ -1045,4 +1045,30 @@ body {
 
 .glyphicon-chevron-right:before {
     content: "\f054";
+}
+
+.header-padding {
+	margin-top: 140px;
+}
+
+.jumbotron {
+	background: rgba(0,0,0,.5);
+	color: #FD391E;
+}
+
+.jumbotron p {
+	color: #fff;
+	font-size: 2em;
+}
+
+.jumbotron .content {
+	max-width: 75%;
+}
+
+.container .jumbotron, .container-fluid .jumbotron {
+    border-radius: 0;
+}
+
+.black-transparent {
+	background: rgba(0,0,0,.7);
 }
