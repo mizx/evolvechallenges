@@ -32,6 +32,7 @@ class Challenge(ndb.Model):
 	type = ndb.StringProperty(choices=['counter', 'versus', 'joint'], default='counter')
 	
 	action = ndb.StringProperty(default='')
+	action_stretch = ndb.StringProperty(default='')
 	reward = ndb.StringProperty(default='')
 	reward_stretch = ndb.StringProperty(default='')
 	background = ndb.StringProperty(default='/img/bg/default.png')
@@ -41,13 +42,18 @@ class Challenge(ndb.Model):
 	progress = ndb.FloatProperty(default=0)
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
-	is_stretch = ndb.ComputedProperty(lambda self: self.has_stretch())
+	is_stretch = ndb.ComputedProperty(
+		lambda self: self.goal_stretch is not None and self.goal_stretch > 0
+	)
 	is_countdown = ndb.ComputedProperty(lambda self: not self.is_started())
 	is_active = ndb.ComputedProperty(
 		lambda self: (not self.is_ended() and self.is_started())
 	)
 	is_achieved = ndb.ComputedProperty(
 		lambda self: self.is_ended() if self.is_versus() else self.is_goal_reached()
+	)
+	is_achieved_stretch = ndb.ComputedProperty(
+		lambda self: self.is_goal_stretch_reached() if self.is_stretch else False
 	)
 	
 	axis_y_min = ndb.IntegerProperty()
@@ -67,9 +73,6 @@ class Challenge(ndb.Model):
 	def get_datapoints(self):
 		return ChallengeData.query(ChallengeData.challenge==self.key).order(ChallengeData.updated).fetch()
 	
-	def has_stretch(self):
-		return hasattr(self, 'goal_stretch') and self.goal_stretch is not None
-	
 	def is_versus(self):
 		return self.type == 'versus'
 	
@@ -83,6 +86,9 @@ class Challenge(ndb.Model):
 	
 	def is_goal_reached(self):
 		return self.progress > self.goal
+	
+	def is_goal_stretch_reached(self):
+		return self.progress > self.goal_stretch
 	
 	def get_versus_names(self):
 		if not self.is_versus():

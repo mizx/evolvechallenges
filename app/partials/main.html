@@ -9,8 +9,25 @@
 		<div class="jumbotron" style="background-image: url('{{ challenge.thumbnail }}')">
 			<div class="content">
 				<h1>{{ challenge.name }}</h1>
-				<p>{{ challenge.action }}</p>
-				<p><a class="btn btn-primary btn-lg" href="/challenge/{{ challenge.slug }}">View Progress</a></p>
+				<p>
+					<i ng-if="challenge.is_achieved" class="fa fa-check-square-o"></i>
+					<i ng-if="!challenge.is_achieved" class="fa fa-square-o"></i>
+					{{ challenge.action }}
+					<span ng-if="challenge.is_stretch"><br>
+						<i ng-if="challenge.is_achieved_stretch" class="fa fa-check-square-o"></i>
+						<i ng-if="!challenge.is_achieved_stretch" class="fa fa-square-o"></i>
+						Stretch Goal
+					</span>
+				</p>
+				<p class="text-uppercase">
+					<strong ng-if="challenge.is_countdown">starts {{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</strong>
+					<strong ng-if="challenge.is_active">ON NOW - ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</strong>
+				</p>
+				<p ng-if="challenge.is_active">
+					<a class="btn btn-primary btn-lg" href="/challenge/{{ challenge.slug }}">
+						View Challenge
+					</a>
+				</p>
 			</div>
 		</div>
 	</div>
