@@ -23,7 +23,7 @@
 					<strong ng-if="challenge.is_countdown">starts {{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</strong>
 					<strong ng-if="challenge.is_active">ON NOW - ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</strong>
 				</p>
-				<p ng-if="challenge.is_active">
+				<p ng-if="!challenge.is_countdown">
 					<a class="btn btn-primary btn-lg" href="/challenge/{{ challenge.slug }}">
 						View Challenge
 					</a>
@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col-sm-4">
 			<div class="thumbnail">
-				<a href="https://talk.turtlerockstudios.com/">
+				<a href="https://talk.turtlerockstudios.com/" target="_blank">
 					<img src="/img/home/turtle_rock_invert.png">
 				</a>
 				<div class="caption">
@@ -46,7 +46,7 @@
 		</div>
 		<div class="col-sm-4">
 			<div class="thumbnail">
-				<a href="https://www.reddit.com/r/EvolveGame">
+				<a href="https://www.reddit.com/r/EvolveGame" target="_blank">
 					<img src="/img/home/reddit.png">
 				</a>
 				<div class="caption">
@@ -57,7 +57,7 @@
 		</div>
 		<div class="col-sm-4">
 			<div class="thumbnail">
-				<a href="https://twitter.com/EvolveGame">
+				<a href="https://twitter.com/EvolveGame" target="_blank">
 					<img src="/img/home/twitter.png" class="img-responsive">
 				</a>
 				<div class="caption">
