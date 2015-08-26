@@ -1053,6 +1053,8 @@ body {
 
 .jumbotron {
 	background: rgba(0,0,0,.5);
+	background-position: top right;
+	background-repeat: no-repeat;
 	color: #FD391E;
 }
 
@@ -1078,7 +1080,29 @@ body {
 	border: 1px solid #FD391E;
 }
 
+.thumbnail img {
+	opacity: .8;
+}
+
+.thumbnail img:hover, .thumbnail img:active {
+	opacity: 1.0;
+}
+
 .thumbnail p {
 	color: #fff;
 	font-size: 1.2em;
+}
+
+@media (max-width: 480px) {
+	.navbar-default .navbar-brand {
+		padding-left: 124px;
+		background-size: 50%;
+	}
+}
+
+@media (max-width: 640px) {
+	.jumbotron {
+		background-size: contain;
+		background-position: top right;
+	}
 }

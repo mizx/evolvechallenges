@@ -6,7 +6,7 @@
 <div class="header-padding"></div>
 <div class="container-fluid">
 	<div ng-repeat="challenge in challenges">
-		<div class="jumbotron" style="background: rgba(0,0,0,.5) url('{{ challenge.thumbnail }}') top right no-repeat">
+		<div class="jumbotron" style="background-image: url('{{ challenge.thumbnail }}')">
 			<div class="content">
 				<h1>{{ challenge.name }}</h1>
 				<p>{{ challenge.action }}</p>

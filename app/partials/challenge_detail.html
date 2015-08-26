@@ -4,17 +4,17 @@
 	</div>
 	<div class="container versus" ng-if="challenge.type == 'versus'">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12 col-sm-12">
 				<h1 class="percent" ng-if="challenge.is_achieved">COMPLETED</h1>
 			</div>
-			<div class="col-sm-5">
+			<div class="col-xs-12 col-sm-5">
 				<h1 class="percent" ng-class="{winning: challenge.progress > 50}">{{ challenge.progress | number : 1}}%</h1>
 				<h1 class="name">{{ challenge.versus_names[0] }}</h1>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-xs-4 col-xs-offset-4 col-sm-offset-0 col-sm-2">
 				<img class="v img-responsive" src="/img/misc/versus.png" />
 			</div>
-			<div class="col-sm-5">
+			<div class="col-xs-12 col-sm-5">
 				<h1 class="percent" ng-class="{winning: challenge.progress < 50}">{{ 100 - challenge.progress | number : 1}}%</h1>
 				<h1 class="name">{{ challenge.versus_names[1] }}</h1>
 			</div>
