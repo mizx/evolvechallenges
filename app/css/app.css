@@ -166,8 +166,9 @@ fieldset[disabled] .btn-xl.active {
     font-family: ultralight, Segoe, sans-serif;
 	text-transform: uppercase;
 	font-weight: 600;
-	padding-left: 210px;
+	padding-left: 180px;
 	background: url(/img/evolve_logo.png);
+	background-size: 170px;
 	background-position-y: center;
 	background-repeat: no-repeat;
 }
@@ -224,7 +225,7 @@ fieldset[disabled] .btn-xl.active {
         border: 0
     }
     .navbar-default .navbar-brand {
-        font-size: 2em;
+        font-size: 1.6em;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
         transition: all .3s
@@ -344,10 +345,13 @@ ul.social-buttons li a:active {
 
 html {
     color: #bbb;
-	background: #111 url('/img/bg/default.png');
+	background-color: #32090C;
+	background: #32090C url('/img/bg/default.png');
 	background-size: cover;
 	background-position: top;
 	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: top right;
 }
 
 body {
@@ -685,5 +689,13 @@ body {
 	.jumbotron {
 		background-size: contain;
 		background-position: top right;
+	}
+}
+
+@media (max-width: 768px) {
+	html {
+		background-image: url(http://localhost:13080/img/bg/default.png)!important;
+		background-position: top left;
+		background-size: auto;
 	}
 }
