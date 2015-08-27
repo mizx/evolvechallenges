@@ -26,103 +26,127 @@
 				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
 				<h1 class="white percent">{{ challenge.percent | number : 0}}%</h1>
 			</div>
-			<div class="armor" ng-show="challenge.is_achieved && challenge.is_stretch">
-				<div class="col-xs-1 col-xs-offset-2">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 23%"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress"></div>
-							<div class="bar_border"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress"></div>
-							<div class="bar_border"></div>
-						</div>
+		</div>
+		<div class="row armor no-gutters" ng-show="challenge.is_achieved && challenge.is_stretch">
+			<div class="col-xs-1 col-xs-offset-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
 					</div>
 				</div>
 			</div>
-		<div class="health">
-				<div class="col-xs-2 col-xs-offset-2 col-sm-offset-2">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
 					</div>
 				</div>
-				<div class="col-xs-2">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
 					</div>
 				</div>
-				<div class="col-xs-2">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
 					</div>
 				</div>
-				<div class="col-xs-2">
-					<div class="row challenge_progress">
-						<div class="placeholder">
-							<div class="bar_progress" style="width: 100%"></div>
-							<div class="bar_border"></div>
-						</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 23%"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row health no-gutters">
+			<div class="col-xs-2 col-xs-offset-1">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 100%"></div>
+						<div class="bar_border"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-2">
+				<div class="challenge_progress">
+					<div class="placeholder">
+						<div class="bar_progress" style="width: 15%"></div>
+						<div class="bar_border"></div>
 					</div>
 				</div>
 			</div>

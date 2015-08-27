@@ -682,6 +682,12 @@ body {
 	font-size: 1.2em;
 }
 
+.row.no-gutters  > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+	padding-right: 0;
+	padding-left: 0;
+}
+
 @media (max-width: 480px) {
 	.navbar-default .navbar-brand {
 		padding-left: 124px;
