@@ -2,31 +2,31 @@
 	<div class="page-header challenge">
 		<h1>{{ challenge.name }}</h1>
 	</div>
-	<div class="container challenge versus" ng-if="challenge.type == 'versus'">
+	<div class="container challenge versus" ng-show="challenge.type == 'versus'">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
 				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
 			</div>
 			<div class="col-xs-12 col-sm-5">
-				<h1 class="white" ng-class="{winning: challenge.progress > 50}">{{ challenge.progress | number : 1}}%</h1>
+				<h1 class="white percent" ng-class="{winning: challenge.progress > 50}">{{ challenge.progress | number : 1}}%</h1>
 				<h1 class="name">{{ challenge.versus_names[0] }}</h1>
 			</div>
 			<div class="col-xs-4 col-xs-offset-4 col-sm-offset-0 col-sm-2">
 				<img class="v img-responsive" src="/img/misc/versus.png" />
 			</div>
 			<div class="col-xs-12 col-sm-5">
-				<h1 class="white" ng-class="{winning: challenge.progress < 50}">{{ 100 - challenge.progress | number : 1}}%</h1>
+				<h1 class="white percent" ng-class="{winning: challenge.progress < 50}">{{ 100 - challenge.progress | number : 1}}%</h1>
 				<h1 class="name">{{ challenge.versus_names[1] }}</h1>
 			</div>
 		</div>
 	</div>
-	<div class="container challenge" ng-if="challenge.type != 'versus'">
+	<div class="container challenge" ng-show="challenge.type == 'counter'">
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
-				<h1 class="white">{{ challenge.percent | number : 0}}%</h1>
+				<h1 class="white percent">{{ challenge.percent | number : 0}}%</h1>
 			</div>
-			<div class="armor">
+			<div class="armor" ng-show="challenge.is_achieved && challenge.is_stretch">
 				<div class="col-xs-1 col-xs-offset-2">
 					<div class="row challenge_progress">
 						<div class="placeholder">

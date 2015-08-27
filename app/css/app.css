@@ -446,6 +446,10 @@ body {
 	color: #FD391E;
 }
 
+.challenge .percent {
+	font-size: 4em;
+}
+
 .challenge.page-header, .jumbotron {
 	font-family: ultralight, Segoe, sans-serif;
 	background: rgba(0,0,0,.5);
@@ -565,11 +569,11 @@ body {
 
 .versus .percent {
 	font-size: 42px;
-	line-height: 64px;
+	line-height: 72px;
 }
 
 .versus .percent.winning {
-	font-size: 64px;
+	font-size: 72px;
 }
 
 .versus .v {
