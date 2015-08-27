@@ -17,15 +17,12 @@ handlers:
   static_files: app/\1/\2
   upload: app/(img|css|font|js|partials)/(.*)
 
-- url: /admin/.*
-  script: cron.app
-  login: admin
-
 - url: /api/.*
   script: api.app
 
 - url: /task/.*
   script: task.app
+  login: admin
 
 - url: /(.*)
   static_files: app/index.html
