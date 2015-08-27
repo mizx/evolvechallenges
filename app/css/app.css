@@ -12,6 +12,7 @@
 body {
     overflow-x: hidden;
     font-family: ultralight, Segoe, sans-serif;
+	color: #fff;
 }
 .text-muted {
     color: #777
@@ -19,9 +20,10 @@ body {
 .text-primary {
     color: #FD391E
 }
-p {
-    font-size: 14px;
-    line-height: 1.75
+p , .unstyled {
+    font-size: 16px;
+    line-height: 1.75;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 p.large {
     font-size: 16px
@@ -320,6 +322,7 @@ ul.social-buttons li a {
     line-height: 40px;
     color: #fff;
     outline: 0;
+	text-align: center;
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
     transition: all .3s
@@ -384,6 +387,7 @@ body {
 }
 
 .challenge-item {
+	font-family: ultralight, Segoe, sans-serif;
 	width: 100%;
 	border: solid 1px #111;
 	position: relative;
@@ -430,6 +434,7 @@ body {
 	text-align: center;
 	font-size: 1.1em;
 	font-weight: 600;
+	font-family: ultralight, Segoe, sans-serif;
 }
 
 .challenge {
@@ -438,6 +443,7 @@ body {
 }
 
 .challenge.page-header, .jumbotron {
+	font-family: ultralight, Segoe, sans-serif;
 	background: rgba(0,0,0,.5);
 	border: 2px solid #FD391E;
 	border-left: 0;
@@ -568,7 +574,6 @@ body {
 
 .donate h2, h3 {
 	color: #FD391E;
-	text-align: center;
 }
 
 .donate h3 {
@@ -578,6 +583,12 @@ body {
 
 .donate button {
 	font-size: 200%;
+}
+
+.section {
+	background: rgba(0,0,0,.8);
+	padding: 10px 10px 20px 10px;
+	margin-bottom: 40px;
 }
 
 .btn-group {
@@ -630,6 +641,7 @@ body {
 .jumbotron p {
 	color: #fff;
 	font-size: 2em;
+	font-family: ultralight, Segoe, sans-serif;
 }
 
 .jumbotron .content {

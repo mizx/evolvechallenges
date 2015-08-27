@@ -24,6 +24,10 @@ app.config(function($routeProvider, $locationProvider) {
 			controller: 'DonateCtrl',
 			templateUrl: '/partials/donate.html'
 		}).
+		when('/about', {
+			controller: 'AboutCtrl',
+			templateUrl: '/partials/about.html'
+		}).
 		otherwise({
 			redirectTo: '/'
 		});
@@ -107,6 +111,10 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 });
 
 app.controller('DonateCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
+});
+
+app.controller('AboutCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 });
 
