@@ -107,7 +107,7 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 });
 
 app.controller('DonateCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
-	
+	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 });
 
 app.controller('HeaderController', function($scope, $location) {
