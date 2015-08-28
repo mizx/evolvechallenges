@@ -1,6 +1,7 @@
 import datetime
+import os
 
-DEV = False
+DEV = True #os.environ['SERVER_SOFTWARE'].startswith('Dev')
 
 if DEV:
 	URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
@@ -24,6 +25,7 @@ API_TO_DATASTORE = {
 	'Goal': 'goal',
 	'StretchGoal': 'goal_stretch',
 	'StartDateTimeEpoch': 'start',
+	'EndDateTimeEpoch': 'end',
 	'YAxisLabel': 'axis_y_label',
 	'SetYMin': 'axis_y_min',
 	'SetYMax': 'axis_y_max'

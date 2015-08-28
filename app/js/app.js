@@ -52,6 +52,9 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 			
 			$rootScope.htmlPage = {backgroundImage: "url('" + $scope.challenge.background + "')"};
 			
+			if ( !$scope.challenge.is_countdown && !$scope.challenge.is_active)
+				$interval.cancel($scope.intervalPromise);
+			
 			$scope.refreshChart();
 		});
 	};
@@ -110,6 +113,10 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 	$scope.intervalPromise = $interval(function() {
 		$scope.refresh();
 	}, 15 * 60 * 1000);
+	
+	$scope.$on("$destroy", function() {
+		$interval.cancel($scope.intervalPromise);
+	});
 	
 	$scope.refresh();
 });
