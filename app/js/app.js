@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart', 'ngSanitize']);
+var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart', 'ngSanitize', 'ngResource']);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -34,7 +34,7 @@ app.config(function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 });
 
-app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+app.controller('ChallengeListCtrl', function($scope, $rootScope, $http) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	
 	$http.get('/api/challenges.json').success(function(data) {
@@ -42,67 +42,79 @@ app.controller('ChallengeListCtrl', function($scope, $rootScope, $log, $http, $r
 	});
 });
 
-app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
-	$http.get('/api/challenge/' + $routeParams.challengeSlug + '.json').success(function(data) {
-		$scope.challenge = data;
-		$scope.challenge['percent'] = $scope.challenge.progress / $scope.challenge.goal * 100;
-		$scope.challenge.percent = ($scope.challenge.percent > 100) ? 100.0 : $scope.challenge.percent;
-		$rootScope.htmlPage = {backgroundImage: "url('" + $scope.challenge.background + "')"};
+app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $routeParams, $interval) {
 	
-	
-	var chart = {};
-	var rows = [];
-	var i = 0;
-	chart.type="LineChart";
-	chart.data = new google.visualization.DataTable();
-	chart.data.addColumn('datetime', 'Time');
-	chart.data.addColumn('number', 'Target');
-	chart.data.addColumn('number', 'Progress');
-	
-	for (i = 0; i < $scope.challenge.datapoints.length; i++) {
-		if (i == 0) {
-			chart.data.addRow([new Date($scope.challenge.start), 0, 0]);
-		}
-		chart.data.addRow([new Date($scope.challenge.datapoints[i]['updated']), null, $scope.challenge.datapoints[i]['value']]);
-		if (i == $scope.challenge.datapoints.length - 1) {
-			chart.data.addRow([new Date($scope.challenge.end), $scope.challenge.goal, null]);
-		}
-	}
-	
-	chart.options = {
-        title: "Challenge Progress",
-		titleTextStyle: {color: '#fff'},
-		titlePosition: 'none',
-		legend: {position: 'none'},
-		backgroundColor: 'transparent',
-		colors: ['#333', '#FD391E'],
-        vAxis: {
-            title: $scope.challenge.axis_y_label,
-			titleTextStyle: {color: '#fff'},
-			baselineColor: '#333',
-			ticks: [$scope.challenge.goal],
-			maxValue: $scope.challenge.axis_y_max,
-			minValue: $scope.challenge.axis_y_min,
-			format: 'short',
-        },
-        hAxis: {
-            title: "Time",
-			titleTextStyle: {color: '#fff'},
-			gridlines: {
-				color: '#333',
-				count: 6,
+	$scope.refresh = function() {
+		$http.get('/api/challenge/' + $routeParams.challengeSlug + '.json').success(function(data) {
+			$scope.challenge = data;
+			$scope.challenge['percent'] = $scope.challenge.progress / $scope.challenge.goal * 100;
+			$scope.challenge.percent = ($scope.challenge.percent > 100) ? 100.0 : $scope.challenge.percent;
+			
+			$rootScope.htmlPage = {backgroundImage: "url('" + $scope.challenge.background + "')"};
+			
+			$scope.refreshChart();
+		});
+	};
+
+	$scope.refreshChart = function() {
+
+		var chart = {},
+			i = 0;
+		chart.type="LineChart";
+		chart.data = new google.visualization.DataTable();
+		chart.data.addColumn('datetime', 'Time');
+		chart.data.addColumn('number', 'Target');
+		chart.data.addColumn('number', 'Progress');
+		
+		for (i = 0; i < $scope.challenge.datapoints.length; i++) {
+			if (i == 0) {
+				chart.data.addRow([new Date($scope.challenge.start), 0, 0]);
 			}
-        }
-    };
-	if ($scope.challenge.is_stretch)
-		chart.options['vAxis']['ticks'].push($scope.challenge.goal_stretch);
-	chart.formatters = {};
-	$scope.chart = chart;
+			chart.data.addRow([new Date($scope.challenge.datapoints[i]['updated']), null, $scope.challenge.datapoints[i]['value']]);
+			if (i == $scope.challenge.datapoints.length - 1) {
+				chart.data.addRow([new Date($scope.challenge.end), $scope.challenge.goal, null]);
+			}
+		}
+		
+		chart.options = {
+			title: "Challenge Progress",
+			titleTextStyle: {color: '#fff'},
+			titlePosition: 'none',
+			legend: {position: 'none'},
+			backgroundColor: 'transparent',
+			colors: ['#333', '#FD391E'],
+			vAxis: {
+				title: $scope.challenge.axis_y_label,
+				titleTextStyle: {color: '#fff'},
+				baselineColor: '#333',
+				ticks: [$scope.challenge.goal],
+				maxValue: $scope.challenge.axis_y_max,
+				minValue: $scope.challenge.axis_y_min,
+				format: 'short',
+			},
+			hAxis: {
+				title: "Time",
+				titleTextStyle: {color: '#fff'},
+				gridlines: {
+					color: '#333',
+					count: 6,
+				}
+			}
+		};
+		if ($scope.challenge.is_stretch)
+			chart.options['vAxis']['ticks'].push($scope.challenge.goal_stretch);
+		chart.formatters = {};
+		$scope.chart = chart;
+	};
 	
-	});
+	$scope.intervalPromise = $interval(function() {
+		$scope.refresh();
+	}, 15 * 60 * 1000);
+	
+	$scope.refresh();
 });
 
-app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+app.controller('MainCtrl', function($scope, $rootScope, $http) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	
 	$http.get('/api/challenges/countdown.json').success(function(data) {
@@ -110,11 +122,11 @@ app.controller('MainCtrl', function($scope, $rootScope, $log, $http, $routeParam
 	});
 });
 
-app.controller('DonateCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+app.controller('DonateCtrl', function($rootScope) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 });
 
-app.controller('AboutCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+app.controller('AboutCtrl', function($rootScope) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 });
 
@@ -124,7 +136,7 @@ app.controller('HeaderController', function($scope, $location) {
 	};
 });
 
-app.controller('FaqCtrl', function($scope, $rootScope, $log, $http, $routeParams, $location, $route) {
+app.controller('FaqCtrl', function($scope, $rootScope) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/faq.jpg')"};
 	$scope.questions = [
 		{
