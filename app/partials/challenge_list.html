@@ -30,7 +30,7 @@
 								<span ng-if="challenge.type == 'versus'">NOT COMPLETE</span>
 							</p>
 						</div>
-						<p>{{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</p>
+						<p>{{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</p>
 					</div>
 				</div>
 			</a>

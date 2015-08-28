@@ -686,6 +686,10 @@ body {
 	font-size: 1.2em;
 }
 
+.static.img-responsive {
+	margin: 0 auto;
+}
+
 .row.no-gutters  > [class^="col-"],
 .row.no-gutters > [class*=" col-"] {
 	padding-right: 0;
