@@ -115,10 +115,14 @@ class ChallengeApi(object):
 	
 	def _process_challenge_extras(self):
 		self.challenge['slug'] = slugify(self.challenge['name'])
-		self.challenge['start'] = datetime.utcfromtimestamp(self.challenge['start'])
-		if not self.challenge.has_key('end'):
+		if self.challenge.has_key('start'):
+			self.challenge['start'] = datetime.utcfromtimestamp(self.challenge['start'])
+		if self.challenge.has_key('end'):
+			self.challenge['end'] = datetime.utcfromtimestamp(self.challenge['end'])
+		else:
 			self.challenge['end'] = self.challenge['start'] + config.DEFAULT_CHALLENGE_DURATION
-		self.challenge['type'] = 'versus' if 'vs' in self.challenge['name'] and self.challenge['goal'] == 50 else 'counter'
+		if not self.challenge.has_key('type'):
+			self.challenge['type'] = 'versus' if 'vs' in self.challenge['name'] and self.challenge['goal'] == 50 else 'counter'
 	
 	def _process_challenge_data(self):
 		value_previous = 0.0

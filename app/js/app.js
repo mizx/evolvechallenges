@@ -54,8 +54,8 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 			
 			if ( !$scope.challenge.is_countdown && !$scope.challenge.is_active)
 				$interval.cancel($scope.intervalPromise);
-			
-			$scope.refreshChart();
+			if ( $scope.challenge.type != 'info')
+				$scope.refreshChart();
 		});
 	};
 

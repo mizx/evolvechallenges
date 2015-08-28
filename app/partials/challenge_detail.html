@@ -2,6 +2,23 @@
 	<div class="page-header challenge">
 		<h1>{{ challenge.name }}</h1>
 	</div>
+	<div class="container challenge versus" ng-show="challenge.type == 'info'">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12">
+				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
+			</div>
+			<div class="col-sm-12">
+				<h3 class="white" ng-if="challenge.is_active">ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</h3>
+			</div>
+			<div class="col-sm-8 col-sm-offset-2">
+				<h1 class="action">{{ challenge.action }}</h1>
+				<h3 class="reward" ng-class="{completed: challenge.is_achieved, stretch: challenge.is_stretch}">
+					<i ng-if="challenge.is_achieved" class="fa fa-check"></i>
+					{{ challenge.reward }}
+				</h3>
+			</div>
+		</div>
+	</div>
 	<div class="container challenge versus" ng-show="challenge.type == 'versus'">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12">
@@ -176,12 +193,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-md-4">
-					<h4>
+					<h4 ng-show="challenge.url_news.length">
 						<a href="{{ challenge.url_news }}">
 							info @ EvolveGame.com <i class="fa fa-external-link-square"></i>
 						</a>
 					</h4>
 					<ul class="list-unstyled update-info">
+						<li ng-show="!challenge.is_countdown && !challenge.is_active">Ended {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</li>
 						<li>Last updated {{ challenge.updated | moment : 'utc' | moment : 'fromNow' }}</li>
 						<li>Last API fetch {{ challenge.checked | moment : 'utc' | moment : 'fromNow' }}</li>
 					</ul>
@@ -208,7 +226,7 @@
 						</li>
 					</ul>
 				</div>
-				<div class="col-xs-12 col-md-8">
+				<div class="col-xs-12 col-md-8" ng-if="challenge.type != 'info'">
 					<div google-chart chart="chart" style="height: 200px; width: 100%"></div>
 				</div>
 			</div>

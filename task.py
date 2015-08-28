@@ -37,8 +37,8 @@ class TouchTaskHandler(webapp2.RequestHandler):
 		
 
 app = webapp2.WSGIApplication([
-    webapp2.Route(r'/task/update/<id:\d+>', ChallengeTaskHandler),
-	webapp2.Route(r'/task/update/active', ChallengeTaskHandler),
-	webapp2.Route(r'/task/touch/<id:\d+>', TouchTaskHandler),
+    webapp2.Route(r'/task/update/active', ChallengeTaskHandler),
+	webapp2.Route(r'/task/update/<id>', ChallengeTaskHandler),
+	webapp2.Route(r'/task/touch/<id>', TouchTaskHandler),
 	webapp2.Route(r'/task/touch', TouchTaskHandler),
 ], debug=config.DEV)

@@ -29,7 +29,7 @@ class Challenge(ndb.Model):
 	end = ndb.DateTimeProperty()
 	checked = ndb.DateTimeProperty(auto_now=True)
 	updated = ndb.DateTimeProperty()
-	type = ndb.StringProperty(choices=['counter', 'versus', 'joint'], default='counter')
+	type = ndb.StringProperty(choices=['counter', 'versus', 'joint', 'info'], default='counter')
 	
 	action = ndb.StringProperty(default='')
 	action_stretch = ndb.StringProperty(default='')
@@ -85,10 +85,10 @@ class Challenge(ndb.Model):
 		return datetime.utcnow() > self.end
 	
 	def is_goal_reached(self):
-		return self.progress > self.goal
+		return self.progress >= self.goal
 	
 	def is_goal_stretch_reached(self):
-		return self.progress > self.goal_stretch
+		return self.progress >= self.goal_stretch
 	
 	def get_versus_names(self):
 		if not self.is_versus():
