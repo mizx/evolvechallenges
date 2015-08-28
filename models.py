@@ -104,9 +104,12 @@ class ChallengeData(ndb.Model):
 	increment = ndb.FloatProperty()
 
 def challenges(filter=None):
-	if filter == 'countdown':
-		return Challenge.query(Challenge.is_countdown==True).fetch()
-	return Challenge.query().fetch()
+	query = Challenge.query()
+	if filter == 'current':
+		return query.filter(ndb.OR(Challenge.is_countdown==True, Challenge.is_active==True)).fetch()
+	if filter == 'previous':
+		return query.filter(Challenge.is_active != True).fetch()
+	return []
 
 def challenge(slug):
 	return Challenge.query(Challenge.slug==slug).get()

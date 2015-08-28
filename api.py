@@ -31,7 +31,6 @@ class ChallengeHandler(JsonBaseHandler):
 		self.send_json(response)
 
 app = webapp2.WSGIApplication([
-    webapp2.Route(r'/api/challenges.json', ChallengesHandler),
     webapp2.Route(r'/api/challenges/<filter>.json', ChallengesHandler),
 	webapp2.Route(r'/api/challenge/<slug>.json', ChallengeHandler),
 ], debug=True)

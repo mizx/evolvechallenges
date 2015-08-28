@@ -37,7 +37,7 @@ app.config(function($routeProvider, $locationProvider) {
 app.controller('ChallengeListCtrl', function($scope, $rootScope, $http) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	
-	$http.get('/api/challenges.json').success(function(data) {
+	$http.get('/api/challenges/previous.json').success(function(data) {
 		$scope.challenges = data;
 	});
 });
@@ -124,7 +124,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 app.controller('MainCtrl', function($scope, $rootScope, $http) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	
-	$http.get('/api/challenges/countdown.json').success(function(data) {
+	$http.get('/api/challenges/current.json').success(function(data) {
 		$scope.challenges = data;
 	});
 });
@@ -196,7 +196,7 @@ app.controller('FaqCtrl', function($scope, $rootScope) {
 app.filter('moment', function () {
 	return function (input, momentFn) {
 		var args = Array.prototype.slice.call(arguments, 2),
-			momentObj = moment(input);
+			momentObj = moment.utc(input);
 		return momentObj[momentFn].apply(momentObj, args);
 	}
 });
