@@ -178,6 +178,10 @@ app.controller('FaqCtrl', function($scope, $rootScope) {
 			a: "No. You just need to login and play at least one online game that connects to an official game server and you're eligible. Encourage your team mates to partake in challenges though!"
 		},
 		{
+			q: "Does solo play count?",
+			a: "Be sure you are logged into your 2K account. Your 2K account is what ties your participation to challenges. Rumor has it whether your playing solo or not does not matter for participation, however, solo games DO NOT count towards challenge progress."
+		},
+		{
 			q: "We finished the challenge! When do I get my rewards?!",
 			a: "Officially you will have your rewards by the following Thursday. With that being said, we usually see them by Monday or Tuesday."
 		},
