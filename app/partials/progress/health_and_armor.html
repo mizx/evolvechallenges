@@ -2,7 +2,7 @@
 	<div class="col-xs-1" ng-class="{'col-xs-offset-1': !$index}" ng-repeat="i in range(10) track by $index">
 		<div class="challenge_progress">
 			<div class="placeholder">
-				<div class="bar_progress"style="width: {{ Math.max(Math.min(challenge.percent / 10.0 - $index, 1), 0) * 100 }}%"></div>
+				<div class="bar_progress"style="width: {{ Math.max(Math.min(challenge.percent_stretch / 10.0 - $index, 1), 0) * 100 }}%"></div>
 				<div class="bar_border"></div>
 			</div>
 		</div>
