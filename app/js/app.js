@@ -179,7 +179,7 @@ app.controller('FaqCtrl', function($scope, $rootScope) {
 		},
 		{
 			q: "Does solo play count?",
-			a: "Be sure you are logged into your 2K account. Your 2K account is what ties your participation to challenges. Rumor has it whether your playing solo or not does not matter for participation, however, solo games DO NOT count towards challenge progress."
+			a: "Make sure you are logged into your 2K account. Your 2K account is what ties your participation to challenges online. Playing in solo mode means you are participating in the challenge and are therefore eligible for the reward, however does not contribute to the overall goal. If you wish to contribute to the goal as well, then join an online multiplayer match and join the Hunt!"
 		},
 		{
 			q: "We finished the challenge! When do I get my rewards?!",
