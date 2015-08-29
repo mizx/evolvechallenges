@@ -33,7 +33,7 @@ class JsonBaseHandler(webapp2.RequestHandler):
 	
 	def set_key(self, key):
 		if self.memcache_prefix is not None:
-			self.memcache_key = '%s_%s' % (self.memcache_prefix, key)
+			self.memcache_key = 'v2%s_%s' % (self.memcache_prefix, key)
 		else:
 			self.memcache_key = key
 
