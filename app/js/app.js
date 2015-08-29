@@ -43,6 +43,10 @@ app.controller('ChallengeListCtrl', function($scope, $rootScope, $http) {
 });
 
 app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $routeParams, $interval) {
+
+	$scope.Math = window.Math;
+	$scope.range = function(n) { return new Array(n) };
+	console.log($scope.range(5));
 	
 	$scope.refresh = function() {
 		$http.get('/api/challenge/' + $routeParams.challengeSlug + '.json').success(function(data) {
@@ -198,5 +202,11 @@ app.filter('moment', function () {
 		var args = Array.prototype.slice.call(arguments, 2),
 			momentObj = moment.utc(input);
 		return momentObj[momentFn].apply(momentObj, args);
+	}
+});
+
+app.directive('progressBar', function() {
+	return {
+		templateUrl: '/partials/progress/health_and_armor.html'
 	}
 });
