@@ -1,7 +1,6 @@
 import config
 
 from datetime import datetime
-import time
 
 from google.appengine.ext import ndb
 from django.template.defaultfilters import slugify
