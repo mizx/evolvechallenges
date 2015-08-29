@@ -608,6 +608,10 @@ img.hr {
 	margin: 10px -15px;
 }
 
+.section .img-side {
+	max-width: 40%;
+}
+
 .btn-group {
 	margin-bottom: 20px;
 }
