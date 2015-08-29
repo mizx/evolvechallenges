@@ -599,8 +599,12 @@ body {
 
 .section {
 	background: rgba(0,0,0,.8);
-	padding: 10px 10px 20px 10px;
+	padding: 10px 15px 20px;
 	margin-bottom: 40px;
+}
+
+img.hr {
+	margin: 10px -15px;
 }
 
 .btn-group {
