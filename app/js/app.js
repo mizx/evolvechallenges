@@ -46,7 +46,6 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 
 	$scope.Math = window.Math;
 	$scope.range = function(n) { return new Array(n) };
-	console.log($scope.range(5));
 	
 	$scope.refresh = function() {
 		$http.get('/api/challenge/' + $routeParams.challengeSlug + '.json').success(function(data) {
@@ -61,7 +60,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 			if ( !$scope.challenge.is_countdown && !$scope.challenge.is_active)
 				$interval.cancel($scope.intervalPromise);
 			if ( $scope.challenge.type != 'info')
-				$scope.refreshChart();
+			$scope.refreshChart();
 		});
 	};
 
@@ -70,20 +69,34 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 		var chart = {},
 			i = 0;
 		chart.type="LineChart";
-		chart.data = new google.visualization.DataTable();
-		chart.data.addColumn('datetime', 'Time');
-		chart.data.addColumn('number', 'Target');
-		chart.data.addColumn('number', 'Progress');
+		chart.data = {
+			'cols': [
+				{id: 't', label: 'Time', type: 'datetime'},
+				{id: 'r', label: 'Target', type: 'number'},
+				{id: 'p', label: 'Progress', type: 'number'}
+			],
+			'rows': []
+		};
+		
+		chart.data.rows.push({c: [
+			{v: new Date($scope.challenge.start)},
+			{v: 0},
+			{v: 0}
+		]});
 		
 		for (i = 0; i < $scope.challenge.datapoints.length; i++) {
-			if (i == 0) {
-				chart.data.addRow([new Date($scope.challenge.start), 0, 0]);
-			}
-			chart.data.addRow([new Date($scope.challenge.datapoints[i]['updated']), null, $scope.challenge.datapoints[i]['value']]);
-			if (i == $scope.challenge.datapoints.length - 1) {
-				chart.data.addRow([new Date($scope.challenge.end), $scope.challenge.goal, null]);
-			}
+			chart.data.rows.push({c: [
+				{v: new Date($scope.challenge.datapoints[i]['updated'])},
+				{v: null},
+				{v: $scope.challenge.datapoints[i]['value']}
+			]});
 		}
+		
+		chart.data.rows.push({c: [
+			{v: new Date($scope.challenge.end)},
+			{v: $scope.challenge.goal},
+			{v: null}
+		]});
 		
 		chart.options = {
 			title: "Challenge Progress",
@@ -113,7 +126,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 		if ($scope.challenge.is_stretch)
 			chart.options['vAxis']['ticks'].push($scope.challenge.goal_stretch);
 		chart.formatters = {};
-		$scope.chart = chart;
+		$scope.chartProgress = chart;
 	};
 	
 	$scope.intervalPromise = $interval(function() {
@@ -143,7 +156,11 @@ app.controller('AboutCtrl', function($rootScope) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 });
 
-app.controller('HeaderController', function($scope, $location) {
+app.controller('HeaderController', function($scope, $location, $rootScope) {
+	$rootScope.$on('$viewContentLoaded', function(event) {
+		console.log($location.url());
+	});
+
 	$scope.isActive = function(viewLocation) {
 		return $location.path().substr(0, viewLocation.length) == viewLocation;
 	};
