@@ -1,6 +1,14 @@
 'use strict';
 
-var app = angular.module('evolveApp', ['ngRoute', 'ui.bootstrap', 'googlechart', 'ngSanitize', 'ngResource']);
+var app = angular.module('evolveApp',
+	['ngRoute', 'ui.bootstrap', 'googlechart', 'ngSanitize', 'ngResource']
+).run(['$rootScope', '$location', '$window', function($rootScope, $location, $window) {
+	$rootScope.$on('$routeChangeSuccess', function(event) {
+		if (!$window.ga)
+			return;
+		$window.ga('send', 'pageview', { page: $location.path() });
+	});
+}]);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.
@@ -157,10 +165,6 @@ app.controller('AboutCtrl', function($rootScope) {
 });
 
 app.controller('HeaderController', function($scope, $location, $rootScope) {
-	$rootScope.$on('$viewContentLoaded', function(event) {
-		console.log($location.url());
-	});
-
 	$scope.isActive = function(viewLocation) {
 		return $location.path().substr(0, viewLocation.length) == viewLocation;
 	};
