@@ -69,8 +69,8 @@ class Challenge(ndb.Model):
 			result['versus_names'] = self.get_versus_names()
 		return result
 	
-	def get_datapoints(self):
-		return ChallengeData.query(ChallengeData.challenge==self.key).order(ChallengeData.updated).fetch()
+	def get_datapoints(self, keys_only=False):
+		return ChallengeData.query(ChallengeData.challenge==self.key).order(ChallengeData.updated).fetch(keys_only=keys_only)
 	
 	def is_versus(self):
 		return self.type == 'versus'
@@ -110,5 +110,7 @@ def challenges(filter=None):
 		return query.filter(Challenge.is_active != True).fetch()
 	return []
 
-def challenge(slug):
-	return Challenge.query(Challenge.slug==slug).get()
+def challenge(id):
+	if id.isdigit() or (id.startswith('-') and id[1:].isdigit()):
+		return Challenge.query(Challenge.id==int(id)).get()
+	return Challenge.query(Challenge.slug==id).get()
