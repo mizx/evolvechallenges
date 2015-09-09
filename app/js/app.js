@@ -170,6 +170,13 @@ app.controller('HeaderController', function($scope, $location, $rootScope) {
 	};
 });
 
+app.controller('ChallengeInfo', function($scope, $http, $routeParams) {
+
+	$http.get('/partials/challenges/' + $routeParams.challengeSlug + '.html').success(function(data) {
+		$scope.$parent.challenge_info = data;
+	});
+});
+
 app.controller('FaqCtrl', function($scope, $rootScope) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/faq.jpg')"};
 	$scope.questions = [
