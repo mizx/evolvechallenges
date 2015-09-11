@@ -11,8 +11,28 @@ from google.appengine.api import urlfetch
 from django.template.defaultfilters import slugify
 
 class EvolveApi(object):
+
+	def __init__(self, challenge_id=None):
+		self.id = challenge_id
+		self.challenges = []
+		self.success = False
+		# get challenges
 	
-	def __init__(self,):
+	def get_challenge(id):
+		for challenge in self.challenges:
+			if challenge.id = id:
+				return challenge
+		return None
+	
+	def get_challenge_ids(self):
+		ids = []
+		for challenge in self.challenges:
+			ids.append(challenge.id)
+		return ids
+
+class EvolveApi2(object):
+	
+	def __init__(self):
 		self.challenges_api = []
 		self.challenges_datastore = []
 		self.ids = []

@@ -1,5 +1,6 @@
 import datetime
 import os
+import base64
 
 DEV = True #os.environ['SERVER_SOFTWARE'].startswith('Dev')
 
@@ -16,6 +17,9 @@ API_DATETIME_ADJUST = datetime.timedelta(hours=0)
 MEMCACHE_TIME = 60*15
 
 STRIP_TIME_BASE = '%Y-%m-%dT%H:%M:%S'
+
+MAIL_SENDER = 'EvolveChallenges.com Automation <noreply@evolvechallenges.com>'
+MAIL_TO = base64.b64decode('Q29keSBNYXRoaXNlbiA8Y29keWxtYXRoaXNlbkBnbWFpbC5jb20+') # only smart bots can have my email...
 
 NUMBER_FORMAT = '{:,}'
 

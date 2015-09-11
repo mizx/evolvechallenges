@@ -18,7 +18,7 @@ class TaskHandler(webapp2.RequestHandler):
 class ChallengeTaskHandler(TaskHandler):
 
 	def get(self, id=None):
-		self.log('ChallengeTaskHandler.get has been called.')
+		self.log('ChallengeTaskHandler.get has been called with id=%s' % id)
 		evolve = EvolveApi()
 		if id is not None:
 			evolve.get_single(id)

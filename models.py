@@ -104,6 +104,8 @@ class ChallengeData(ndb.Model):
 
 def challenges(filter=None):
 	query = Challenge.query()
+	if type(filter) is list:
+		return query.filter(Challenge.id.IN(filter)).fetch()
 	if filter == 'current':
 		return query.filter(ndb.OR(Challenge.is_countdown==True, Challenge.is_active==True)).fetch()
 	if filter == 'previous':
