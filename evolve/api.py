@@ -16,7 +16,24 @@ class EvolveApi(object):
 		self.id = challenge_id
 		self.challenges = []
 		self.success = False
-		# get challenges
+		self.get()
+	
+	def get_url(self):
+		if id is not None:
+			self.url = '%s%s' % (config.URL_API_EVOLVE_CHALLENGE, self.id)
+			return
+		self.url = config.URL_API_EVOLVE_CHALLENGE
+	
+	def get(self):
+		result = urlfetch.fetch(self.get_url())
+		if result.status_code != 200 or result.content is None:
+			logging.error('Unable to retrieve challenge API. URL requested replied with %s: %s' % (result.status_code, self.url))
+			return None
+		logging.info('Successfully retrieved challenge API: %s' % self.url)
+		self.challenges = json.loads(result.content)
+		if type(self.json) is not list:
+			self.challenges = [self.json]
+		self.success = True
 	
 	def get_challenge(id):
 		for challenge in self.challenges:

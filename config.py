@@ -2,12 +2,13 @@ import datetime
 import os
 import base64
 
-DEV = True #os.environ['SERVER_SOFTWARE'].startswith('Dev')
+DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
+
+URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
 if DEV:
 	URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
-else:
-	URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
+	
 
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
 DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=30)

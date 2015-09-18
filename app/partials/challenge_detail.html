@@ -27,6 +27,9 @@
 	</div>
 	<div class="container challenge" ng-if="challenge.type == 'counter'">
 		<div class="row">
+			<div class="col-xs-12" ng-if="challenge.id == 13">
+				<div class="alert alert-info" style="font-size: 1.3em; color: #000;"><strong>WARNING</strong> Evolve API does not contain this challenge. Unable to show live progress. <a href="https://talk.turtlerockstudios.com/t/weekend-challenge-caira-infinity-skin-challenge/71717/63" target="_blank">More info...</a></div>
+			</div>
 			<div class="col-xs-12">
 				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
 				<h1 class="white percent">{{ Math.min(challenge.percent, 100) | number : 0}}%</h1>

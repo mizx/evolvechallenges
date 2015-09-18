@@ -38,7 +38,6 @@ class ChallengeManager(object):
 		return None
 	
 	def touch_challenges(self):
-		new_ids = []
 		for id in self.evolve.get_challenge_ids():
 			if id not in self.get_challenge_ids():
 				self.init_challenge(id)
@@ -50,8 +49,6 @@ class ChallengeManager(object):
 				continue
 				
 			logging.error('Evolve API has challenge with ID %s but was not created or found.' % id)
-		
-		self.get_challenges_db()
 	
 	def init_challenge(self, new_id):
 		challenge = self.evolve.get_challenge(new_id)
@@ -61,7 +58,9 @@ class ChallengeManager(object):
 		
 		new = models.Challenge(**challenge)
 		key = new.put()
-		logging.info('New challenge discovered and put in databse.')
+		self.challenges_db.append(new)
+		
+		logging.info('New challenge discovered and put in database %s.' % new_id)
 		mail.send_mail(sender=config.MAIL_SENDER,
 						to=config.MAIL_TO,
 						subject='New Evolve Challenge Discovered',
