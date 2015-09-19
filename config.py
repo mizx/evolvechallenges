@@ -2,7 +2,8 @@ import datetime
 import os
 import base64
 
-DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
+#DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
+DEV = False
 
 URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
@@ -39,5 +40,5 @@ API_TO_DATASTORE = {
 	'EndDateTimeEpoch': 'end',
 	'YAxisLabel': 'axis_y_label',
 	'SetYMin': 'axis_y_min',
-	'SetYMax': 'axis_y_max'
+	'SetYMax': 'axis_y_max',
 }

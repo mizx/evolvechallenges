@@ -106,6 +106,8 @@ def challenges(filter=None):
 	query = Challenge.query()
 	if type(filter) is list:
 		return query.filter(Challenge.id.IN(filter)).fetch()
+	if type(filter) is int:
+		return query.filter(Challenge.id == filter).fetch()
 	if filter == 'current':
 		return query.filter(ndb.OR(Challenge.is_countdown==True, Challenge.is_active==True)).fetch()
 	if filter == 'previous':
@@ -113,6 +115,8 @@ def challenges(filter=None):
 	return []
 
 def challenge(id):
+	if type(id) is int:
+		return Challenge.query(Challenge.id == id).get()
 	if id.isdigit() or (id.startswith('-') and id[1:].isdigit()):
 		return Challenge.query(Challenge.id==int(id)).get()
 	return Challenge.query(Challenge.slug==id).get()

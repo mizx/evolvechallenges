@@ -1,8 +1,0 @@
-cron:
-- description: update active challenges
-  url: /task/update/active
-  schedule: every 15 minutes synchronized
-
-- description: touch challenge for countdown timers to init challenge
-  url: /task/touch
-  schedule: every friday 00:00
