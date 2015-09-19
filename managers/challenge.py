@@ -19,11 +19,14 @@ class ChallengeManager(object):
 		for challenge in self.challenges:
 			challenge.db = models.challenge(challenge.id)
 			if challenge.db is None:
-				challenge.db = models.Challenge(**challenge.to_dict())
-				self.send_notification(challenge.id, challenge.db.name)
+				self.create(challenge)
 			
 			self.refresh_datapoints()
 			self.touch(challenge)
+	
+	def create(self, challenge):
+		challenge.db = models.Challenge(**challenge.to_dict())
+		self.send_notification(challenge.id, challenge.db.name)
 	
 	def touch(self, challenge):
 		challenge.db.progress = challenge.progress
