@@ -104,7 +104,6 @@ class EvolveBatch(object):
 		return self.challenges
 		
 	def __parse(self, result):
-		logging.error('_parse')
 		challenges = json.loads(result)
 		if type(challenges) is not list:
 			challenges = [challenges]
