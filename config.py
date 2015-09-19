@@ -20,7 +20,7 @@ MEMCACHE_TIME = 60*15
 
 STRIP_TIME_BASE = '%Y-%m-%dT%H:%M:%S'
 
-MAIL_SENDER = 'EvolveChallenges.com Automation <noreply@evolvechallenges.com>'
+MAIL_SENDER = 'EvolveChallenges.com Automation <noreply@evolvechallenges.appspot.com>'
 MAIL_TO = base64.b64decode('Q29keSBNYXRoaXNlbiA8Y29keWxtYXRoaXNlbkBnbWFpbC5jb20+') # only smart bots can have my email...
 
 NUMBER_FORMAT = '{:,}'
