@@ -41,7 +41,7 @@ class EvolveItemConverter(object):
 		if not self.challenge.has_key('type'):
 			self.challenge['type'] = 'versus' if 'vs' in self.challenge['name'] and self.challenge['goal'] == 50 else 'counter'
 		
-	def _process_challenge_data(self):		
+	def _process_challenge_data(self):
 		if not self.json.has_key('DataPoints') or not len(self.json['DataPoints']):
 			return
 		
@@ -71,6 +71,7 @@ class EvolveItem(EvolveItemConverter):
 		super(self.__class__, self).__init__(json)
 		self.id = self.challenge['id']
 		self.slug = self.challenge['slug']
+		self.progress = self.challenge['progress']
 		self.db = None
 	
 	def to_dict(self, exclude=['data']):
@@ -103,6 +104,7 @@ class EvolveBatch(object):
 		return self.challenges
 		
 	def __parse(self, result):
+		logging.error('_parse')
 		challenges = json.loads(result)
 		if type(challenges) is not list:
 			challenges = [challenges]
@@ -111,6 +113,6 @@ class EvolveBatch(object):
 	def __get_url(self):
 		url = config.URL_API_EVOLVE_CHALLENGE
 		
-		if id is not None:
+		if self.id is not None:
 			return '%s%s' % (url, self.id)
 		return url

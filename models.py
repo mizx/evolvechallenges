@@ -38,7 +38,7 @@ class Challenge(ndb.Model):
 	thumbnail = ndb.StringProperty(default='')
 	url_news = ndb.StringProperty(default='')
 	
-	progress = ndb.FloatProperty(default=0)
+	progress = ndb.FloatProperty(default=0.0)
 	goal = ndb.IntegerProperty(required=True)
 	goal_stretch = ndb.IntegerProperty()
 	is_stretch = ndb.ComputedProperty(

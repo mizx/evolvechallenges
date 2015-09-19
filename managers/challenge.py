@@ -1,6 +1,7 @@
 import config
 import models
 from evolve import EvolveBatch
+from datetime import datetime
 
 from google.appengine.api import mail
 from google.appengine.api import memcache
@@ -20,16 +21,25 @@ class ChallengeManager(object):
 			if challenge.db is None:
 				challenge.db = models.Challenge(**challenge.to_dict())
 				self.send_notification(challenge.id, challenge.db.name)
-			challenge.db.put()
-			memcache.delete('challenge_%s' % challenge.slug)
+			
 			self.refresh_datapoints()
+			self.touch(challenge)
+	
+	def touch(self, challenge):
+		challenge.db.progress = challenge.progress
+		logging.error('PROGRESS %s' % challenge.db.progress)
+		challenge.db.updated = datetime.now()
+		challenge.db.put()
+		memcache.delete('challenge_%s' % challenge.slug)
 	
 	def refresh_datapoints(self):
 		for challenge in self.challenges:
 			if not challenge.db.is_active:
 				continue
+			logging.error('refresh is active')
 			keys = challenge.db.get_datapoints(keys_only=True)
 			ndb.delete_multi(keys)
+			logging.error('refresh deleted')
 			
 			points = []
 			for point in challenge.data:
