@@ -386,8 +386,12 @@ body {
 }
 
 .page-header {
-	margin-top: 140px;
+	margin-top: 60px;
 	color: #fff;
+}
+
+.page-header.no-border {
+	border: none;
 }
 
 .challenge-item {
@@ -665,10 +669,6 @@ img.hr {
 	font-family: ultralight, Segoe, sans-serif;
 }
 
-.jumbotron .content {
-	max-width: 75%;
-}
-
 .container .jumbotron, .container-fluid .jumbotron {
     border-radius: 0;
 }
@@ -709,10 +709,14 @@ img.hr {
 	padding-left: 0;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 @media (max-width: 480px) {
 	.navbar-default .navbar-brand {
 		padding-left: 124px;
-		background-size: 50%;
+		background-size: 40%;
 	}
 }
 
@@ -723,10 +727,33 @@ img.hr {
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	html {
 		background-image: url(http://localhost:13080/img/bg/default.png)!important;
 		background-position: top left;
 		background-size: auto;
+	}
+	
+	.jumbotron {
+		background-image: none !important;
+	}
+	
+	.jumbotron .content {
+		margin-left: 12px;
+		margin-right: 12px;
+	}
+}
+
+@media (min-width: 768px) {
+	.page-header {
+		margin-top: 140px;
+	}
+	
+	.jumbotron {
+		background-position: top right;
+	}
+	
+	.jumbotron .content {
+		max-width: 75%;
 	}
 }

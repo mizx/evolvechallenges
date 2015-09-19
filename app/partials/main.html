@@ -1,9 +1,5 @@
-<!---<div class="jumbotron">
-	<h1>Test</h1>
-	<p>Test test test test</p>
-	<p><a class="btn btn-primary btn-lg" href="#">Clicky</a></p>
-</div>--->
-<div class="header-padding"></div>
+<div class="page-header no-border">
+</div>
 <div class="container-fluid">
 	<div ng-repeat="challenge in challenges">
 		<div class="jumbotron" style="background-image: url('{{ challenge.thumbnail }}')">
@@ -31,7 +27,7 @@
 			</div>
 		</div>
 	</div>
-	<div ng-hide="challenges.length">
+	<div ng-if="!challenges.length">
 		<div class="jumbotron" style="background-image: url('/img/characters/trapper/crow/thumbnail_gobi.png')">
 			<div class="content">
 				<h1>No Active Challenges</h1>
