@@ -1,5 +1,5 @@
 application: evolvechallenges
-version: v2
+version: v3
 runtime: python27
 threadsafe: yes
 api_version: 1
@@ -27,6 +27,18 @@ handlers:
 - url: /(.*)
   static_files: app/index.html
   upload: app/index.html
+
+error_handlers:
+  - file: app/errors/default.html
+  
+  - error_code: over_quota
+    file: app/errors/quota.html
+
+  - error_code: dos_api_denial
+    file: app/errors/dos.html
+
+  - error_code: timeout
+    file: app/errors/timeout.html
 
 libraries:
 - name: webapp2
