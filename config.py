@@ -3,7 +3,7 @@ import os
 import base64
 
 #DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
-DEV = False
+DEV = True
 
 URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
@@ -33,6 +33,7 @@ API_TO_DATASTORE = {
 	'Action': 'action',
 	'Background': 'background',
 	'Thumbnail': 'thumbnail',
+	'Alert': 'alert',
 	'Reward': 'reward',
 	'NewsUrl': 'url_news',
 	'StretchGoal': 'goal_stretch',

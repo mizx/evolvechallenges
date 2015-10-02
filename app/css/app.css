@@ -709,6 +709,14 @@ img.hr {
 	padding-left: 0;
 }
 
+.alert {
+	font-size: 1.3em;
+	color: #000;
+	text-align: center;
+	background-color: #ffe27c;
+	border-color: #ffe27c;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }

@@ -2,6 +2,15 @@
 	<div class="page-header challenge">
 		<h1>{{ challenge.name }}</h1>
 	</div>
+	<div class="container" ng-if="challenge.alert">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alert alert-warning" >
+					<i class="fa fa-exclamation-triangle"></i> <span ng-bind-html="challenge.alert"></span>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container challenge versus" ng-if="challenge.type == 'info'">
 		<div ng-controller="ChallengeInfo">
 			<div ng-bind-html="challenge_info"></div>
@@ -70,23 +79,28 @@
 					</ul>
 					<ul class="list-inline social-buttons">
 						<li>
-							<a href="https://steamcommunity.com/id/mizx" target="_blank" title="Steam">
-								<i class="fa fa-steam"></i>
-							</a>
-						</li>
-						<li>
-							<a href="https://talk.turtlerockstudios.com/users/mizx/activity" target="_blank" title="Turtle Rock Forums">
+							<a href="https://talk.turtlerockstudios.com/" target="_blank" title="Turtle Rock Forums">
 								<i class="fa fa-commenting"></i>
 							</a>
 						</li>
 						<li>
-							<a href="https://twitter.com/mrmizx" target="_blank" title="Twitter">
+							<a href="https://twitter.com/evolvegame" target="_blank" title="Twitter">
 								<i class="fa fa-twitter"></i>
 							</a>
 						</li>
 						<li>
-							<a href="https://github.com/mizx/evolvechallenges" target="_blank" title="GitHub">
-								<i class="fa fa-github"></i>
+							<a href="https://reddit.com/r/EvolveGame" target="_blank" title="Reddit">
+								<i class="fa fa-reddit"></i>
+							</a>
+						</li>
+						<li>
+							<a href="http://twitch.tv/evolvegame" target="_blank" title="Twitch">
+								<i class="fa fa-twitch"></i>
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/user/EvolveGame" target="_blank" title="Twitch">
+								<i class="fa fa-youtube"></i>
 							</a>
 						</li>
 					</ul>

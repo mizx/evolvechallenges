@@ -29,6 +29,7 @@ class Challenge(ndb.Model):
 	checked = ndb.DateTimeProperty(auto_now=True)
 	updated = ndb.DateTimeProperty()
 	type = ndb.StringProperty(choices=['counter', 'versus', 'joint', 'info'], default='counter')
+	alert = ndb.StringProperty(default='')
 	
 	action = ndb.StringProperty(default='')
 	action_stretch = ndb.StringProperty(default='')

@@ -10,7 +10,9 @@ class EvolveItemConverter(object):
 
 	def __init__(self, json):
 		self.json = json
-		self.challenge = {}
+		self.challenge = {
+			'progress': 0,
+		}
 		self.data = []
 		self._process_challenge_info()
 		self._process_challenge_data()
