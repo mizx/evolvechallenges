@@ -52,5 +52,5 @@ class ChallengeManager(object):
 		mail.send_mail(sender=config.MAIL_SENDER,
 						to=config.MAIL_TO,
 						subject='New Evolve Challenge Discovered',
-						body='Challenge ID: %s<br>Challenge Name: %s' % (id, name)
+						body='Challenge ID: %s Challenge Name: %s' % (id, name)
 		)
