@@ -38,15 +38,16 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h1 class="white" ng-if="challenge.is_achieved">COMPLETED</h1>
-				<h1 class="white percent">{{ Math.min(challenge.percent, 100) | number : 0}}%</h1>
+				<h1 class="white percent" ng-if="!challenge.alert">{{ Math.min(challenge.percent, 100) | number : 0}}%</h1>
+				<h1 class="white percent" ng-if="challenge.alert">UNKNOWN</h1>
 			</div>
 		</div>
 		<progress-bar></progress-bar>
 		<div class="row">
 			<div class="col-sm-12">
 				<h2 class="progress_normal" ng-class="{completed: challenge.is_achieved}">
-					<span class="current" ng-if="challenge.alert">UNKNOWN</span>
 					<span class="current" ng-if="!challenge.alert">{{ challenge.progress | number : 0 }}</span>
+					<span class="current" ng-if="challenge.alert">UNKNOWN</span>
 					<span class="goal">/ {{ (challenge.is_achieved && challenge.is_stretch) ? challenge.goal_stretch : challenge.goal | number : 0 }}</span>
 				</h2>
 				<h3 class="white" ng-if="challenge.is_active">ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</h3>
