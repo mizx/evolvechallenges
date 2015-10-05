@@ -15,6 +15,12 @@ class TaskHandler(webapp2.RequestHandler):
 		logging.info(string)
 		self.response.write(string)
 
+class ChallengeTaskForceHandler(TaskHandler):
+	
+	def get(self, id=None):
+		self.log('ChallengeTaskHandler.get has been called with id=%s' % (id if id is not None else 'active'))
+		ChallengeManager(id, True)
+
 class ChallengeTaskHandler(TaskHandler):
 
 	def get(self, id=None):
@@ -46,6 +52,7 @@ class DeleteTaskHandler(TaskHandler):
 
 app = webapp2.WSGIApplication([
     webapp2.Route(r'/task/update/active', ChallengeTaskHandler),
+	webapp2.Route(r'/task/update/<id>/force', ChallengeTaskForceHandler),
 	webapp2.Route(r'/task/update/<id>', ChallengeTaskHandler),
 	webapp2.Route(r'/task/touch/<id>', TouchTaskHandler),
 	webapp2.Route(r'/task/delete/<id>', DeleteTaskHandler),
