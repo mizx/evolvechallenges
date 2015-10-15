@@ -3,7 +3,7 @@ import os
 import base64
 
 #DEV = os.environ['SERVER_SOFTWARE'].startswith('Dev')
-DEV = True
+DEV = False
 
 URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
