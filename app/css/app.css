@@ -710,6 +710,7 @@ img.hr {
 }
 
 .alert {
+	font-weight: 800;
 	font-size: 1.3em;
 	color: #000;
 	text-align: center;
