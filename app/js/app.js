@@ -59,6 +59,7 @@ app.controller('ChallengeDetailCtrl', function($scope, $rootScope, $http, $route
 		$http.get('/api/challenge/' + $routeParams.challengeSlug + '.json').success(function(data) {
 			$scope.challenge = data;
 			$scope.challenge['percent'] = $scope.challenge.progress / $scope.challenge.goal * 100;
+			$scope.challenge['percent'] = Math.floor($scope.challenge['percent'])
 			$scope.challenge['percent_stretch'] =
 				($scope.challenge.progress - $scope.challenge.goal)
 				/ ($scope.challenge.goal_stretch - $scope.challenge.goal) * 100;
