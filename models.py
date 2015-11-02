@@ -1,6 +1,7 @@
 import config
 
 from datetime import datetime
+import time
 
 from google.appengine.ext import ndb
 from django.template.defaultfilters import slugify
@@ -68,6 +69,7 @@ class Challenge(ndb.Model):
 		result = super(Challenge, self).to_dict()
 		if self.is_versus():
 			result['versus_names'] = self.get_versus_names()
+		result['percent_time'] = self.get_time_progress()
 		return result
 	
 	def get_datapoints(self, keys_only=False):
@@ -96,6 +98,11 @@ class Challenge(ndb.Model):
 		names = self.name.split(' ')
 		if len(names) >= 3 and names[1] == 'vs':
 			return [names[0], names[2]]
+	
+	def get_time_progress(self):
+		total = (self.end - self.start).total_seconds()
+		remain = (self.end - self.updated).total_seconds()
+		return (total - remain) / total * 100
 
 class ChallengeData(ndb.Model):
 	challenge = ndb.KeyProperty(kind=Challenge)

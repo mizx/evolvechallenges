@@ -718,6 +718,14 @@ img.hr {
 	border-color: #ffe27c;
 }
 
+.text-success {
+	color: #5cb85c;
+}
+
+.text-warning {
+	color: #ffe27c;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
