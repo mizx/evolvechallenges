@@ -1,0 +1,1 @@
+C:\Python27\python -m pip install -t lib -r requirements.txt
