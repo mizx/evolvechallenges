@@ -5,12 +5,12 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary active" ng-model="filterTest" btn-radio="{}" selected>All</button>
-				<button type="button" class="btn btn-primary" ng-model="filterTest" btn-radio="{is_achieved: true}">Achieved</button>
-				<button type="button" class="btn btn-primary" ng-model="filterTest" btn-radio="{is_achieved: false}">Not Achieved</button>
+				<button type="button" class="btn btn-primary active" ng-model="filter" ng-click="filter = {}" selected>All</button>
+				<button type="button" class="btn btn-primary" ng-model="filter" ng-click="filter = {is_achieved: true}">Achieved</button>
+				<button type="button" class="btn btn-primary" ng-model="filter" ng-click="filter = {is_achieved: false}">Not Achieved</button>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="challenge in challenges | orderBy:'-start' | filter: {'is_countdown': false}">
+		<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="challenge in challenges | orderBy:'-start' | filter: {'is_countdown': false} | filter : filter">
 			<a href="/challenge/{{ challenge.slug }}">
 				<div class="challenge-item">
 					<div class="character-img">

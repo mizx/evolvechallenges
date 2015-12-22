@@ -45,6 +45,8 @@ app.config(function($routeProvider, $locationProvider) {
 app.controller('ChallengeListCtrl', function($scope, $rootScope, $http) {
 	$rootScope.htmlPage = {backgroundImage: "url('/img/bg/default.png')"};
 	
+	$scope.filter = {};
+	
 	$http.get('/api/challenges/previous.json').success(function(data) {
 		$scope.challenges = data;
 	});
