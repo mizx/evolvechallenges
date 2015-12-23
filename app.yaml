@@ -1,5 +1,5 @@
 application: evolvechallenges
-version: v3
+version: v3-hank
 runtime: python27
 threadsafe: yes
 api_version: 1
