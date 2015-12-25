@@ -52,7 +52,7 @@
 				</h2>
 				<h3 class="white" ng-if="challenge.is_active">ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</h3>
 				<h3 class="text-success" ng-if="challenge.is_active && !challenge.is_achieved && challenge.percent > challenge.percent_time"><i class="fa fa-thumbs-up"></i> on track</h3>
-				<h3 class="text-warning" ng-if="challenge.is_active && !challenge.is_achieved && challenge.percent <= challenge.percent_time"><i class="fa fa-exclamation-circle"></i> We're behind! Get back to playing!</h3>
+				<h3 class="text-warning" ng-if="challenge.is_active && !challenge.is_achieved && challenge.percent_time >= 50.0 && challenge.percent <= challenge.percent_time"><i class="fa fa-exclamation-circle"></i> We're behind! Get back to playing!</h3>
 			</div>
 			<div class="col-sm-8 col-sm-offset-2">
 				<h1 class="action">{{ challenge.action }}</h1>
