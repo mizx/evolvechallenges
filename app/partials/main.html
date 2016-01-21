@@ -19,7 +19,7 @@
 					<strong ng-if="challenge.is_countdown">starts {{ challenge.start | moment : 'utc' | moment : 'fromNow' }}</strong>
 					<strong ng-if="challenge.is_active">ON NOW - ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</strong>
 				</p>
-				<p ng-if="!challenge.is_countdown">
+				<p>
 					<a class="btn btn-primary btn-lg" href="/challenge/{{ challenge.slug }}">
 						View Challenge
 					</a>
