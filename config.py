@@ -7,8 +7,9 @@ DEV = False
 
 URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
-if DEV:
-	URL_API_EVOLVE_CHALLENGE = 'http://mizx.me/evolve/challenge/'
+URL_API_EVOLVE_CHALLENGE_DEV = 'http://mizx.me/evolve/challenge/'
+
+IP_FILTER = 'MjAwMTo1N2E6ZTgwMDozMDA6OjU='
 	
 
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)

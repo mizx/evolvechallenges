@@ -1,5 +1,5 @@
 application: evolvechallenges
-version: v3
+version: v4
 runtime: python27
 threadsafe: yes
 api_version: 1
@@ -31,6 +31,9 @@ handlers:
 
 - url: /api/.*
   script: api.app
+
+- url: /task/script/.*
+  script: taskscript.app
 
 - url: /task/.*
   script: task.app

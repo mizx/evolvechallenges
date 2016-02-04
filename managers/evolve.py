@@ -1,6 +1,7 @@
 import config
 import logging
 import json
+import re
 from datetime import datetime
 
 from google.appengine.api import urlfetch
@@ -114,6 +115,9 @@ class EvolveBatch(object):
 	def __get_url(self):
 		url = config.URL_API_EVOLVE_CHALLENGE
 		
-		if self.id is not None:
-			return '%s%s' % (url, self.id)
-		return url
+		if self.id is None:
+			return url
+		
+		if re.match("[+-]?\d", self.id) and int(self.id) < 0:
+			return '%s%s' % (config.URL_API_EVOLVE_CHALLENGE_DEV, self.id)
+		return '%s%s' % (url, self.id)
