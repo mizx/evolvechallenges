@@ -9,7 +9,7 @@ URL_API_EVOLVE_CHALLENGE = 'http://challenge.4v1game.net/challenge/'
 
 URL_API_EVOLVE_CHALLENGE_DEV = 'http://mizx.me/evolve/challenge/'
 
-IP_FILTER = 'MjAwMTo1N2E6ZTgwMDozMDA6OjU='
+WHITELIST = ['MjAwMTo1N2E6ZTgwMDozMDA6OjU=', 'MjAwMTo1N2E6ZTgwMDozMDA6ODhhMDoyZTNmOmNjMjg6M2YzNw==']
 	
 
 DEFAULT_CHALLENGE_DURATION = datetime.timedelta(days=3)
@@ -17,7 +17,7 @@ DEFAULT_CHALLENGE_POST_DELAY = datetime.timedelta(minutes=30)
 DEFAULT_CHALLENGE_START_GRACE = datetime.timedelta(minutes=5)
 API_DATETIME_ADJUST = datetime.timedelta(hours=0)
 
-MEMCACHE_TIME = 60*15
+MEMCACHE_TIME = 60 * 5
 
 STRIP_TIME_BASE = '%Y-%m-%dT%H:%M:%S'
 
