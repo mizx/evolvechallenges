@@ -1,4 +1,4 @@
-from base64 import b64encode
+from base64 import b64decode
 import logging
 import webapp2
 
@@ -16,7 +16,13 @@ class InsertDataHandler(webapp2.RequestHandler):
 		self.response.write(string)
 	
 	def post(self):
-		if not (self.request.remote_addr == '::1' or b64encode(self.request.remote_addr) in config.WHITELIST):
+		whitelisted = False
+		for item in config.WHITELIST:
+			if self.request.remote_addr.startswith(b64decode(item)):
+				whitelisted = True
+				break
+		
+		if not (whitelisted):
 			self.abort(403)
 			return
 		
