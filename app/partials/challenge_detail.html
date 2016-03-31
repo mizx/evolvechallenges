@@ -48,7 +48,8 @@
 				<h2 class="progress_normal" ng-class="{completed: challenge.is_achieved}">
 					<span class="current" ng-if="!challenge.alert">{{ challenge.progress | number : 0 }}</span>
 					<span class="current" ng-if="challenge.alert">UNKNOWN</span>
-					<span class="goal">/ {{ (challenge.is_achieved && challenge.is_stretch) ? challenge.goal_stretch : challenge.goal | number : 0 }}</span>
+					<span class="goal" ng-if="challenge.goal > 1">/ {{ (challenge.is_achieved && challenge.is_stretch) ? challenge.goal_stretch : challenge.goal | number : 0 }}</span>
+					<span class="goal" ng-if="challenge.goal <= 1"> / &infin;</span>
 				</h2>
 				<h3 class="white" ng-if="challenge.is_active">ends {{ challenge.end | moment : 'utc' | moment : 'fromNow' }}</h3>
 				<h3 class="text-success" ng-if="challenge.is_active && !challenge.is_achieved && challenge.percent > challenge.percent_time"><i class="fa fa-thumbs-up"></i> on track</h3>
